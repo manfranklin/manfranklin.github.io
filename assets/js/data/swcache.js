@@ -42,7 +42,7 @@ const resource = [
 const allowedDomains = [
   
 
-  'manfranklin.github.io',
+  'localhost:4000',
 
   
 
