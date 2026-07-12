@@ -1,0 +1,163 @@
+# Site Configuration - Metadata and Settings
+# This file is used by TinaCMS and site templates
+
+# Site Owner Information
+owner:
+  name: "Manuel Franklin"
+  email: "manfranklin817@gmail.com"
+  bio: "Software engineer, educator, and writer focused on technology, culture, and learning."
+  location: "Luanda, Angola"
+  avatar_url: "/images/reverie.png"
+  website_url: "https://manfranklin.github.io"
+
+# Social Media Links
+social:
+  twitter: ""
+  github: "manfranklin"
+  linkedin: "manfranklin"
+  instagram: ""
+  mastodon: ""
+  email: "manfranklin817@gmail.com"
+
+# Site Branding
+branding:
+  site_name: "Manuel Franklin"
+  tagline: "Technology, education, and growth"
+  description: "A modern, bilingual personal website with portfolio and blog"
+  logo_url: "/images/reverie.png"
+  favicon_url: "/images/favicon-32x32.png"
+  og_image: "/images/reverie.png"
+
+# Blog Settings
+blog:
+  posts_per_page: 6
+  excerpt_length: 150
+  show_author: true
+  show_date: true
+  show_reading_time: true
+  show_categories: true
+  show_tags: true
+  enable_comments: false
+
+# Resources Settings
+resources:
+  items_per_page: 12
+  categories:
+    - learning
+    - books
+    - courses
+    - tools
+    - websites
+    - ai
+    - development
+  show_featured: true
+
+# Showcase Settings
+showcase:
+  items_per_page: 12
+  categories:
+    - animals
+    - travel
+    - projects
+    - misc
+  enable_lightbox: true
+  lazy_loading: true
+
+# Search Settings
+search:
+  enabled: true
+  engine: "pagefind"  # pagefind or lunr
+  show_search_input: true
+  results_per_page: 10
+
+# Comments Settings
+comments:
+  enabled: false
+  system: ""  # disabled
+  moderation_required: false
+
+# Analytics Settings
+analytics:
+  enabled: true  # Set to true after Umami is configured
+  umami:
+    site_id: ""  # Will be set in _config.yml
+    domain: ""   # cloud.umami.is or your domain
+
+# SEO Settings
+seo:
+  enable_sitemap: true
+  enable_robots: true
+  enable_og_tags: true
+  enable_twitter_cards: true
+  enable_json_ld: true
+  enable_canonical_urls: true
+  enable_hreflang: true
+
+# Performance Settings
+performance:
+  minify_css: true
+  minify_js: true
+  lazy_load_images: true
+  optimize_images: true
+  serve_webp: false  # Set to true when WebP images are available
+
+# Build Settings
+build:
+  increment: true
+  watch: true
+  strict_front_matter: true
+  timezone: "UTC"
+
+# Languages
+languages:
+  default: "en"
+  supported:
+    - code: "en"
+      name: "English"
+      native_name: "English"
+      direction: "ltr"
+    - code: "pt"
+      name: "PT-AO"
+      native_name: "PT-AO"
+      direction: "ltr"
+
+# Feature Flags (for gradual rollout)
+features:
+  bilingual_support: true
+  search: true
+  comments: false
+  analytics: true  # Enable after setup
+  lightbox_gallery: true
+  related_posts: true
+  social_sharing: true
+  email_subscription: true  # Enable after setup
+  dark_mode: false  # Optional dark mode
+
+# Archive Settings
+archive:
+  group_by: "year"  # year, month, or category
+  show_count: true
+
+# External Services
+external_services:
+  github_username: "manfranklin"
+  github_repo: "manfranklin.github.io"
+  staticman_api: ""  # Staticman API endpoint
+  staticman_repo: "manfranklin/manfranklin.github.io"
+
+# Contact Form Settings
+contact_form:
+  enabled: false
+  method: "formspree"  # formspree, staticman, or email
+  email: "your.email@example.com"
+
+# Cookie Consent
+cookie_consent:
+  enabled: true
+  message: "We use Umami Analytics to collect anonymous website usage statistics. Umami does not use cookies or collect personally identifiable information."
+  dismiss_text: "Dismiss"
+  learn_more_text: "Learn more"
+
+# Maintenance Mode
+maintenance_mode: false
+maintenance_message: "Site is under maintenance. Please check back soon."

@@ -1,0 +1,619 @@
+# Resources Library
+# Sample resources - Edit via TinaCMS or directly in YAML
+
+items:
+  - id: jekyll-documentation
+    title: "Jekyll Documentation"
+    description: "Official Jekyll static site generator documentation with comprehensive guides"
+    category: learning
+    url: "https://jekyllrb.com/docs/"
+    tags:
+      - jekyll
+      - static-site
+      - documentation
+    language: en
+    featured: true
+
+  - id: github-pages-docs
+    title: "GitHub Pages Documentation"
+    description: "Complete guide to hosting sites on GitHub Pages"
+    category: learning
+    url: "https://docs.github.com/en/pages"
+    tags:
+      - github
+      - hosting
+      - static-site
+    language: en
+    featured: true
+
+  - id: liquid-template-language
+    title: "Liquid Template Language"
+    description: "Reference guide for Liquid template syntax used in Jekyll"
+    category: development
+    url: "https://shopify.github.io/liquid/"
+    tags:
+      - liquid
+      - templates
+      - jekyll
+    language: en
+    featured: false
+
+  - id: markdown-guide
+    title: "Markdown Guide"
+    description: "Complete markdown syntax reference and best practices"
+    category: learning
+    url: "https://www.markdownguide.org/"
+    tags:
+      - markdown
+      - writing
+      - documentation
+    language: en
+    featured: false
+
+  - id: pagefind-search
+    title: "Pagefind - Static Search"
+    description: "Fast, zero-dependency search library for static sites"
+    category: development
+    url: "https://pagefind.app/"
+    tags:
+      - search
+      - static-site
+      - javascript
+    language: en
+    featured: true
+
+  - id: tinacms-docs
+    title: "TinaCMS Documentation"
+    description: "Headless CMS with Git integration for static site editing"
+    category: tools
+    url: "https://tina.io/docs/"
+    tags:
+      - cms
+      - github
+      - content-management
+    language: en
+    featured: true
+
+  - id: umami-analytics
+    title: "Umami Analytics"
+    description: "Privacy-friendly, simple web analytics alternative to Google Analytics"
+    category: tools
+    url: "https://umami.is/"
+    tags:
+      - analytics
+      - privacy
+      - data
+    language: en
+    featured: false
+
+  - id: staticman
+    title: "Staticman"
+    description: "Manages form submissions and comments for static sites via Git"
+    category: tools
+    url: "https://staticman.net/"
+    tags:
+      - comments
+      - forms
+      - static-site
+    language: en
+    featured: true
+
+  - id: sass-documentation
+    title: "Sass Documentation"
+    description: "CSS preprocessor that extends CSS with variables, nesting, and more"
+    category: development
+    url: "https://sass-lang.com/documentation"
+    tags:
+      - css
+      - sass
+      - styling
+    language: en
+    featured: false
+
+  - id: web-accessibility-wcag
+    title: "Web Content Accessibility Guidelines (WCAG)"
+    description: "Standards for making web content more accessible to people with disabilities"
+    category: learning
+    url: "https://www.w3.org/WAI/WCAG21/quickref/"
+    tags:
+      - accessibility
+      - wcag
+      - standards
+    language: en
+    featured: false
+
+  - id: jekyll-documentation-pt
+    title: "Documentação do Jekyll"
+    description: "Documentação oficial do gerador de sites estáticos Jekyll, com guias completos"
+    category: learning
+    url: "https://jekyllrb.com/docs/"
+    tags:
+      - jekyll
+      - site-estático
+      - documentação
+    language: pt
+    featured: true
+
+  - id: github-pages-docs-pt
+    title: "Documentação do GitHub Pages"
+    description: "Guia completo para alojar sites no GitHub Pages"
+    category: learning
+    url: "https://docs.github.com/en/pages"
+    tags:
+      - github
+      - alojamento
+      - site-estático
+    language: pt
+    featured: true
+
+  - id: liquid-template-language-pt
+    title: "Linguagem de Templates Liquid"
+    description: "Guia de referência para a sintaxe de templates Liquid usada no Jekyll"
+    category: development
+    url: "https://shopify.github.io/liquid/"
+    tags:
+      - liquid
+      - templates
+      - jekyll
+    language: pt
+    featured: false
+
+  - id: markdown-guide-pt
+    title: "Guia de Markdown"
+    description: "Referência completa da sintaxe Markdown e boas práticas"
+    category: learning
+    url: "https://www.markdownguide.org/"
+    tags:
+      - markdown
+      - escrita
+      - documentação
+    language: pt
+    featured: false
+
+  - id: pagefind-search-pt
+    title: "Pagefind - Pesquisa Estática"
+    description: "Biblioteca de pesquisa rápida e sem dependências para sites estáticos"
+    category: development
+    url: "https://pagefind.app/"
+    tags:
+      - pesquisa
+      - site-estático
+      - javascript
+    language: pt
+    featured: true
+
+  - id: tinacms-docs-pt
+    title: "Documentação do TinaCMS"
+    description: "CMS sem cabeça com integração Git para edição de sites estáticos"
+    category: tools
+    url: "https://tina.io/docs/"
+    tags:
+      - cms
+      - github
+      - gestão-de-conteúdos
+    language: pt
+    featured: true
+
+  - id: umami-analytics-pt
+    title: "Umami Analytics"
+    description: "Alternativa simples e com privacidade para analytics web em vez do Google Analytics"
+    category: tools
+    url: "https://umami.is/"
+    tags:
+      - analytics
+      - privacidade
+      - dados
+    language: pt
+    featured: false
+
+  - id: staticman-pt
+    title: "Staticman"
+    description: "Gerir submissões de formulários e comentários para sites estáticos via Git"
+    category: tools
+    url: "https://staticman.net/"
+    tags:
+      - comentários
+      - formulários
+      - site-estático
+    language: pt
+    featured: true
+
+  - id: sass-documentation-pt
+    title: "Documentação do Sass"
+    description: "Pré-processador CSS que estende o CSS com variáveis, aninhamento e muito mais"
+    category: development
+    url: "https://sass-lang.com/documentation"
+    tags:
+      - css
+      - sass
+      - styling
+    language: pt
+    featured: false
+
+  - id: web-accessibility-wcag-pt
+    title: "Diretrizes de Acessibilidade Web (WCAG)"
+    description: "Padrões para tornar o conteúdo web mais acessível a pessoas com deficiência"
+    category: learning
+    url: "https://www.w3.org/WAI/WCAG21/quickref/"
+    tags:
+      - acessibilidade
+      - wcag
+      - padrões
+    language: pt
+    featured: false
+
+  # Open Educational Resources
+  - id: mit-opencourseware
+    title: "MIT OpenCourseWare"
+    description: "Free online course materials from MIT for self-paced learning."
+    category: learning
+    url: "https://ocw.mit.edu/"
+    tags:
+      - oer
+      - courses
+      - mit
+    language: en
+    featured: true
+
+  - id: class-central
+    title: "Class Central"
+    description: "Search and discover free online courses from universities and platforms worldwide."
+    category: learning
+    url: "https://www.classcentral.com/"
+    tags:
+      - oer
+      - courses
+      - discovery
+    language: en
+    featured: true
+
+  - id: 3blue1brown
+    title: "3Blue1Brown"
+    description: "Visual mathematics lessons and intuitive explanations through animation."
+    category: learning
+    url: "https://www.3blue1brown.com/"
+    tags:
+      - math
+      - videos
+      - visualizations
+    language: en
+    featured: false
+
+  - id: edge-org
+    title: "Edge.org"
+    description: "Essays and conversations on science, technology, and culture from leading thinkers."
+    category: learning
+    url: "https://www.edge.org/"
+    tags:
+      - essays
+      - science
+      - culture
+    language: en
+    featured: false
+
+  - id: umich-open-oer
+    title: "University of Michigan Open OER"
+    description: "Institutional repository for open educational resources from the University of Michigan."
+    category: learning
+    url: "https://open.umich.edu/"
+    tags:
+      - oer
+      - repository
+      - university
+    language: en
+    featured: false
+
+  - id: big-think
+    title: "Big Think"
+    description: "Interviews, articles and videos featuring experts and thought leaders."
+    category: learning
+    url: "https://bigthink.com/"
+    tags:
+      - ideas
+      - videos
+      - interviews
+    language: en
+    featured: false
+
+  - id: merlot
+    title: "MERLOT"
+    description: "Multimedia Educational Resource for Learning and Online Teaching across disciplines."
+    category: learning
+    url: "https://www.merlot.org/"
+    tags:
+      - oer
+      - repository
+      - multimedia
+    language: en
+    featured: false
+
+  - id: howstuffworks
+    title: "HowStuffWorks"
+    description: "Explanations and guides covering mechanics, electronics, computing and biology."
+    category: learning
+    url: "https://www.howstuffworks.com/"
+    tags:
+      - explainers
+      - science
+      - technology
+    language: en
+    featured: false
+
+  - id: case-study-teaching-science
+    title: "National Center for Case Study Teaching in Science"
+    description: "Nearly 1,000 STEM case studies with instructor guidance for active learning."
+    category: learning
+    url: "https://sciencecases.lib.buffalo.edu/cs/"
+    tags:
+      - cases
+      - stem
+      - teaching
+    language: en
+    featured: false
+
+  - id: learncheme
+    title: "LearnChemE"
+    description: "Chemical engineering resources including screencasts, simulations, and instructor tools."
+    category: learning
+    url: "https://learncheme.com/"
+    tags:
+      - chemical-engineering
+      - simulations
+      - screencasts
+    language: en
+    featured: false
+
+  # Open Data & Research Repositories
+  - id: gapminder
+    title: "Gapminder"
+    description: "Educational platform presenting global data and tools for data-driven insights."
+    category: data
+    url: "https://www.gapminder.org/"
+    tags:
+      - data
+      - visualization
+      - statistics
+    language: en
+    featured: false
+
+  - id: briter-bridges
+    title: "Briter Bridges"
+    description: "Visual maps and reports for understanding complex systemic data and markets."
+    category: data
+    url: "https://briterbridges.com/"
+    tags:
+      - data
+      - mapping
+      - research
+    language: en
+    featured: false
+
+  # Open Publications & Literature
+  - id: oapen
+    title: "OAPEN Library"
+    description: "Global digital library for hosting and disseminating peer-reviewed open access books."
+    category: publications
+    url: "https://www.oapen.org/"
+    tags:
+      - books
+      - open-access
+      - publications
+    language: en
+    featured: false
+
+  - id: doab
+    title: "Directory of Open Access Books (DOAB)"
+    description: "Discovery service indexing peer-reviewed open access books."
+    category: publications
+    url: "https://www.doabooks.org/"
+    tags:
+      - books
+      - open-access
+      - discovery
+    language: en
+    featured: false
+
+  - id: project-gutenberg
+    title: "Project Gutenberg"
+    description: "A vast collection of free eBooks, including classic literature and historical texts."
+    category: publications
+    url: "https://www.gutenberg.org/"
+    tags:
+      - ebooks
+      - literature
+      - public-domain
+    language: en
+    featured: false
+
+  - id: openstax
+    title: "OpenStax"
+    description: "Peer-reviewed, openly-licensed textbooks for college and AP courses."
+    category: publications
+    url: "https://openstax.org/"
+    tags:
+      - textbooks
+      - open-access
+      - education
+    language: en
+    featured: false
+
+  # Open Content (Multimedia)
+  - id: pixabay
+    title: "Pixabay"
+    description: "Free stock photos, vector art, and illustrations with permissive licensing."
+    category: multimedia
+    url: "https://pixabay.com/"
+    tags:
+      - images
+      - stock
+      - cc0
+    language: en
+    featured: false
+
+  - id: the-noun-project
+    title: "The Noun Project"
+    description: "SVG and PNG vector icons and symbols under permissive licenses."
+    category: multimedia
+    url: "https://thenounproject.com/"
+    tags:
+      - icons
+      - vector
+      - design
+    language: en
+    featured: false
+
+  # Software & Tools
+  - id: ptolemy-project
+    title: "Ptolemy Project"
+    description: "Resources on modeling, simulation, and design of concurrent and embedded systems."
+    category: tools
+    url: "https://ptolemy.berkeley.edu/"
+    tags:
+      - simulation
+      - embedded
+      - modeling
+    language: en
+    featured: false
+
+  - id: libreoffice
+    title: "LibreOffice"
+    description: "Free and open-source office suite compatible with common document formats."
+    category: tools
+    url: "https://www.libreoffice.org/"
+    tags:
+      - office
+      - productivity
+      - foss
+    language: en
+    featured: false
+
+  - id: electric-vlsi
+    title: "Electric VLSI Design System"
+    description: "Flexible system for circuit design (MOS, Bipolar, schematics, HDL)."
+    category: tools
+    url: "https://www.staticfreesoft.com/electricSpecs.html"
+    tags:
+      - vlsi
+      - cad
+      - electronics
+    language: en
+    featured: false
+
+  - id: ubuntu
+    title: "Ubuntu"
+    description: "Popular free and open-source desktop and server operating system."
+    category: tools
+    url: "https://ubuntu.com/"
+    tags:
+      - linux
+      - os
+      - foss
+    language: en
+    featured: false
+
+  - id: gnucash
+    title: "GnuCash"
+    description: "Double-entry accounting application for personal and small business use."
+    category: tools
+    url: "https://www.gnucash.org/"
+    tags:
+      - finance
+      - accounting
+      - foss
+    language: en
+    featured: false
+
+  - id: gnuradio
+    title: "GNU Radio"
+    description: "Open-source toolkit for building software-defined radios and signal-processing systems."
+    category: tools
+    url: "https://www.gnuradio.org/"
+    tags:
+      - sdr
+      - signal-processing
+      - foss
+    language: en
+    featured: false
+
+  - id: gimp
+    title: "GIMP"
+    description: "Cross-platform open-source image editor for photo retouching and composition."
+    category: tools
+    url: "https://www.gimp.org/"
+    tags:
+      - image-editing
+      - graphics
+      - foss
+    language: en
+    featured: false
+
+  # Frameworks & Mental Models
+  - id: untools
+    title: "Untools"
+    description: "A curated collection of practical thinking tools to aid problem-solving and decision-making."
+    category: frameworks
+    url: "https://untools.org/"
+    tags:
+      - frameworks
+      - thinking
+      - decision-making
+    language: en
+    featured: false
+
+  - id: startup-secrets-sandbox
+    title: "Startup Secrets Sandbox"
+    description: "Platform for entrepreneurs to explore startup strategies and experiments."
+    category: frameworks
+    url: ""
+    tags:
+      - startups
+      - entrepreneurship
+    language: en
+    featured: false
+
+  # Portuguese translations (selected)
+  - id: mit-opencourseware-pt
+    title: "MIT OpenCourseWare"
+    description: "Materiais gratuitos de cursos online do MIT para aprendizagem ao ritmo do utilizador."
+    category: learning
+    url: "https://ocw.mit.edu/"
+    tags:
+      - oer
+      - cursos
+      - mit
+    language: pt
+    featured: true
+
+  - id: class-central-pt
+    title: "Class Central"
+    description: "Motor de busca para descobrir cursos online gratuitos de universidades e plataformas."
+    category: learning
+    url: "https://www.classcentral.com/"
+    tags:
+      - oer
+      - cursos
+      - descoberta
+    language: pt
+    featured: true
+
+  - id: gapminder-pt
+    title: "Gapminder"
+    description: "Plataforma educativa que apresenta dados globais e ferramentas para análises baseadas em dados."
+    category: data
+    url: "https://www.gapminder.org/"
+    tags:
+      - dados
+      - visualização
+    language: pt
+    featured: false
+
+  - id: oapen-pt
+    title: "OAPEN Library"
+    description: "Biblioteca digital global para albergar e divulgar livros académicos de acesso aberto."
+    category: publications
+    url: "https://www.oapen.org/"
+    tags:
+      - livros
+      - acesso-aberto
+    language: pt
+    featured: false

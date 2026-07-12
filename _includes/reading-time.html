@@ -1,0 +1,18 @@
+<!-- Reading Time Estimate -->
+{% if page.content %}
+  {% assign words = page.content | strip_html | number_of_words %}
+  {% if words >= 200 %}
+    {% assign reading_time = words | divided_by: 200 | ceil %}
+  {% else %}
+    {% assign reading_time = 1 %}
+  {% endif %}
+  
+  <span class="reading-time" aria-label="Reading time">
+    {{ reading_time }}
+    {% if page.language == "pt" %}
+      min
+    {% else %}
+      min
+    {% endif %}
+  </span>
+{% endif %}

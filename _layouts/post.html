@@ -1,0 +1,311 @@
+---
+layout: default
+---
+
+{% assign language = page.language | default: site.default_language %}
+{% assign i18n = site.data.i18n[language] %}
+{% assign category_archive_path = "/categories/" %}
+{% if language == "pt" %}
+  {% assign category_archive_path = "/pt/categorias/" %}
+{% endif %}
+{% assign related_posts = site.posts | where_exp: "post", "post.url != page.url" | where_exp: "post", "post.language == language" | limit: 3 %}
+
+<article class="post detailed" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    {% if page.image %}
+      <div class="post-featured-image">
+        <img src="{{ page.image | relative_url }}" alt="{{ page.title | escape }}" itemprop="image" loading="lazy">
+      </div>
+    {% endif %}
+
+    <p class="post-kicker">{{ i18n.blog.title | default: "Blog" }}</p>
+    <h1 itemprop="headline">{{ page.title }}</h1>
+
+    {% if page.description %}
+      <p class="post-description">{{ page.description }}</p>
+    {% endif %}
+
+    <div class="post-metadata">
+      <span class="post-author" itemprop="author">{{ page.author | default: site.author }}</span>
+      <span class="post-separator">·</span>
+      <time class="post-date" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+        {{ page.date | date: "%B %e, %Y" }}
+      </time>
+      {% if page.last_modified_at %}
+        <span class="post-separator">·</span>
+        <time class="post-updated" datetime="{{ page.last_modified_at | date_to_xmlschema }}" itemprop="dateModified">
+          {{ i18n.ui.updated_on }}: {{ page.last_modified_at | date: "%b %-d, %Y" }}
+        </time>
+      {% endif %}
+      <span class="post-separator">·</span>
+      {% include reading-time.html %}
+    </div>
+  </header>
+
+  {% if page.categories %}
+    <div class="post-categories">
+      <strong>{{ i18n.ui.categories }}:</strong>
+      {% for category in page.categories %}
+        <a href="{{ category_archive_path }}#{{ category | slugify }}" rel="tag">{{ category }}</a>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {% if page.tags %}
+    <div class="post-tags">
+      <strong>{{ i18n.ui.tags }}:</strong>
+      {% for tag in page.tags %}
+        <a href="{{ site.baseurl }}/tags/#{{ tag | slugify }}" rel="tag">#{{ tag }}</a>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <div class="entry" itemprop="articleBody">
+    {{ content }}
+  </div>
+
+  <div class="post-footer">
+    <a href="{{ site.baseurl }}/blog/" class="back-to-blog">← {{ i18n.blog.title | default: "Back to blog" }}</a>
+  </div>
+
+  <div class="post-sharing">
+    <p><strong>{{ i18n.ui.share_this_post }}:</strong></p>
+    <ul class="share-buttons">
+      <li>
+        <a href="https://twitter.com/intent/tweet?text={{ page.title | uri_escape }}&url={{ site.url }}{{ page.url }}&via=yourhandle" target="_blank" rel="noopener noreferrer" class="share-button share-twitter" title="Share on Twitter">Twitter</a>
+      </li>
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u={{ site.url }}{{ page.url }}" target="_blank" rel="noopener noreferrer" class="share-button share-facebook" title="Share on Facebook">Facebook</a>
+      </li>
+      <li>
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ site.url }}{{ page.url }}" target="_blank" rel="noopener noreferrer" class="share-button share-linkedin" title="Share on LinkedIn">LinkedIn</a>
+      </li>
+      <li>
+        <a href="mailto:?subject={{ page.title | uri_escape }}&body={{ site.url }}{{ page.url }}" class="share-button share-email" title="Share via email">Email</a>
+      </li>
+    </ul>
+  </div>
+
+  {% if related_posts.size > 0 %}
+    <div class="related-posts">
+      <h3>{{ i18n.blog.latest_posts }}</h3>
+      <ul>
+        {% for post in related_posts %}
+          <li>
+            <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+            <span class="post-date">{{ post.date | date: "%b %d, %Y" }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+
+  {% if site.data.site-config.comments.enabled and page.comments %}
+    {% include comment-form.html %}
+  {% endif %}
+</article>
+
+<style>
+  .post-header {
+    margin-bottom: 2rem;
+  }
+
+  .post-kicker {
+    margin: 0 0 0.5rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #2563eb;
+    font-weight: 700;
+  }
+
+  .post-description {
+    font-size: 1.05rem;
+    color: #475569;
+    margin: 1rem 0 0;
+  }
+
+  .post-featured-image {
+    margin: 1.5rem 0 2rem;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
+  }
+
+  .post-featured-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .post-metadata {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1.25rem 0 0;
+    font-size: 0.95rem;
+    color: #64748b;
+  }
+
+  .post-separator {
+    color: #cbd5e1;
+  }
+
+  .post-author {
+    font-weight: 600;
+    color: #0f172a;
+  }
+
+  .post-date,
+  .post-updated {
+    color: #64748b;
+  }
+
+  .post-categories,
+  .post-tags {
+    margin: 1rem 0;
+    padding: 1rem 1.25rem;
+    background: #f8fafc;
+    border-left: 3px solid #2563eb;
+    border-radius: 10px;
+    color: #334155;
+  }
+
+  .post-categories a,
+  .post-tags a {
+    display: inline-block;
+    margin-right: 0.5rem;
+    margin-bottom: 0.3rem;
+    padding: 0.3rem 0.75rem;
+    background: #dbeafe;
+    color: #1d4ed8;
+    text-decoration: none;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+  }
+
+  .post-categories a:hover,
+  .post-tags a:hover {
+    background: #2563eb;
+    color: white;
+  }
+
+  .entry {
+    margin: 2rem 0;
+    line-height: 1.8;
+    color: #334155;
+  }
+
+  .entry img {
+    max-width: 100%;
+    height: auto;
+    margin: 1.5rem 0;
+    border-radius: 8px;
+  }
+
+  .post-footer {
+    margin: 2rem 0 1rem;
+  }
+
+  .back-to-blog {
+    color: #2563eb;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .post-sharing {
+    margin: 2rem 0;
+    padding: 1.25rem;
+    background: #f8fafc;
+    border-radius: 12px;
+  }
+
+  .share-buttons {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .share-button {
+    display: inline-block;
+    padding: 0.5rem 0.9rem;
+    background: #2563eb;
+    color: white;
+    text-decoration: none;
+    border-radius: 999px;
+    font-size: 0.9rem;
+  }
+
+  .share-button:hover {
+    background: #1d4ed8;
+  }
+
+  .related-posts {
+    margin: 2rem 0;
+    padding: 1.25rem;
+    background: #f8fafc;
+    border-radius: 12px;
+  }
+
+  .related-posts h3 {
+    margin-top: 0;
+  }
+
+  .related-posts ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .related-posts li {
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  .related-posts li:last-child {
+    border-bottom: none;
+  }
+
+  .related-posts a {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .related-posts a:hover {
+    text-decoration: underline;
+  }
+
+  .related-posts .post-date {
+    display: block;
+    font-size: 0.85rem;
+    color: #999;
+    margin-top: 0.25rem;
+  }
+
+  @media (max-width: 768px) {
+    .post-metadata {
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .post-separator {
+      display: none;
+    }
+
+    .share-buttons {
+      flex-direction: column;
+    }
+
+    .share-button {
+      width: 100%;
+      text-align: center;
+    }
+  }
+</style>
+

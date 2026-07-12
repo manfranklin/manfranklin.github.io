@@ -1,0 +1,34 @@
+---
+layout: null
+permalink: /pagefind/index.json
+---
+[
+{% assign search_items = site.posts %}
+{% assign output_index = 0 %}
+{% for item in search_items %}
+  {% assign url = item.url | default: '' %}
+  {% unless url contains '/pagefind/' %}
+    {% if url != '/search/' and url != '/pt/pesquisa/' and url != '/404.html' %}
+    {% assign title = item.title | default: item.url %}
+    {% assign item_url = site.baseurl | append: item.url %}
+    {% assign item_category = item.categories | join: ', ' %}
+    {% assign item_date = item.date | date: "%B %e, %Y" %}
+    {% assign item_excerpt = item.excerpt | strip_html | strip_newlines | truncate: 280 %}
+    {% assign item_content = item.content | strip_html | strip_newlines | truncate: 800 %}
+
+    {% if output_index > 0 %},{% endif %}
+    {
+      "title": {{ title | jsonify }},
+      "url": {{ item_url | jsonify }},
+      "category": {{ item_category | jsonify }},
+      "date": {{ item_date | jsonify }},
+      "type": {{ item.collection | default: 'page' | jsonify }},
+      "language": {{ item.language | default: site.default_language | jsonify }},
+      "excerpt": {{ item_excerpt | jsonify }},
+      "content": {{ item_content | jsonify }}
+    }
+    {% assign output_index = output_index | plus: 1 %}
+    {% endif %}
+  {% endunless %}
+{% endfor %}
+]

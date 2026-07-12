@@ -1,0 +1,324 @@
+# Internationalization (i18n) Configuration
+# This file contains all UI strings for both languages
+
+# English
+en:
+  # Navigation
+  nav:
+    home: "Home"
+    blog: "Blog"
+    resources: "Resources"
+    showcase: "Showcase"
+    about: "About Me"
+    disclaimer: "Disclaimer"
+    contact: "Contact"
+    search: "Search"
+
+  # Home
+  home:
+    hero_title: "Greetings!"
+    hero_subtitle: "Here I explore how technology, organizational transformation, and education can help people and organizations achieve their full potential."
+    cta_blog: "Read My Blog"
+    disclaimer_title: "Disclaimer"
+    disclaimer_text: "This website uses no cookies, stores no personal data, and is GDPR compliant. No liability is assumed for the use of this website or any downloadable resources."
+    disclaimer_link: "Read the full Disclaimer"
+    featured_posts: "Featured Posts"
+    featured_projects: "Featured Projects"
+    view_all_posts: "See all posts"
+    view_project: "View"
+
+  # Pages
+  pages:
+    about:
+      heading: "About Me"
+      intro_1: "Hello. What brings you here?"
+      intro_2: "You're probably wondering who's behind this profile. That's a surprisingly difficult question. Philosophers have been working on it for a while, and the answer is far from trivial. So, I'll stick to the parts that fit on a profile."
+      tldr_label: "TL;DR"
+      tldr_text: "I’m a generalist — a Jack of all trades, master of none. I enjoy learning across disciplines, connecting ideas, and turning diverse knowledge into practical solutions."
+      longer_heading: "The longer version"
+      longer_1: "My name is already visible. Where I work and live matters less than what I do and what I am curious about. The rest is mostly paperwork: a degree in Electrical Engineering and a Master's in Digital Transformation."
+      longer_2: "Professionally, I enjoy building software, modernizing systems, improving processes, and turning complex challenges into solutions that are simpler, more reliable, and easier to maintain."
+      longer_3: "I value evidence over assumptions, clarity over unnecessary complexity, and delivering meaningful results over endlessly refining ideas that never leave the drawing board."
+      interests_heading: "Areas of Interest"
+      interests_items:
+        - "Conversational AI"
+        - "Embedded and Cyber-Physical Systems"
+        - "Software-Defined Radio"
+        - "Cybersecurity"
+        - "Digital Strategy & Transformation"
+        - "Business Process Improvement"
+        - "Organizational Learning"
+        - "Venture Capital"
+      connect_text: "Have an interesting problem, project, or idea? Feel free to reach out."
+      email_label: "Email"
+      email_value: "manfranklin817 [at] gmail [dot] com"
+    disclaimer:
+      heading: "Disclaimer"
+      intro_1: "No liability is assumed for damages arising from the use of this website, any downloadable resources, or third-party services embedded on it."
+      intro_2: "This website does not store personal data for its core functionality, uses no tracking cookies, and is GDPR compliant."
+      intro_3: "Comments are disabled on this site."
+      intro_4: "The site also uses Umami for anonymous web analytics to understand general usage patterns. Umami does not identify individuals and does not rely on advertising-style tracking."
+      questions_heading: "For questions and suggestions:"
+      email_label: "Email"
+      email_value: "manfranklin817 [at] gmail [dot] com"
+      responsible_heading: "Responsible for this website:"
+      responsible_name: "Manuel Franklin"
+
+  # Common UI
+  ui:
+    read_more: "Read More"
+    continue_reading: "Continue Reading →"
+    posted_on: "Posted on"
+    updated_on: "Updated on"
+    by: "by"
+    in: "in"
+    reading_time: "min read"
+    no_posts: "No posts found."
+    search_placeholder: "Search posts..."
+    search_results: "Search Results"
+    featured: "Featured"
+    categories: "Categories"
+    tags: "Tags"
+    archive: "Archive"
+    subscribe: "Subscribe"
+    subscribe_desc: "Get notified about new posts"
+    share_this_post: "Share this post"
+    all: "All"
+    visit_resource: "Visit Resource"
+
+  # Blog
+  blog:
+    title: "Blog"
+    description: "Articles, tutorials, and thoughts"
+    latest_posts: "Latest Posts"
+    all_posts: "All Posts"
+    posts_in: "Posts in"
+    no_posts_found: "No posts found."
+
+  # Resources
+  resources:
+    title: "Resources"
+    description: "Curated collection of learning materials"
+    all_resources: "All Resources"
+    learning: "Learning"
+    books: "Books"
+    courses: "Courses"
+    tools: "Tools"
+    websites: "Websites"
+    ai: "AI & ML"
+    development: "Development"
+    filter_by: "Filter by category"
+    no_resources: "No resources found."
+
+  # Showcase / Gallery
+  showcase:
+    title: "Showcase"
+    description: "Photo gallery and project showcase"
+    dogs: "Dogs"
+    travel: "Travel"
+    projects: "Projects"
+    miscellaneous: "Miscellaneous"
+    view_image: "View"
+    filter_by: "Filter by category"
+    no_items: "No showcase items found."
+
+  # Comments
+  comments:
+    title: "Comments"
+    form_title: "Leave a Comment"
+    name: "Name"
+    email: "Email"
+    website: "Website (optional)"
+    message: "Comment"
+    submit: "Submit"
+    submitting: "Submitting..."
+    thank_you: "Thank you for your comment! It will be reviewed and published shortly."
+    moderated: "Comments are moderated."
+    moderation_notice: "Comments are moderated and may take a little time to appear. By submitting a comment, you agree to our Comment Policy."
+    read_policy: "Read the Comment Policy"
+    no_comments: "Be the first to comment!"
+
+  # Footer
+  footer:
+    language: "Language"
+    built_with: "Built with Jekyll & GitHub Pages"
+    powered_by: "Powered by"
+    theme: "Theme"
+    privacy: "Privacy Policy"
+    terms: "Terms of Service"
+    about: "About Me"
+    disclaimer: "Disclaimer"
+
+  # Errors
+  errors:
+    page_not_found: "Page Not Found"
+    error_404: "Sorry, the page you're looking for doesn't exist."
+    back_home: "Back to Home"
+
+  # SEO
+  seo:
+    home_title: "Home"
+    home_description: "Welcome to my personal website"
+
+# Portuguese (Angola)
+pt:
+  # Navegação
+  nav:
+    home: "Início"
+    blog: "Blog"
+    resources: "Recursos"
+    showcase: "Galeria"
+    about: "Sobre Mim"
+    disclaimer: "Aviso"
+    contact: "Contacto"
+    search: "Pesquisar"
+
+  # Início
+  home:
+    hero_title: "Bem-vindo ao meu website!"
+    hero_subtitle: "Aqui, exploro a forma como a tecnologia, a transformação organizacional e a educação podem ajudar as pessoas e as organizações a atingirem o seu pleno potencial."
+    cta_blog: "Ler o Meu Blog"
+    disclaimer_title: "Aviso"
+    disclaimer_text: "Este website não utiliza cookies, não armazena dados pessoais e está em conformidade com o GDPR. Não é assumida qualquer responsabilidade pelo uso deste website ou de recursos descarregáveis."
+    disclaimer_link: "Ler o aviso completo"
+    featured_posts: "Artigos Recentes"
+    featured_projects: "Projectos em Destaque"
+    view_all_posts: "Ver Todos os Artigos"
+    view_project: "Ver"
+
+  # Páginas
+  pages:
+    about:
+      heading: "Sobre Mim"
+      intro_1: "Olá. O que te traz até aqui?"
+      intro_2: "Provavelmente estás a perguntar quem está por detrás deste perfil. É uma pergunta bastante difícil. Os filósofos já vêm a debruçar-se sobre ela há algum tempo, e a resposta está longe de ser trivial. Portanto, vou limitar-me às partes que cabem num perfil."
+      tldr_label: "Resumo"
+      tldr_text: "Sou um generalista com interesses multidisciplinares. Gosto de explorar diferentes áreas, ligar ideias entre disciplinas e transformar conhecimento diversificado em soluções práticas. "
+      longer_heading: "A versão mais longa"
+      longer_1: "O meu nome já está visível. Onde trabalho e vivo importa menos do que aquilo que faço e aquilo que me desperta curiosidade. O resto é, em grande parte, papelada: uma licenciatura em Engenharia Electrotécnica e um mestrado em Transformação Digital."
+      longer_2: "Profissionalmente, gosto de consdesenvolver software, modernizar sistemas, melhorar processos e transformar desafios complexos em soluções mais simples, fiáveis e fáceis de manter."
+      longer_3: "Valorizo a evidência mais do que as suposições, a clareza mais do que a complexidade desnecessária e a entrega de resultados significativos mais do que refinar indefinidamente ideias que nunca saem do papel."
+      interests_heading: "Áreas de Interesse"
+      interests_items:
+        - "IA Conversacional"
+        - "Sistemas Embebidos e Ciberfísicos"
+        - "Rádio Definido por Software"
+        - "Cibersegurança"
+        - "Estratégia e Transformação Digital"
+        - "Melhoria de Processos de Negócio"
+        - "Aprendizagem Organizacional"
+        - "Capital de Risco"
+      connect_text: "Tens um desafio, projeto ou ideia interessante? Não hesites em entrar em contacto."
+      email_label: "Email"
+      email_value: "manfranklin817 [arroba] gmail [ponto] com"
+    disclaimer:
+      heading: "Aviso"
+      intro_1: "Não é assumida qualquer responsabilidade por danos resultantes da utilização deste website, de quaisquer recursos descarregáveis ou de serviços de terceiros incorporados no mesmo."
+      intro_2: "Este website não armazena dados pessoais para o seu funcionamento principal, não utiliza cookies de rastreio e está em conformidade com o GDPR."
+      intro_3: "Os comentários estão desativados neste website."
+      intro_4: "O website também utiliza o Umami para estatísticas de analytics web anónimas, com o objetivo de compreender padrões gerais de utilização. O Umami não identifica indivíduos nem depende de rastreio com fins publicitários."
+      questions_heading: "Para questões e sugestões:"
+      email_label: "Email"
+      email_value: "manfranklin817 [arroba] gmail [ponto] com"
+      responsible_heading: "Responsável por este website:"
+      responsible_name: "Manuel Franklin"
+
+  # UI Comum
+  ui:
+    read_more: "Ler Mais"
+    continue_reading: "Continuar Lendo →"
+    posted_on: "Publicado em"
+    updated_on: "Actualizado em"
+    by: "por"
+    in: "em"
+    reading_time: "min de leitura"
+    no_posts: "Nenhum artigo encontrado."
+    search_placeholder: "Pesquisar artigos..."
+    search_results: "Resultados da Pesquisa"
+    featured: "Destaque"
+    categories: "Categorias"
+    tags: "Etiquetas"
+    archive: "Arquivo"
+    subscribe: "Inscrever-se"
+    subscribe_desc: "Seja notificado sobre novos artigos"
+    share_this_post: "Partilhar este artigo"
+    all: "Todos"
+    visit_resource: "Visitar Recurso"
+
+  # Blog
+  blog:
+    title: "Blog"
+    description: "Artigos, tutoriais e pensamentos"
+    latest_posts: "Últimos Artigos"
+    all_posts: "Todos os Artigos"
+    posts_in: "Artigos em"
+    no_posts_found: "Nenhum artigo encontrado."
+
+  # Resources
+  resources:
+    title: "Recursos"
+    description: "Colecção selecionada de materiais de aprendizagem"
+    all_resources: "Todos os Recursos"
+    learning: "Aprendizagem"
+    books: "Livros"
+    courses: "Cursos"
+    tools: "Ferramentas"
+    websites: "Websites"
+    ai: "IA e ML"
+    development: "Desenvolvimento"
+    data: "Dados"
+    publications: "Publicações"
+    multimedia: "Multimédia"
+    frameworks: "Frameworks"
+    filter_by: "Filtrar por categoria"
+    no_resources: "Nenhum recurso encontrado."
+
+  # Showcase / Gallery
+  showcase:
+    title: "Galeria"
+    description: "Galeria de fotos e projectos"
+    dogs: "Cães"
+    travel: "Viagens"
+    projects: "Projectos"
+    miscellaneous: "Diversos"
+    view_image: "Ver"
+    filter_by: "Filtrar por categoria"
+    no_items: "Nenhum item da galeria encontrado."
+
+  # Comments
+  comments:
+    title: "Comentários"
+    form_title: "Deixar um Comentário"
+    name: "Nome"
+    email: "Email"
+    website: "Website (opcional)"
+    message: "Comentário"
+    submit: "Enviar"
+    submitting: "Enviando..."
+    thank_you: "Obrigado pelo seu comentário! Será revisto e publicado em breve."
+    moderated: "Os comentários são moderados."
+    moderation_notice: "Os comentários são moderados e podem demorar algum tempo a aparecer. Ao submeter um comentário, concorda com a nossa Política de Comentários."
+    read_policy: "Ler a Política de Comentários"
+    no_comments: "Seja o primeiro a comentar!"
+
+  # Footer
+  footer:
+    language: "Idioma"
+    built_with: "Construído com Jekyll & GitHub Pages"
+    powered_by: "Alimentado por"
+    theme: "Tema"
+    privacy: "Política de Privacidade"
+    terms: "Termos de Serviço"
+    about: "Sobre Mim"
+    disclaimer: "Aviso"
+
+  # Errors
+  errors:
+    page_not_found: "Página Não Encontrada"
+    error_404: "Desculpe, a página que procura não existe."
+    back_home: "Voltar ao Início"
+
+  # SEO
+  seo:
+    home_title: "Início"
+    home_description: "Bem-vindo ao meu website pessoal"

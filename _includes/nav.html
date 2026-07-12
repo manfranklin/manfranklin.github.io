@@ -1,0 +1,59 @@
+<nav class="site-nav" role="navigation" aria-label="Primary">
+  {% assign language = page.language | default: site.default_language %}
+  {% assign i18n = site.data.i18n[language] | default: site.data.i18n[site.default_language] %}
+  {% assign current_path = page.url | replace: 'index.html', '' | replace: '//', '/' %}
+
+  <div class="nav-toolbar">
+    <button
+      class="nav-toggle"
+      type="button"
+      data-nav-toggle
+      aria-expanded="false"
+      aria-controls="site-nav-menu"
+      aria-label="{{ i18n.nav.menu | default: 'Menu' }}"
+    >
+      <span class="nav-toggle-icon" aria-hidden="true"></span>
+    </button>
+  </div>
+
+  <div class="nav-menu" id="site-nav-menu" role="menu" data-nav-menu aria-label="{{ i18n.nav.menu | default: 'Navigation menu' }}" aria-hidden="true">
+    {% if language == "en" %}
+      <a href="{{ site.baseurl }}/" class="nav-link{% if current_path == '/' %} is-active{% endif %}" role="menuitem"{% if current_path == '/' %} aria-current="page"{% endif %}>{{ i18n.nav.home }}</a>
+      <a href="{{ site.baseurl }}/blog/" class="nav-link{% if current_path contains '/blog/' %} is-active{% endif %}" role="menuitem"{% if current_path contains '/blog/' %} aria-current="page"{% endif %}>{{ i18n.nav.blog }}</a>
+      <a href="{{ site.baseurl }}/resources/" class="nav-link{% if current_path contains '/resources/' %} is-active{% endif %}" role="menuitem"{% if current_path contains '/resources/' %} aria-current="page"{% endif %}>{{ i18n.nav.resources }}</a>
+      <a href="{{ site.baseurl }}/about/" class="nav-link{% if current_path contains '/about/' %} is-active{% endif %}" role="menuitem"{% if current_path contains '/about/' %} aria-current="page"{% endif %}>{{ i18n.nav.about }}</a>
+         {% elsif language == "pt" %}
+      <a href="{{ site.baseurl }}/pt/" class="nav-link{% if current_path == '/pt/' %} is-active{% endif %}" role="menuitem"{% if current_path == '/pt/' %} aria-current="page"{% endif %}>{{ i18n.nav.home }}</a>
+      <a href="{{ site.baseurl }}/pt/blog/" class="nav-link{% if current_path contains '/pt/blog/' %} is-active{% endif %}" role="menuitem"{% if current_path contains '/pt/blog/' %} aria-current="page"{% endif %}>{{ i18n.nav.blog }}</a>
+      <a href="{{ site.baseurl }}/pt/recursos/" class="nav-link{% if current_path contains '/pt/recursos/' %} is-active{% endif %}" role="menuitem"{% if current_path contains '/pt/recursos/' %} aria-current="page"{% endif %}>{{ i18n.nav.resources }}</a>
+      <a href="{{ site.baseurl }}/pt/sobre/" class="nav-link{% if current_path contains '/pt/sobre/' %} is-active{% endif %}" role="menuitem"{% if current_path contains '/pt/sobre/' %} aria-current="page"{% endif %}>{{ i18n.nav.about }}</a>
+    {% endif %}
+  </div>
+
+  <div class="nav-tools">
+    <a href="{% if language == 'pt' %}{{ site.baseurl }}/pt/pesquisa/{% else %}{{ site.baseurl }}/search/{% endif %}" class="nav-search" aria-label="{{ i18n.nav.search }}">
+      <span class="nav-search-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+          <path d="M10.5 4.5a6 6 0 1 1 0 12 6 6 0 0 1 0-12Zm0 0 8.25 8.25" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"></path>
+        </svg>
+      </span>
+      <span class="nav-search-text">{{ i18n.nav.search }}</span>
+    </a>
+
+    <div class="nav-language-switcher" data-language-switcher aria-label="Language selection">
+      <label class="lang-select-label" for="language-select" id="language-select-label">
+        {{ i18n.footer.language | default: "Language" }}
+      </label>
+
+      <select
+        id="language-select"
+        class="lang-select"
+        data-language-select
+        aria-labelledby="language-select-label"
+      >
+        <option value="en" {% if language == 'en' %}selected{% endif %}>English</option>
+        <option value="pt" {% if language == 'pt' %}selected{% endif %}>Português</option>
+      </select>
+    </div>
+  </div>
+</nav>

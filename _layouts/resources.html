@@ -1,0 +1,272 @@
+---
+layout: default
+---
+
+{% assign current_language = page.language | default: site.default_language %}
+{% assign i18n = site.data.i18n[current_language] %}
+
+<div class="resources-container">
+  <h1>{{ page.title }}</h1>
+  {% if page.description %}
+    <p class="section-description">{{ page.description }}</p>
+  {% endif %}
+
+  <div class="resources-filters">
+    <button class="filter-btn active" data-filter="all">{{ i18n.ui.all }}</button>
+    {% assign categories = site.data.resources.items | where: "language", current_language | map: "category" | uniq %}
+    {% for category in categories %}
+      {% assign category_label = category %}
+      {% if i18n.resources[category] %}
+        {% assign category_label = i18n.resources[category] %}
+      {% endif %}
+      <button class="filter-btn" data-filter="{{ category }}">
+        {{ category_label }}
+      </button>
+    {% endfor %}
+  </div>
+
+  <div class="resources-grid">
+    {% for resource in site.data.resources.items %}
+      {% if resource.language == current_language %}
+        <div class="resource-card" data-category="{{ resource.category }}">
+          <div class="resource-header">
+            <h3 class="resource-title">{{ resource.title }}</h3>
+            {% assign category_label = resource.category %}
+            {% if i18n.resources[resource.category] %}
+              {% assign category_label = i18n.resources[resource.category] %}
+            {% endif %}
+            <span class="resource-category">{{ category_label }}</span>
+          </div>
+
+          {% if resource.description %}
+            <p class="resource-description">{{ resource.description }}</p>
+          {% endif %}
+
+          {% if resource.tags %}
+            <div class="resource-tags">
+              {% for tag in resource.tags %}
+                <span class="tag">{{ tag }}</span>
+              {% endfor %}
+            </div>
+          {% endif %}
+
+          <a href="{{ resource.url }}"
+             target="_blank"
+             rel="noopener noreferrer"
+             class="resource-link">
+            {{ i18n.ui.visit_resource }} →
+          </a>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <div class="no-results" style="display: none;">
+    <p>{{ i18n.resources.no_resources }}</p>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  const resourceCards = document.querySelectorAll('.resource-card');
+  const noResults = document.querySelector('.no-results');
+
+  filterButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      const filterValue = this.getAttribute('data-filter');
+
+      filterButtons.forEach(btn => btn.classList.remove('active'));
+      this.classList.add('active');
+
+      let visibleCount = 0;
+      resourceCards.forEach(card => {
+        if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+          card.style.display = '';
+          card.classList.add('fade-in');
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+    });
+  });
+});
+</script>
+
+<style>
+  .resources-container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .section-description {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+
+  .resources-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 2rem 0;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid #e0e0e0;
+  }
+
+  .filter-btn {
+    padding: 0.5rem 1rem;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #333;
+    transition: all 0.3s ease;
+  }
+
+  .filter-btn:hover {
+    background-color: #e0e0e0;
+    border-color: #999;
+  }
+
+  .filter-btn.active {
+    background-color: #007acc;
+    color: white;
+    border-color: #007acc;
+  }
+
+  .resources-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+  }
+
+  .resource-card {
+    padding: 1.5rem;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .resource-card:hover {
+    border-color: #007acc;
+    box-shadow: 0 4px 12px rgba(0, 122, 204, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .resource-card.fade-in {
+    animation: fadeIn 0.3s ease;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .resource-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .resource-title {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #222;
+    flex: 1;
+  }
+
+  .resource-category {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background-color: #e8f4f8;
+    color: #007acc;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .resource-description {
+    margin: 0.75rem 0;
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    flex-grow: 1;
+  }
+
+  .resource-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1rem 0;
+  }
+
+  .tag {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    background-color: #f0f0f0;
+    color: #666;
+    border-radius: 4px;
+    font-size: 0.8rem;
+  }
+
+  .resource-link {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.75rem 1.25rem;
+    background-color: #007acc;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-align: center;
+  }
+
+  .resource-link:hover {
+    background-color: #005a96;
+    box-shadow: 0 2px 8px rgba(0, 122, 204, 0.3);
+  }
+
+  .no-results {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: #999;
+    font-size: 1.1rem;
+  }
+
+  @media (max-width: 768px) {
+    .resources-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .resources-filters {
+      gap: 0.5rem;
+    }
+
+    .filter-btn {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.85rem;
+    }
+  }
+</style>

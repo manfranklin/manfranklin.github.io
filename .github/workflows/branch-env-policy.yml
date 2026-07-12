@@ -1,0 +1,23 @@
+name: Enforce branch-specific env files
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+  pull_request:
+    branches:
+      - main
+      - dev
+
+jobs:
+  validate-env-policy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Validate env file branch policy
+        env:
+          BRANCH_NAME: ${{ github.base_ref || github.ref_name }}
+        run: bash scripts/validate-env-branch-policy.sh "$BRANCH_NAME"
