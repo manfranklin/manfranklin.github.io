@@ -58,6 +58,20 @@ bundle exec jekyll build
 
 The site is deployed to GitHub Pages from this repository. Changes pushed to the main branch trigger a Jekyll build and publish the generated site.
 
+### Secure environment variables for GitHub Pages
+
+Use GitHub-managed secrets and variables rather than committing credentials to the repository.
+
+1. Open your repository settings and go to Secrets and variables → Actions.
+2. Add these as repository or environment-scoped values:
+   - Secret: TINA_TOKEN
+   - Variable: TINA_CLIENT_ID
+   - Variable: TINA_BRANCH (optional, usually main)
+3. If you use the GitHub Pages deployment environment, add the same values under Environments → github-pages for tighter scoping.
+4. For local development, create a local file named .env.local (ignored by Git) with the same variable names.
+
+A safe example file is included as .env.example.
+
 ## Analytics
 
 The site uses Umami for privacy-conscious analytics. The tracking configuration is managed in the site config and analytics includes.

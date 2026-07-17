@@ -32,7 +32,7 @@ en:
     about:
       heading: "About Me"
       intro_1: "Hello. What brings you here?"
-      intro_2: "You're probably wondering who's behind this profile. That's a surprisingly difficult question. Philosophers have been working on it for a while, and the answer is far from trivial. So, I'll stick to the parts that fit on a profile."
+      intro_2: "You're probably wondering who am I. That's a surprisingly difficult question. Philosophers have been working on it for a while, and the answer is far from trivial. So, I'll stick to the parts that fit on a profile."
       tldr_label: "TL;DR"
       tldr_text: "I’m a generalist — a Jack of all trades, master of none. I enjoy learning across disciplines, connecting ideas, and turning diverse knowledge into practical solutions."
       longer_heading: "The longer version"
@@ -57,7 +57,7 @@ en:
       intro_1: "No liability is assumed for damages arising from the use of this website, any downloadable resources, or third-party services embedded on it."
       intro_2: "This website does not store personal data for its core functionality, uses no tracking cookies, and is GDPR compliant."
       intro_3: "Comments are disabled on this site."
-      intro_4: "The site also uses Umami for anonymous web analytics to understand general usage patterns. Umami does not identify individuals and does not rely on advertising-style tracking."
+      intro_4: "The site uses Umami for anonymous web analytics to understand general usage patterns. Umami does not identify individuals and does not rely on advertising-style tracking."
       questions_heading: "For questions and suggestions:"
       email_label: "Email"
       email_value: "manfranklin817 [at] gmail [dot] com"
@@ -107,6 +107,10 @@ en:
     websites: "Websites"
     ai: "AI & ML"
     development: "Development"
+    data: "Data"
+    publications: "Publications"
+    multimedia: "Multimedia"
+    frameworks: "Frameworks"
     filter_by: "Filter by category"
     no_resources: "No resources found."
 
@@ -191,7 +195,7 @@ pt:
     about:
       heading: "Sobre Mim"
       intro_1: "Olá. O que te traz até aqui?"
-      intro_2: "Provavelmente estás a perguntar quem está por detrás deste perfil. É uma pergunta bastante difícil. Os filósofos já vêm a debruçar-se sobre ela há algum tempo, e a resposta está longe de ser trivial. Portanto, vou limitar-me às partes que cabem num perfil."
+      intro_2: "Provavelmente estás a perguntar quem sou. É uma das perguntas mais antigas da filosofia e, ao que parece, continua sem uma resposta definitiva. Portanto, vou limitar-me às partes que cabem num perfil."
       tldr_label: "Resumo"
       tldr_text: "Sou um generalista com interesses multidisciplinares. Gosto de explorar diferentes áreas, ligar ideias entre disciplinas e transformar conhecimento diversificado em soluções práticas. "
       longer_heading: "A versão mais longa"
@@ -215,13 +219,17 @@ pt:
       heading: "Aviso"
       intro_1: "Não é assumida qualquer responsabilidade por danos resultantes da utilização deste website, de quaisquer recursos descarregáveis ou de serviços de terceiros incorporados no mesmo."
       intro_2: "Este website não armazena dados pessoais para o seu funcionamento principal, não utiliza cookies de rastreio e está em conformidade com o GDPR."
-      intro_3: "Os comentários estão desativados neste website."
-      intro_4: "O website também utiliza o Umami para estatísticas de analytics web anónimas, com o objetivo de compreender padrões gerais de utilização. O Umami não identifica indivíduos nem depende de rastreio com fins publicitários."
+      intro_3: "Por enquanto os comentários estão desativados neste website."
+      intro_4: "O website utiliza a ferramenta Umami Analytcs para a análise anónima do tráfego web, com o objetivo de compreender padrões gerais de utilização. O Umami não identifica indivíduos nem depende de rastreio com fins publicitários."
       questions_heading: "Para questões e sugestões:"
       email_label: "Email"
       email_value: "manfranklin817 [arroba] gmail [ponto] com"
       responsible_heading: "Responsável por este website:"
       responsible_name: "Manuel Franklin"
+
+
+
+
 
   # UI Comum
   ui:

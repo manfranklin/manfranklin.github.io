@@ -17,12 +17,12 @@ avatar: /images/reverie.png
 # Includes an icon in the footer for each username you enter
 footer-links:
   dribbble:
-  email: manfranklin817@gmail.com
+  email: ""
   facebook:
   flickr:
   github: manfranklin
   instagram:
-  linkedin: https://www.linkedin.com/in/manfranklin/
+  linkedin: ""
   pinterest:
   rss: feed
   twitter: 
@@ -64,9 +64,9 @@ enforce_ssl: https://manfranklin.github.io
 permalink: /:title/
 
 # Analytics & Comments
-# Umami Analytics - set after account creation
-umami_id: f0c848c1-d27a-4512-bdb0-c4eed8130591 # Your Umami site ID
-umami_domain: cloud.umami.is # Your Umami domain (cloud.umami.is or self-hosted)
+# Values can be supplied via environment variables in GitHub Actions or local .env files.
+umami_id: ""
+umami_domain: "cloud.umami.is"
 
 #
 # Bilingual Configuration

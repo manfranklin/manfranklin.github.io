@@ -12,12 +12,10 @@ package.json
 .jekyll-cache
 vendor
 
-# Branch-specific env files
-.env.production
-.env.development
-
-# Keep local secrets out of version control
+# Local environment files should never be committed
 .env
+.env.local
 .env.*
-!.env.production
-!.env.development
+.env.*.local
+!.env.example
+!.env.sample

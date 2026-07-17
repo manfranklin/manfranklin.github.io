@@ -5,7 +5,7 @@ items:
   - id: jekyll-documentation
     title: "Jekyll Documentation"
     description: "Official Jekyll static site generator documentation with comprehensive guides"
-    category: learning
+    category: development
     url: "https://jekyllrb.com/docs/"
     tags:
       - jekyll
@@ -17,7 +17,7 @@ items:
   - id: github-pages-docs
     title: "GitHub Pages Documentation"
     description: "Complete guide to hosting sites on GitHub Pages"
-    category: learning
+    category: development
     url: "https://docs.github.com/en/pages"
     tags:
       - github
@@ -41,7 +41,7 @@ items:
   - id: markdown-guide
     title: "Markdown Guide"
     description: "Complete markdown syntax reference and best practices"
-    category: learning
+    category: development
     url: "https://www.markdownguide.org/"
     tags:
       - markdown
@@ -61,6 +61,42 @@ items:
       - javascript
     language: en
     featured: true
+
+  - id: mermaid-live-editor
+    title: "Mermaid Live Editor"
+    description: "Create diagrams and flowcharts from text using Mermaid syntax."
+    category: development
+    url: "https://mermaid.live/edit#pako:eNpNjcFuwjAMhl8F-ZyhkLQp5Mgmdh87Tbl41JSK1kFuso0h3n0FDcHN3_f7t0-wiTWBhwF5T8enT0oYOPAaO5SjWua6oaSs1jrwSog65A1NvqPsb9nMXLJ_eCMejX0wrxI3JC0Nyj3Yd0EeDlGSMuXdrjIr-8Br_Gq5GdSs0hoUNNLW4JNkUtCT9HhBOAWeTAKkHfUUwI9jTVvMXQoQ-DzWDsgfMfa3psTc7MBvsRtGyocaE7202AjeV4hrkueYOYE3-noC_Al-wNvCTPWidAtXmtK4wio4gi_NtLBVMdeFKypnnD0r-L3-1NN5VZ7_ANS4cz4"
+    tags:
+      - diagrams
+      - flowcharts
+      - visualization
+    language: en
+    featured: false
+
+  - id: spartanslearn-training-resources
+    title: "MSU SpartansLearn Training Resources"
+    description: "Training resources and learning materials from Michigan State University."
+    category: learning
+    url: "https://spartanslearn.msu.edu/training-resources/index.html"
+    tags:
+      - training
+      - msu
+      - learning
+    language: en
+    featured: false
+
+  - id: secureit-msu
+    title: "SecureIT"
+    description: "Michigan State University cybersecurity and information security resources."
+    category: learning
+    url: "https://secureit.msu.edu/"
+    tags:
+      - security
+      - cybersecurity
+      - msu
+    language: en
+    featured: false
 
   - id: tinacms-docs
     title: "TinaCMS Documentation"
@@ -113,7 +149,7 @@ items:
   - id: web-accessibility-wcag
     title: "Web Content Accessibility Guidelines (WCAG)"
     description: "Standards for making web content more accessible to people with disabilities"
-    category: learning
+    category: development
     url: "https://www.w3.org/WAI/WCAG21/quickref/"
     tags:
       - accessibility
@@ -125,7 +161,7 @@ items:
   - id: jekyll-documentation-pt
     title: "Documentação do Jekyll"
     description: "Documentação oficial do gerador de sites estáticos Jekyll, com guias completos"
-    category: learning
+    category: development
     url: "https://jekyllrb.com/docs/"
     tags:
       - jekyll
@@ -137,7 +173,7 @@ items:
   - id: github-pages-docs-pt
     title: "Documentação do GitHub Pages"
     description: "Guia completo para alojar sites no GitHub Pages"
-    category: learning
+    category: development
     url: "https://docs.github.com/en/pages"
     tags:
       - github
@@ -161,7 +197,7 @@ items:
   - id: markdown-guide-pt
     title: "Guia de Markdown"
     description: "Referência completa da sintaxe Markdown e boas práticas"
-    category: learning
+    category: development
     url: "https://www.markdownguide.org/"
     tags:
       - markdown
@@ -181,6 +217,42 @@ items:
       - javascript
     language: pt
     featured: true
+
+  - id: mermaid-live-editor-pt
+    title: "Mermaid Live Editor"
+    description: "Crie diagramas e fluxogramas a partir de texto usando a sintaxe Mermaid."
+    category: development
+    url: "https://mermaid.live/edit#pako:eNpNjcFuwjAMhl8F-ZyhkLQp5Mgmdh87Tbl41JSK1kFuso0h3n0FDcHN3_f7t0-wiTWBhwF5T8enT0oYOPAaO5SjWua6oaSs1jrwSog65A1NvqPsb9nMXLJ_eCMejX0wrxI3JC0Nyj3Yd0EeDlGSMuXdrjIr-8Br_Gq5GdSs0hoUNNLW4JNkUtCT9HhBOAWeTAKkHfUUwI9jTVvMXQoQ-DzWDsgfMfa3psTc7MBvsRtGyocaE7202AjeV4hrkueYOYE3-noC_Al-wNvCTPWidAtXmtK4wio4gi_NtLBVMdeFKypnnD0r-L3-1NN5VZ7_ANS4cz4"
+    tags:
+      - diagramas
+      - fluxogramas
+      - visualização
+    language: pt
+    featured: false
+
+  - id: spartanslearn-training-resources-pt
+    title: "Recursos de Formação MSU SpartansLearn"
+    description: "Recursos de formação e materiais de aprendizagem da Michigan State University."
+    category: learning
+    url: "https://spartanslearn.msu.edu/training-resources/index.html"
+    tags:
+      - formação
+      - msu
+      - aprendizagem
+    language: pt
+    featured: false
+
+  - id: secureit-msu-pt
+    title: "SecureIT"
+    description: "Recursos de cibersegurança e segurança da informação da Michigan State University."
+    category: learning
+    url: "https://secureit.msu.edu/"
+    tags:
+      - segurança
+      - cibersegurança
+      - msu
+    language: pt
+    featured: false
 
   - id: tinacms-docs-pt
     title: "Documentação do TinaCMS"
@@ -233,7 +305,7 @@ items:
   - id: web-accessibility-wcag-pt
     title: "Diretrizes de Acessibilidade Web (WCAG)"
     description: "Padrões para tornar o conteúdo web mais acessível a pessoas com deficiência"
-    category: learning
+    category: development
     url: "https://www.w3.org/WAI/WCAG21/quickref/"
     tags:
       - acessibilidade
@@ -462,6 +534,18 @@ items:
     language: en
     featured: false
 
+  - id: pixabay-pt
+    title: "Pixabay"
+    description: "Fotos, ilustrações e vetores gratuitos com licenças permissivas."
+    category: multimedia
+    url: "https://pixabay.com/"
+    tags:
+      - imagens
+      - stock
+      - cc0
+    language: pt
+    featured: false
+
   # Software & Tools
   - id: ptolemy-project
     title: "Ptolemy Project"
@@ -571,49 +655,266 @@ items:
     language: en
     featured: false
 
-  # Portuguese translations (selected)
-  - id: mit-opencourseware-pt
-    title: "MIT OpenCourseWare"
-    description: "Materiais gratuitos de cursos online do MIT para aprendizagem ao ritmo do utilizador."
+  # Portuguese translations (remaining resources)
+  - id: 3blue1brown-pt
+    title: "3Blue1Brown"
+    description: "Lições visuais de matemática e explicações intuitivas através de animação."
     category: learning
-    url: "https://ocw.mit.edu/"
+    url: "https://www.3blue1brown.com/"
     tags:
-      - oer
-      - cursos
-      - mit
-    language: pt
-    featured: true
-
-  - id: class-central-pt
-    title: "Class Central"
-    description: "Motor de busca para descobrir cursos online gratuitos de universidades e plataformas."
-    category: learning
-    url: "https://www.classcentral.com/"
-    tags:
-      - oer
-      - cursos
-      - descoberta
-    language: pt
-    featured: true
-
-  - id: gapminder-pt
-    title: "Gapminder"
-    description: "Plataforma educativa que apresenta dados globais e ferramentas para análises baseadas em dados."
-    category: data
-    url: "https://www.gapminder.org/"
-    tags:
-      - dados
-      - visualização
+      - matemática
+      - vídeos
+      - visualizações
     language: pt
     featured: false
 
-  - id: oapen-pt
-    title: "OAPEN Library"
-    description: "Biblioteca digital global para albergar e divulgar livros académicos de acesso aberto."
+  - id: edge-org-pt
+    title: "Edge.org"
+    description: "Ensaios e conversas sobre ciência, tecnologia e cultura de pensadores líderes."
+    category: learning
+    url: "https://www.edge.org/"
+    tags:
+      - ensaios
+      - ciência
+      - cultura
+    language: pt
+    featured: false
+
+  - id: umich-open-oer-pt
+    title: "University of Michigan Open OER"
+    description: "Repositório institucional de recursos educacionais abertos da University of Michigan."
+    category: learning
+    url: "https://open.umich.edu/"
+    tags:
+      - oer
+      - repositório
+      - universidade
+    language: pt
+    featured: false
+
+  - id: big-think-pt
+    title: "Big Think"
+    description: "Entrevistas, artigos e vídeos com especialistas e líderes de pensamento."
+    category: learning
+    url: "https://bigthink.com/"
+    tags:
+      - ideias
+      - vídeos
+      - entrevistas
+    language: pt
+    featured: false
+
+  - id: merlot-pt
+    title: "MERLOT"
+    description: "Recurso educativo multimédia para aprendizagem e ensino online em várias disciplinas."
+    category: learning
+    url: "https://www.merlot.org/"
+    tags:
+      - oer
+      - repositório
+      - multimédia
+    language: pt
+    featured: false
+
+  - id: howstuffworks-pt
+    title: "HowStuffWorks"
+    description: "Explicações e guias sobre mecânica, eletrónica, informática e biologia."
+    category: learning
+    url: "https://www.howstuffworks.com/"
+    tags:
+      - explicações
+      - ciência
+      - tecnologia
+    language: pt
+    featured: false
+
+  - id: case-study-teaching-science-pt
+    title: "National Center for Case Study Teaching in Science"
+    description: "Quase 1.000 estudos de caso STEM com orientação de instrutores para aprendizagem ativa."
+    category: learning
+    url: "https://sciencecases.lib.buffalo.edu/cs/"
+    tags:
+      - estudos-de-caso
+      - stem
+      - ensino
+    language: pt
+    featured: false
+
+  - id: learncheme-pt
+    title: "LearnChemE"
+    description: "Recursos de engenharia química incluindo screencasts, simulações e ferramentas para instrutores."
+    category: learning
+    url: "https://learncheme.com/"
+    tags:
+      - engenharia-química
+      - simulações
+      - screencasts
+    language: pt
+    featured: false
+
+  - id: briter-bridges-pt
+    title: "Briter Bridges"
+    description: "Mapas visuais e relatórios para compreender dados complexos e mercados sistémicos."
+    category: data
+    url: "https://briterbridges.com/"
+    tags:
+      - dados
+      - mapeamento
+      - investigação
+    language: pt
+    featured: false
+
+  - id: doab-pt
+    title: "Directory of Open Access Books (DOAB)"
+    description: "Serviço de descoberta que indexa livros académicos de acesso aberto revisados por pares."
     category: publications
-    url: "https://www.oapen.org/"
+    url: "https://www.doabooks.org/"
     tags:
       - livros
       - acesso-aberto
+      - descoberta
+    language: pt
+    featured: false
+
+  - id: project-gutenberg-pt
+    title: "Project Gutenberg"
+    description: "Uma vasta coleção de eBooks gratuitos, incluindo literatura clássica e textos históricos."
+    category: publications
+    url: "https://www.gutenberg.org/"
+    tags:
+      - ebooks
+      - literatura
+      - domínio-público
+    language: pt
+    featured: false
+
+  - id: openstax-pt
+    title: "OpenStax"
+    description: "Manuais revisados por pares e licenciados abertamente para cursos universitários e AP."
+    category: publications
+    url: "https://openstax.org/"
+    tags:
+      - manuais
+      - acesso-aberto
+      - educação
+    language: pt
+    featured: false
+
+  - id: the-noun-project-pt
+    title: "The Noun Project"
+    description: "Ícones e símbolos vetoriais em SVG e PNG com licenças permissivas."
+    category: multimedia
+    url: "https://thenounproject.com/"
+    tags:
+      - ícones
+      - vetor
+      - design
+    language: pt
+    featured: false
+
+  - id: ptolemy-project-pt
+    title: "Ptolemy Project"
+    description: "Recursos sobre modelação, simulação e design de sistemas concorrentes e embutidos."
+    category: tools
+    url: "https://ptolemy.berkeley.edu/"
+    tags:
+      - simulação
+      - embutido
+      - modelação
+    language: pt
+    featured: false
+
+  - id: libreoffice-pt
+    title: "LibreOffice"
+    description: "Suíte de escritório gratuita e de código aberto compatível com formatos de documentos comuns."
+    category: tools
+    url: "https://www.libreoffice.org/"
+    tags:
+      - escritório
+      - produtividade
+      - foss
+    language: pt
+    featured: false
+
+  - id: electric-vlsi-pt
+    title: "Electric VLSI Design System"
+    description: "Sistema flexível para desenho de circuitos (MOS, bipolar, esquemas, HDL)."
+    category: tools
+    url: "https://www.staticfreesoft.com/electricSpecs.html"
+    tags:
+      - vlsi
+      - cad
+      - eletrónica
+    language: pt
+    featured: false
+
+  - id: ubuntu-pt
+    title: "Ubuntu"
+    description: "Popular sistema operativo desktop e servidor gratuito e de código aberto."
+    category: tools
+    url: "https://ubuntu.com/"
+    tags:
+      - linux
+      - os
+      - foss
+    language: pt
+    featured: false
+
+  - id: gnucash-pt
+    title: "GnuCash"
+    description: "Aplicação de contabilidade de lançamentos múltiplos para uso pessoal e de pequenas empresas."
+    category: tools
+    url: "https://www.gnucash.org/"
+    tags:
+      - finanças
+      - contabilidade
+      - foss
+    language: pt
+    featured: false
+
+  - id: gnuradio-pt
+    title: "GNU Radio"
+    description: "Conjunto de ferramentas de código aberto para criar rádios definidos por software e sistemas de processamento de sinal."
+    category: tools
+    url: "https://www.gnuradio.org/"
+    tags:
+      - sdr
+      - processamento-de-sinal
+      - foss
+    language: pt
+    featured: false
+
+  - id: gimp-pt
+    title: "GIMP"
+    description: "Editor de imagem de código aberto e multiplataforma para retoque e composição fotográfica."
+    category: tools
+    url: "https://www.gimp.org/"
+    tags:
+      - edição-de-imagem
+      - gráficos
+      - foss
+    language: pt
+    featured: false
+
+  - id: untools-pt
+    title: "Untools"
+    description: "Uma coleção curada de ferramentas práticas de pensamento para ajudar na resolução de problemas e na tomada de decisões."
+    category: frameworks
+    url: "https://untools.org/"
+    tags:
+      - frameworks
+      - pensamento
+      - tomada-de-decisão
+    language: pt
+    featured: false
+
+  - id: startup-secrets-sandbox-pt
+    title: "Startup Secrets Sandbox"
+    description: "Plataforma para empreendedores explorarem estratégias e experiências de startups."
+    category: frameworks
+    url: ""
+    tags:
+      - startups
+      - empreendedorismo
     language: pt
     featured: false

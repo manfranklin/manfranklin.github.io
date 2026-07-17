@@ -1,5 +1,5 @@
 <!-- Umami Analytics -->
-{% if site.umami_id and site.umami_domain %}
-  <script defer src="https://{{ site.umami_domain }}/script.js" data-website-id="{{ site.umami_id }}" data-domains="{{ site.url | replace: 'https://', '' | replace: 'http://', '' }}"></script>
+{% if site.UMAMI_CLIENT_ID and site.umami_domain %}
+  <script defer src="https://{{ site.umami_domain }}/script.js" data-website-id="{{ site.UMAMI_CLIENT_ID }}" data-domains="{{ site.url | replace: 'https://', '' | replace: 'http://', '' }}"></script>
 {% endif %}
 

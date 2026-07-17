@@ -262,8 +262,8 @@
   function getTranslations(language) {
     if (language === 'pt') {
       return {
-        title: 'Saindo do site MANF',
-        message: 'Você está sendo direcionado para conteúdo hospedado em outro site. Este link será aberto em uma nova janela ou aba do navegador.\n\nA MANF não assume qualquer responsabilidade ou obrigação por danos, perdas, problemas de segurança, riscos de privacidade ou quaisquer consequências resultantes da utilização de sites externos ou do download de produtos, arquivos ou materiais disponibilizados nesses sites.',
+        title: 'Saindo do site manfraklin.github.io',
+        message: 'Você está sendo direcionado para conteúdo hospedado em outro site. Este link será aberto em uma nova janela ou aba do navegador.\n\nA manfraklin.github.io não assume qualquer responsabilidade ou obrigação por danos, perdas, problemas de segurança, riscos de privacidade ou quaisquer consequências resultantes da utilização de sites externos ou do download de produtos, arquivos ou materiais disponibilizados nesses sites.',
         checkboxLabel: 'Não mostrar esta mensagem novamente',
         continueLabel: 'Continuar',
         cancelLabel: 'Cancelar'
@@ -271,8 +271,8 @@
     }
 
     return {
-      title: 'Leaving MANF Website',
-      message: 'You are being redirected to content hosted on another website. This link will open in a new browser window or tab.\n\nMANF assumes no responsibility or liability for any damage, loss, security issues, privacy risks, or other consequences resulting from the use of external websites or any products, files, or materials downloaded from those websites.',
+      title: 'Leaving manfraklin.github.io',
+      message: 'You are being redirected to content hosted on another website. This link will open in a new browser window or tab.\n\n manfraklin.github.io assumes no responsibility or liability for any damage, loss, security issues, privacy risks, or other consequences resulting from the use of external websites or any products, files, or materials downloaded from those websites.',
       checkboxLabel: 'Do not show me this again',
       continueLabel: 'Continue',
       cancelLabel: 'Cancel'

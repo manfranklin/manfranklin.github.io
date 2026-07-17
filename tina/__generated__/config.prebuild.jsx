@@ -1,37 +1,24 @@
+// tina/config.ts
 import { defineConfig } from "tinacms";
-
-const branch =
-  process.env.TINA_BRANCH?.trim() ||
-  process.env.VERCEL_GIT_COMMIT_REF?.trim() ||
-  process.env.GITHUB_REF_NAME?.trim() ||
-  "main";
-
-const clientId =
-  process.env.PUBLIC_TINA_CLIENT_ID?.trim() ||
-  process.env.TINA_CLIENT_ID?.trim() ||
-  "";
-const token =
-  process.env.TINA_TOKEN?.trim() ||
-  process.env.TINA_TOKEN_CONTENT?.trim() ||
-  process.env.TINA_TOKEN_SEARCH?.trim() ||
-  "";
-
-export default defineConfig({
+var branch = process.env.TINA_BRANCH?.trim() || process.env.VERCEL_GIT_COMMIT_REF?.trim() || process.env.GITHUB_REF_NAME?.trim() || "main";
+var clientId = process.env.TINA_CLIENT_ID?.trim() || "";
+var token = process.env.TINA_TOKEN?.trim() || "";
+var config_default = defineConfig({
   branch,
   clientId,
   token,
   client: {
-    skip: true,
+    skip: true
   },
   build: {
     outputFolder: "admin",
-    publicFolder: "",
+    publicFolder: ""
   },
   media: {
     tina: {
       mediaRoot: "images",
-      publicFolder: "",
-    },
+      publicFolder: ""
+    }
   },
   schema: {
     collections: [
@@ -52,7 +39,7 @@ export default defineConfig({
               return `/blog/${year}/${month}/${day}/${filename}`;
             }
             return `/blog/${filename}`;
-          },
+          }
         },
         fields: [
           {
@@ -60,16 +47,16 @@ export default defineConfig({
             name: "title",
             label: "Title",
             isTitle: true,
-            required: true,
+            required: true
           },
           {
             type: "string",
             name: "layout",
             label: "Layout",
             ui: {
-              component: "hidden",
+              component: "hidden"
             },
-            defaultValue: "post",
+            defaultValue: "post"
           },
           {
             type: "string",
@@ -78,46 +65,46 @@ export default defineConfig({
             options: ["en", "pt"],
             description: "Content language",
             required: true,
-            defaultValue: "en",
+            defaultValue: "en"
           },
           {
             type: "string",
             name: "date",
             label: "Publish Date",
             ui: {
-              component: "datetime",
+              component: "datetime"
             },
-            required: true,
+            required: true
           },
           {
             type: "string",
             name: "author",
             label: "Author",
             description: "Post author",
-            defaultValue: "Manuel Franklin",
+            defaultValue: "Manuel Franklin"
           },
           {
             type: "string",
             name: "description",
             label: "Description",
             ui: {
-              component: "textarea",
+              component: "textarea"
             },
-            description: "Short summary for previews and excerpts",
+            description: "Short summary for previews and excerpts"
           },
           {
             type: "string",
             name: "image",
             label: "Featured Image",
             ui: {
-              component: "image",
-            },
+              component: "image"
+            }
           },
           {
             type: "string",
             name: "permalink",
             label: "Permalink",
-            description: "Optional custom URL for this post",
+            description: "Optional custom URL for this post"
           },
           {
             type: "string",
@@ -125,9 +112,9 @@ export default defineConfig({
             label: "Categories",
             list: true,
             ui: {
-              component: "tags",
+              component: "tags"
             },
-            description: "Use one category per item",
+            description: "Use one category per item"
           },
           {
             type: "string",
@@ -135,55 +122,55 @@ export default defineConfig({
             label: "Tags",
             list: true,
             ui: {
-              component: "tags",
-            },
+              component: "tags"
+            }
           },
           {
             type: "boolean",
             name: "comments",
             label: "Enable Comments",
             description: "Allow readers to comment on this post",
-            defaultValue: true,
+            defaultValue: true
           },
           {
             type: "boolean",
             name: "published",
             label: "Published",
             description: "Whether to publish this post",
-            defaultValue: true,
+            defaultValue: true
           },
           {
             type: "string",
             name: "translation_key",
             label: "Translation Key",
-            description: "Shared key for translated versions of this post",
+            description: "Shared key for translated versions of this post"
           },
           {
             type: "string",
             name: "translation_url_en",
-            label: "English Translation URL",
+            label: "English Translation URL"
           },
           {
             type: "string",
             name: "translation_url_pt",
-            label: "Portuguese Translation URL",
+            label: "Portuguese Translation URL"
           },
           {
             type: "rich-text",
             name: "body",
             label: "Body",
-            isBody: true,
-          },
+            isBody: true
+          }
         ],
         defaultItem: () => ({
           title: "New Post",
           language: "en",
-          date: new Date().toISOString(),
+          date: (/* @__PURE__ */ new Date()).toISOString(),
           layout: "post",
           author: "Manuel Franklin",
           published: true,
-          comments: true,
-        }),
+          comments: true
+        })
       },
       {
         label: "Pages",
@@ -194,7 +181,7 @@ export default defineConfig({
           router: ({ document }) => {
             const permalink = document._values?.permalink;
             return permalink || `/${document._sys?.filename}`;
-          },
+          }
         },
         fields: [
           {
@@ -204,8 +191,8 @@ export default defineConfig({
             label: "Front Matter",
             ui: {
               itemProps: (item) => ({
-                label: item?.title,
-              }),
+                label: item?.title
+              })
             },
             fields: [
               {
@@ -213,44 +200,44 @@ export default defineConfig({
                 name: "title",
                 label: "Title",
                 isTitle: true,
-                required: true,
+                required: true
               },
               {
                 type: "string",
                 name: "layout",
                 label: "Layout",
-                options: ["page", "default"],
+                options: ["page", "default"]
               },
               {
                 type: "string",
                 name: "permalink",
                 label: "Permalink",
-                description: "/page-name/",
+                description: "/page-name/"
               },
               {
                 type: "string",
                 name: "language",
                 label: "Language",
                 options: ["en", "pt"],
-                required: true,
+                required: true
               },
               {
                 type: "string",
                 name: "description",
                 label: "Description",
                 ui: {
-                  component: "textarea",
-                },
-              },
-            ],
+                  component: "textarea"
+                }
+              }
+            ]
           },
           {
             type: "rich-text",
             name: "body",
             label: "Body",
-            isBody: true,
-          },
-        ],
+            isBody: true
+          }
+        ]
       },
       {
         label: "Resources",
@@ -262,8 +249,8 @@ export default defineConfig({
             create: true,
             read: true,
             update: true,
-            delete: true,
-          },
+            delete: true
+          }
         },
         fields: [
           {
@@ -273,8 +260,8 @@ export default defineConfig({
             label: "Resources",
             ui: {
               itemProps: (item) => ({
-                label: item?.title,
-              }),
+                label: item?.title
+              })
             },
             fields: [
               {
@@ -282,21 +269,21 @@ export default defineConfig({
                 name: "id",
                 label: "ID",
                 required: true,
-                description: "Unique identifier (use kebab-case)",
+                description: "Unique identifier (use kebab-case)"
               },
               {
                 type: "string",
                 name: "title",
                 label: "Title",
-                required: true,
+                required: true
               },
               {
                 type: "string",
                 name: "description",
                 label: "Description",
                 ui: {
-                  component: "textarea",
-                },
+                  component: "textarea"
+                }
               },
               {
                 type: "string",
@@ -309,8 +296,8 @@ export default defineConfig({
                   "tools",
                   "websites",
                   "ai",
-                  "development",
-                ],
+                  "development"
+                ]
               },
               {
                 type: "string",
@@ -318,8 +305,8 @@ export default defineConfig({
                 label: "URL",
                 required: true,
                 ui: {
-                  component: "textarea",
-                },
+                  component: "textarea"
+                }
               },
               {
                 type: "object",
@@ -328,32 +315,32 @@ export default defineConfig({
                 label: "Tags",
                 ui: {
                   itemProps: (item) => ({
-                    label: item,
-                  }),
+                    label: item
+                  })
                 },
                 fields: [
                   {
                     type: "string",
                     name: "tag",
-                    label: "Tag",
-                  },
-                ],
+                    label: "Tag"
+                  }
+                ]
               },
               {
                 type: "string",
                 name: "language",
                 label: "Language",
-                options: ["en", "pt"],
+                options: ["en", "pt"]
               },
               {
                 type: "boolean",
                 name: "featured",
                 label: "Featured",
-                description: "Show this resource in featured section",
-              },
-            ],
-          },
-        ],
+                description: "Show this resource in featured section"
+              }
+            ]
+          }
+        ]
       },
       {
         label: "Site Settings",
@@ -365,11 +352,11 @@ export default defineConfig({
             create: false,
             read: true,
             update: true,
-            delete: false,
-          },
+            delete: false
+          }
         },
         match: {
-          include: "site-config",
+          include: "site-config"
         },
         fields: [
           {
@@ -383,12 +370,12 @@ export default defineConfig({
                 type: "string",
                 name: "bio",
                 label: "Bio",
-                ui: { component: "textarea" },
+                ui: { component: "textarea" }
               },
               { type: "string", name: "location", label: "Location" },
               { type: "string", name: "avatar_url", label: "Avatar" },
-              { type: "string", name: "website_url", label: "Website URL" },
-            ],
+              { type: "string", name: "website_url", label: "Website URL" }
+            ]
           },
           {
             type: "object",
@@ -400,8 +387,8 @@ export default defineConfig({
               { type: "string", name: "linkedin", label: "LinkedIn Profile" },
               { type: "string", name: "instagram", label: "Instagram Handle" },
               { type: "string", name: "mastodon", label: "Mastodon Handle" },
-              { type: "string", name: "email", label: "Email" },
-            ],
+              { type: "string", name: "email", label: "Email" }
+            ]
           },
           {
             type: "object",
@@ -414,12 +401,12 @@ export default defineConfig({
                 type: "string",
                 name: "description",
                 label: "Description",
-                ui: { component: "textarea" },
+                ui: { component: "textarea" }
               },
               { type: "string", name: "logo_url", label: "Logo URL" },
               { type: "string", name: "favicon_url", label: "Favicon URL" },
-              { type: "string", name: "og_image", label: "Open Graph Image" },
-            ],
+              { type: "string", name: "og_image", label: "Open Graph Image" }
+            ]
           },
           {
             type: "object",
@@ -433,8 +420,8 @@ export default defineConfig({
               { type: "boolean", name: "show_reading_time", label: "Show Reading Time" },
               { type: "boolean", name: "show_categories", label: "Show Categories" },
               { type: "boolean", name: "show_tags", label: "Show Tags" },
-              { type: "boolean", name: "enable_comments", label: "Enable Comments" },
-            ],
+              { type: "boolean", name: "enable_comments", label: "Enable Comments" }
+            ]
           },
           {
             type: "object",
@@ -448,12 +435,12 @@ export default defineConfig({
                 name: "categories",
                 label: "Categories",
                 ui: {
-                  itemProps: (item) => ({ label: item }),
+                  itemProps: (item) => ({ label: item })
                 },
-                fields: [{ type: "string", name: "category", label: "Category" }],
+                fields: [{ type: "string", name: "category", label: "Category" }]
               },
-              { type: "boolean", name: "show_featured", label: "Show Featured" },
-            ],
+              { type: "boolean", name: "show_featured", label: "Show Featured" }
+            ]
           },
           {
             type: "object",
@@ -467,13 +454,13 @@ export default defineConfig({
                 name: "categories",
                 label: "Categories",
                 ui: {
-                  itemProps: (item) => ({ label: item }),
+                  itemProps: (item) => ({ label: item })
                 },
-                fields: [{ type: "string", name: "category", label: "Category" }],
+                fields: [{ type: "string", name: "category", label: "Category" }]
               },
               { type: "boolean", name: "enable_lightbox", label: "Enable Lightbox" },
-              { type: "boolean", name: "lazy_loading", label: "Lazy Loading" },
-            ],
+              { type: "boolean", name: "lazy_loading", label: "Lazy Loading" }
+            ]
           },
           {
             type: "object",
@@ -485,11 +472,11 @@ export default defineConfig({
                 type: "string",
                 name: "engine",
                 label: "Search Engine",
-                options: ["pagefind", "lunr"],
+                options: ["pagefind", "lunr"]
               },
               { type: "boolean", name: "show_search_input", label: "Show Search Input" },
-              { type: "number", name: "results_per_page", label: "Results per Page" },
-            ],
+              { type: "number", name: "results_per_page", label: "Results per Page" }
+            ]
           },
           {
             type: "object",
@@ -498,8 +485,8 @@ export default defineConfig({
             fields: [
               { type: "boolean", name: "enabled", label: "Enabled" },
               { type: "string", name: "system", label: "System" },
-              { type: "boolean", name: "moderation_required", label: "Moderation Required" },
-            ],
+              { type: "boolean", name: "moderation_required", label: "Moderation Required" }
+            ]
           },
           {
             type: "object",
@@ -513,10 +500,10 @@ export default defineConfig({
                 label: "Umami",
                 fields: [
                   { type: "string", name: "site_id", label: "Site ID" },
-                  { type: "string", name: "domain", label: "Domain" },
-                ],
-              },
-            ],
+                  { type: "string", name: "domain", label: "Domain" }
+                ]
+              }
+            ]
           },
           {
             type: "object",
@@ -529,8 +516,8 @@ export default defineConfig({
               { type: "boolean", name: "enable_twitter_cards", label: "Enable Twitter Cards" },
               { type: "boolean", name: "enable_json_ld", label: "Enable JSON-LD" },
               { type: "boolean", name: "enable_canonical_urls", label: "Enable Canonical URLs" },
-              { type: "boolean", name: "enable_hreflang", label: "Enable Hreflang" },
-            ],
+              { type: "boolean", name: "enable_hreflang", label: "Enable Hreflang" }
+            ]
           },
           {
             type: "object",
@@ -541,8 +528,8 @@ export default defineConfig({
               { type: "boolean", name: "minify_js", label: "Minify JS" },
               { type: "boolean", name: "lazy_load_images", label: "Lazy Load Images" },
               { type: "boolean", name: "optimize_images", label: "Optimize Images" },
-              { type: "boolean", name: "serve_webp", label: "Serve WebP" },
-            ],
+              { type: "boolean", name: "serve_webp", label: "Serve WebP" }
+            ]
           },
           {
             type: "object",
@@ -552,8 +539,8 @@ export default defineConfig({
               { type: "boolean", name: "increment", label: "Incremental Build" },
               { type: "boolean", name: "watch", label: "Watch" },
               { type: "boolean", name: "strict_front_matter", label: "Strict Front Matter" },
-              { type: "string", name: "timezone", label: "Timezone" },
-            ],
+              { type: "string", name: "timezone", label: "Timezone" }
+            ]
           },
           {
             type: "object",
@@ -568,17 +555,17 @@ export default defineConfig({
                 label: "Supported Languages",
                 ui: {
                   itemProps: (item) => ({
-                    label: item?.name || item?.code,
-                  }),
+                    label: item?.name || item?.code
+                  })
                 },
                 fields: [
                   { type: "string", name: "code", label: "Code" },
                   { type: "string", name: "name", label: "Name" },
                   { type: "string", name: "native_name", label: "Native Name" },
-                  { type: "string", name: "direction", label: "Direction" },
-                ],
-              },
-            ],
+                  { type: "string", name: "direction", label: "Direction" }
+                ]
+              }
+            ]
           },
           {
             type: "object",
@@ -593,8 +580,8 @@ export default defineConfig({
               { type: "boolean", name: "related_posts", label: "Related Posts" },
               { type: "boolean", name: "social_sharing", label: "Social Sharing" },
               { type: "boolean", name: "email_subscription", label: "Email Subscription" },
-              { type: "boolean", name: "dark_mode", label: "Dark Mode" },
-            ],
+              { type: "boolean", name: "dark_mode", label: "Dark Mode" }
+            ]
           },
           {
             type: "object",
@@ -605,10 +592,10 @@ export default defineConfig({
                 type: "string",
                 name: "group_by",
                 label: "Group By",
-                options: ["year", "month", "category"],
+                options: ["year", "month", "category"]
               },
-              { type: "boolean", name: "show_count", label: "Show Count" },
-            ],
+              { type: "boolean", name: "show_count", label: "Show Count" }
+            ]
           },
           {
             type: "object",
@@ -618,8 +605,8 @@ export default defineConfig({
               { type: "string", name: "github_username", label: "GitHub Username" },
               { type: "string", name: "github_repo", label: "GitHub Repo" },
               { type: "string", name: "staticman_api", label: "Staticman API Endpoint" },
-              { type: "string", name: "staticman_repo", label: "Staticman Repository" },
-            ],
+              { type: "string", name: "staticman_repo", label: "Staticman Repository" }
+            ]
           },
           {
             type: "object",
@@ -631,10 +618,10 @@ export default defineConfig({
                 type: "string",
                 name: "method",
                 label: "Method",
-                options: ["formspree", "staticman", "email"],
+                options: ["formspree", "staticman", "email"]
               },
-              { type: "string", name: "email", label: "Email" },
-            ],
+              { type: "string", name: "email", label: "Email" }
+            ]
           },
           {
             type: "object",
@@ -646,25 +633,28 @@ export default defineConfig({
                 type: "string",
                 name: "message",
                 label: "Message",
-                ui: { component: "textarea" },
+                ui: { component: "textarea" }
               },
               { type: "string", name: "dismiss_text", label: "Dismiss Text" },
-              { type: "string", name: "learn_more_text", label: "Learn More Text" },
-            ],
+              { type: "string", name: "learn_more_text", label: "Learn More Text" }
+            ]
           },
           {
             type: "boolean",
             name: "maintenance_mode",
-            label: "Maintenance Mode",
+            label: "Maintenance Mode"
           },
           {
             type: "string",
             name: "maintenance_message",
             label: "Maintenance Message",
-            ui: { component: "textarea" },
-          },
-        ],
-      },
-    ],
-  },
+            ui: { component: "textarea" }
+          }
+        ]
+      }
+    ]
+  }
 });
+export {
+  config_default as default
+};

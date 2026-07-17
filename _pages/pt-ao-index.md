@@ -181,11 +181,11 @@ language: pt
 
 <section class="featured-section">
   <h2>{{ i18n.home.featured_projects }}</h2>
-  <p>
+  <!--p>
     <a href="https://www.example.com" target="_blank" rel="noopener noreferrer">
       Exemplo de Link Externo
     </a>
-  </p>
+  </p-->
   <div class="projects-grid">
     {% assign projects = site.showcase | where: "language", "pt" | limit: 3 %}
     {% for project in projects %}

@@ -1,34 +1,24 @@
-# Site Configuration - Metadata and Settings
-# This file is used by TinaCMS and site templates
-
-# Site Owner Information
 owner:
-  name: "Manuel Franklin"
-  email: "manfranklin817@gmail.com"
-  bio: "Software engineer, educator, and writer focused on technology, culture, and learning."
-  location: "Luanda, Angola"
-  avatar_url: "/images/reverie.png"
-  website_url: "https://manfranklin.github.io"
-
-# Social Media Links
+  name: Manuel Franklin
+  email: manfranklin817@gmail.com
+  bio: 'Software engineer, educator, and writer focused on technology, culture, and learning.'
+  location: 'Luanda, Angola'
+  avatar_url: /images/reverie.png
+  website_url: 'https://manfranklin.github.io'
 social:
-  twitter: ""
-  github: "manfranklin"
-  linkedin: "manfranklin"
-  instagram: ""
-  mastodon: ""
-  email: "manfranklin817@gmail.com"
-
-# Site Branding
+  twitter: ''
+  github: manfranklin
+  linkedin: manfranklin
+  instagram: ''
+  mastodon: ''
+  email: manfranklin817@gmail.com
 branding:
-  site_name: "Manuel Franklin"
-  tagline: "Technology, education, and growth"
-  description: "A modern, bilingual personal website with portfolio and blog"
-  logo_url: "/images/reverie.png"
-  favicon_url: "/images/favicon-32x32.png"
-  og_image: "/images/reverie.png"
-
-# Blog Settings
+  site_name: Manuel Franklin
+  tagline: 'Technology, education, and growth'
+  description: 'A modern, bilingual personal website with portfolio and blog'
+  logo_url: /images/reverie.png
+  favicon_url: /images/favicon-32x32.png
+  og_image: /images/reverie.png
 blog:
   posts_per_page: 6
   excerpt_length: 150
@@ -38,52 +28,40 @@ blog:
   show_categories: true
   show_tags: true
   enable_comments: false
-
-# Resources Settings
 resources:
   items_per_page: 12
   categories:
-    - learning
-    - books
-    - courses
-    - tools
-    - websites
-    - ai
-    - development
+    - {}
+    - {}
+    - {}
+    - {}
+    - {}
+    - {}
+    - {}
   show_featured: true
-
-# Showcase Settings
 showcase:
   items_per_page: 12
   categories:
-    - animals
-    - travel
-    - projects
-    - misc
+    - {}
+    - {}
+    - {}
+    - {}
   enable_lightbox: true
   lazy_loading: true
-
-# Search Settings
 search:
   enabled: true
-  engine: "pagefind"  # pagefind or lunr
+  engine: pagefind
   show_search_input: true
   results_per_page: 10
-
-# Comments Settings
 comments:
   enabled: false
-  system: ""  # disabled
+  system: ''
   moderation_required: false
-
-# Analytics Settings
 analytics:
-  enabled: true  # Set to true after Umami is configured
+  enabled: true
   umami:
-    site_id: ""  # Will be set in _config.yml
-    domain: ""   # cloud.umami.is or your domain
-
-# SEO Settings
+    site_id: ''
+    domain: ''
 seo:
   enable_sitemap: true
   enable_robots: true
@@ -92,72 +70,54 @@ seo:
   enable_json_ld: true
   enable_canonical_urls: true
   enable_hreflang: true
-
-# Performance Settings
 performance:
   minify_css: true
   minify_js: true
   lazy_load_images: true
   optimize_images: true
-  serve_webp: false  # Set to true when WebP images are available
-
-# Build Settings
+  serve_webp: false
 build:
   increment: true
   watch: true
   strict_front_matter: true
-  timezone: "UTC"
-
-# Languages
+  timezone: UTC+1
 languages:
-  default: "en"
+  default: en
   supported:
-    - code: "en"
-      name: "English"
-      native_name: "English"
-      direction: "ltr"
-    - code: "pt"
-      name: "PT-AO"
-      native_name: "PT-AO"
-      direction: "ltr"
-
-# Feature Flags (for gradual rollout)
+    - code: en
+      name: English
+      native_name: English
+      direction: ltr
+    - code: pt
+      name: PT-AO
+      native_name: PT-AO
+      direction: ltr
 features:
   bilingual_support: true
   search: true
   comments: false
-  analytics: true  # Enable after setup
+  analytics: true
   lightbox_gallery: true
   related_posts: true
   social_sharing: true
-  email_subscription: true  # Enable after setup
-  dark_mode: false  # Optional dark mode
-
-# Archive Settings
+  email_subscription: true
+  dark_mode: false
 archive:
-  group_by: "year"  # year, month, or category
+  group_by: year
   show_count: true
-
-# External Services
 external_services:
-  github_username: "manfranklin"
-  github_repo: "manfranklin.github.io"
-  staticman_api: ""  # Staticman API endpoint
-  staticman_repo: "manfranklin/manfranklin.github.io"
-
-# Contact Form Settings
+  github_username: manfranklin
+  github_repo: manfranklin.github.io
+  staticman_api: ''
+  staticman_repo: manfranklin/manfranklin.github.io
 contact_form:
   enabled: false
-  method: "formspree"  # formspree, staticman, or email
-  email: "your.email@example.com"
-
-# Cookie Consent
+  method: formspree
+  email: your.email@example.com
 cookie_consent:
   enabled: true
-  message: "We use Umami Analytics to collect anonymous website usage statistics. Umami does not use cookies or collect personally identifiable information."
-  dismiss_text: "Dismiss"
-  learn_more_text: "Learn more"
-
-# Maintenance Mode
+  message: We use Umami Analytics to collect anonymous website usage statistics. Umami does not use cookies or collect personally identifiable information.
+  dismiss_text: Dismiss
+  learn_more_text: Learn more
 maintenance_mode: false
-maintenance_message: "Site is under maintenance. Please check back soon."
+maintenance_message: Site is under maintenance. Please check back soon.
