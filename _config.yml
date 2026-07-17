@@ -51,12 +51,12 @@ description: Personal website and portfolio of Manuel Franklin.
 avatar: "/images/reverie.png"
 footer-links:
   dribbble: 
-  email: ''
+  email: 
   facebook: 
   flickr: 
   github: manfranklin
   instagram: 
-  linkedin: ''
+  linkedin: 
   pinterest: 
   rss: feed
   twitter: 
@@ -65,15 +65,15 @@ footer-links:
   googleplus: 
   playconsole: 
   mastodon: 
-disqus: ''
+disqus: 
 google_analytics: 
 url: https://manfranklin.github.io
-baseurl: ''
+baseurl: 
 enforce_ssl: https://manfranklin.github.io
 permalink: "/:title/"
-UMAMI_CLIENT_ID: ''
+UMAMI_CLIENT_ID: 
 umami_domain: cloud.umami.is
-umami_enabled: false
+umami_enabled: true
 default_language: en
 languages:
   en:
@@ -96,7 +96,7 @@ kramdown:
   syntax_highlighter_opts:
     css_class: highlight
 sass:
-  style: :compressed
+  style: compressed
   load_paths:
   - _sass
 plugins:
