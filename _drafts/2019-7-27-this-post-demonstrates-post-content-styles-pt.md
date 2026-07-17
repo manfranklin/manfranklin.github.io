@@ -103,3 +103,32 @@ Proin eget nibh a massa vestibulum pretium. Suspendisse eu nisl a ante aliquet b
 |lorem ipsum dolor sit | lorem ipsum dolor sit | lorem ipsum dolor sit | lorem ipsum dolor sit|
 |lorem ipsum dolor sit | lorem ipsum dolor sit | lorem ipsum dolor sit | lorem ipsum dolor sit|
 |lorem ipsum dolor sit | lorem ipsum dolor sit | lorem ipsum dolor sit | lorem ipsum dolor sit|
+```mermaid
+%% This won't render without implementing a rendering engine (e.g. mermaid on npm)
+sankey-beta
+
+Salary,Budget,3000
+Freelance work,Budget,1200
+Budget,Rent,1300
+Budget,Groceries,600
+Budget,Transport,250
+Budget,Fun,350
+Budget,Savings,1700
+```
+
+```cpp
+Sample c++ code
+```
+
+> Loresu plus\
+> `1+1+3`
+
+---
+excerpt_separator: <!--more-->
+---
+
+Excerpt with multiple paragraphs
+
+Here's another paragraph in the excerpt.
+<!--more-->
+Out-of-excerpt

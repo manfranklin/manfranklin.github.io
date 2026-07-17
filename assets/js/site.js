@@ -1,6 +1,7 @@
 (function () {
   'use strict';
 
+  // Shared client-side behavior for language routing, navigation, warnings, search, and gallery interactions.
   const DEFAULT_LANGUAGE = 'en';
   const SUPPORTED_LANGUAGES = new Set(['en', 'pt']);
   const STORAGE_KEYS = {
@@ -155,6 +156,7 @@
     return normalizeText(query).split(/\s+/).filter(Boolean);
   }
 
+  // The language switcher keeps the page aligned with the user's preferred locale and route.
   class LanguageSwitcher {
     init() {
       const switcher = document.querySelector('[data-language-switcher]');
@@ -177,7 +179,7 @@
         try {
           window.localStorage.setItem(STORAGE_KEYS.LANGUAGE, targetLang);
         } catch (_) {
-          // Ignore storage failures and continue with navigation.
+          // Storage is optional here, so navigation should still proceed.
         }
 
         window.location.assign(LanguageService.buildTargetPath(targetLang));
@@ -185,6 +187,7 @@
     }
   }
 
+  // Navigation is implemented as a keyboard-friendly drawer for mobile and desktop layouts.
   class NavigationMenu {
     init() {
       this.toggle = document.querySelector('[data-nav-toggle]');
@@ -284,6 +287,7 @@
     }
   }
 
+  // External links are intercepted so the site can warn visitors before they leave the current domain.
   class ExternalLinkWarning {
     init() {
       this.modal = document.getElementById('external-link-warning-modal') || this.createModal();
@@ -471,7 +475,7 @@
         try {
           window.localStorage.setItem(STORAGE_KEYS.EXTERNAL_LINK_WARNING, 'true');
         } catch (_) {
-          // Ignore storage failures.
+          // Persisting the preference is best-effort only.
         }
       }
 
@@ -483,6 +487,7 @@
     }
   }
 
+  // Search loads the generated Pagefind index and ranks posts by relevance and language.
   class SearchController {
     constructor() {
       this.resultLimit = 12;
@@ -684,6 +689,7 @@
     }
   }
 
+  // The gallery turns image thumbnails into a lightweight lightbox experience.
   class Gallery {
     init() {
       this.galleries = document.querySelectorAll('[data-gallery]');

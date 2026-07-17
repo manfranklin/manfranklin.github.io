@@ -9,14 +9,14 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="Personal website and portfolio of Manuel Franklin." />
 <meta property="og:description" content="Personal website and portfolio of Manuel Franklin." />
-<link rel="canonical" href="http://localhost:4000/search.json" />
-<meta property="og:url" content="http://localhost:4000/search.json" />
+<link rel="canonical" href="https://manfranklin.github.io/search.json" />
+<meta property="og:url" content="https://manfranklin.github.io/search.json" />
 <meta property="og:site_name" content="Manuel Franklin" />
 <meta property="og:type" content="website" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Manuel Franklin" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"Manuel Franklin"},"description":"Personal website and portfolio of Manuel Franklin.","headline":"Manuel Franklin","url":"http://localhost:4000/search.json"}</script>
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"Manuel Franklin"},"description":"Personal website and portfolio of Manuel Franklin.","headline":"Manuel Franklin","url":"https://manfranklin.github.io/search.json"}</script>
 <!-- End Jekyll SEO tag -->
 
     <meta charset="utf-8">
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:image" content="http://localhost:4000/images/reverie.png">
-<meta name="twitter:image" content="http://localhost:4000/images/reverie.png">
+<meta property="og:image" content="https://manfranklin.github.io/images/reverie.png">
+<meta name="twitter:image" content="https://manfranklin.github.io/images/reverie.png">
 
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary">
@@ -48,12 +48,8 @@
     <link rel="preload" href="/assets/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/assets/style.css"></noscript>
     <link rel="alternate" type="application/rss+xml" title="Manuel Franklin - Personal website and portfolio of Manuel Franklin." href="/feed.xml">
-    <link rel="canonical" href="http://localhost:4000/search.json">
+    <link rel="canonical" href="https://manfranklin.github.io/search.json">
     <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
-    
-    
-    
-      <script defer src="https://cloud.umami.is/script.js" data-website-id="" data-domains="localhost:4000"></script>
     
   </head>
 

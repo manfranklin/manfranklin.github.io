@@ -1,4 +1,6 @@
+abort "PLUGIN LOADED"
 module Jekyll
+  warn "[EnvConfigGenerator] plugin loaded"
   class EnvConfigGenerator < Generator
     safe true
     priority :lowest
@@ -9,7 +11,8 @@ module Jekyll
       'url' => 'https://manfranklin.github.io',
       'baseurl' => '',
       'google_analytics' => '',
-      'google_analytics_ga4' => ''
+      'google_analytics_ga4' => '',
+      'umami_enabled' => false
     }.freeze
 
     CONFIG_ALIASES = {
@@ -20,6 +23,7 @@ module Jekyll
       'baseurl' => %w[SITE_BASEURL],
       'google_analytics' => %w[GOOGLE_ANALYTICS],
       'google_analytics_ga4' => %w[GOOGLE_ANALYTICS_GA4],
+      'umami_enabled' => %w[UMAMI_ENABLED],
       'enforce_ssl' => %w[SITE_ENFORCE_SSL]
     }.freeze
 
@@ -35,8 +39,7 @@ module Jekyll
     private
 
     def merge_environment_values
-      # Only merge production env file when running a production build
-      # (either JEKYLL_ENV=production or inside GitHub Actions).
+      # Merge the production environment file only when the build is running in a production context.
       return unless ENV['JEKYLL_ENV'] == 'production' || ENV['GITHUB_ACTIONS'] == 'true'
 
       env_path = File.expand_path('../.env.prod', __dir__)
@@ -53,17 +56,22 @@ module Jekyll
       end
     end
 
+    # Configure analytics settings from environment variables and the site config.
     def configure_umami(site)
-      umami_value = first_present(%w[UMAMI_CLIENT_ID UMAMI_CLIENT_ID]) || site.config['UMAMI_CLIENT_ID'] || ''
-      site.config['UMAMI_CLIENT_ID'] = umami_value
-      site.config['UMAMI_CLIENT_ID'] = umami_value
-      site.config['UMAMI_CLIENT_ID'] = umami_value
+      umami_value = first_present(%w[UMAMI_CLIENT_ID]) || site.config['UMAMI_CLIENT_ID'] || ''
+      umami_domain_value = first_present(%w[UMAMI_DOMAIN]) || site.config['umami_domain'] || 'cloud.umami.is'
+      umami_enabled = production_environment? && truthy?(first_present(%w[UMAMI_ENABLED]) || site.config['umami_enabled']) && !umami_value.empty?
 
-      umami_domain_value = ENV['UMAMI_DOMAIN'] || site.config['umami_domain'] || 'cloud.umami.is'
+      warn "[EnvConfigGenerator] umami_enabled=#{umami_enabled.inspect} umami_value=#{umami_value.inspect} umami_domain_value=#{umami_domain_value.inspect} JEKYLL_ENV=#{ENV['JEKYLL_ENV'].inspect} UMAMI_ENABLED=#{ENV['UMAMI_ENABLED'].inspect}"
+
+      site.config['UMAMI_CLIENT_ID'] = umami_value
       site.config['umami_domain'] = umami_domain_value
       site.config['UMAMI_DOMAIN'] = umami_domain_value
+      site.config['umami_enabled'] = umami_enabled
+      site.config['UMAMI_ENABLED'] = umami_enabled
     end
 
+    # Populate the footer links with environment-aware defaults when values are missing.
     def configure_footer_links(site)
       footer_links = site.config['footer-links'] || {}
       footer_links['email'] = ENV['SITE_EMAIL'] || footer_links['email'] || 'manfraklin817@gmail.com'
@@ -73,6 +81,17 @@ module Jekyll
 
     def env_or_config(config_key, current_value, fallback)
       first_present(CONFIG_ALIASES.fetch(config_key, [])) || current_value || fallback
+    end
+
+    def production_environment?
+      ENV['JEKYLL_ENV'].to_s.downcase == 'production'
+    end
+
+    def truthy?(value)
+      return true if value == true
+      return false if value.nil?
+
+      value.to_s.strip.downcase == 'true'
     end
 
     def first_present(keys)

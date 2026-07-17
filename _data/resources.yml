@@ -1,5 +1,5 @@
 # Resources Library
-# Sample resources - Edit via TinaCMS or directly in YAML
+# Sample resources - Edit directly in YAML
 
 items:
   - id: jekyll-documentation
@@ -98,19 +98,17 @@ items:
     language: en
     featured: false
 
-  - id: tinacms-docs
-    title: "TinaCMS Documentation"
-    description: "Headless CMS with Git integration for static site editing"
-    category: tools
-    url: "https://tina.io/docs/"
-    tags:
-      - cms
-      - github
-      - content-management
-    language: en
-    featured: true
-
   - id: umami-analytics
+    title: "Umami Analytics"
+    description: "Privacy-friendly, simple web analytics alternative to Google Analytics"
+    category: tools
+    url: "https://umami.is/"
+    tags:
+      - analytics
+      - privacy
+      - web
+    language: en
+    featured: false
     title: "Umami Analytics"
     description: "Privacy-friendly, simple web analytics alternative to Google Analytics"
     category: tools
@@ -254,19 +252,17 @@ items:
     language: pt
     featured: false
 
-  - id: tinacms-docs-pt
-    title: "Documentação do TinaCMS"
-    description: "CMS sem cabeça com integração Git para edição de sites estáticos"
-    category: tools
-    url: "https://tina.io/docs/"
-    tags:
-      - cms
-      - github
-      - gestão-de-conteúdos
-    language: pt
-    featured: true
-
   - id: umami-analytics-pt
+    title: "Umami Analytics"
+    description: "Alternativa simples e com privacidade para analytics web em vez do Google Analytics"
+    category: tools
+    url: "https://umami.is/"
+    tags:
+      - analytics
+      - privacidade
+      - dados
+    language: pt
+    featured: false
     title: "Umami Analytics"
     description: "Alternativa simples e com privacidade para analytics web em vez do Google Analytics"
     category: tools

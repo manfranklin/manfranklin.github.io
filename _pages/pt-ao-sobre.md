@@ -17,7 +17,6 @@ seo:
 <p>{{ about.intro_2 }}</p>
 
 <blockquote>
- > On Windows, install Ruby and Node manually or use WSL before running the installer.
  <p><strong>{{ about.tldr_label }}:</strong> {{ about.tldr_text }}</p>
 </blockquote>
 

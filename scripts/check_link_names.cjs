@@ -4,24 +4,25 @@ const path = require('path');
 const IGNORES = ['.bundle', '_site', '.jekyll-cache', 'node_modules', 'vendor', '.git', 'scripts'];
 const ROOT = process.cwd();
 
+// Walk the site tree and inspect HTML-like files for missing accessible names.
 function walk(dir, filelist = []) {
-  const files = fs.readdirSync(dir);
-  for (const file of files) {
-    const full = path.join(dir, file);
+  const entries = fs.readdirSync(dir, { withFileTypes: true });
+  for (const entry of entries) {
+    const full = path.join(dir, entry.name);
     const rel = path.relative(ROOT, full);
-    if (IGNORES.some(i => rel.split(path.sep).includes(i))) continue;
-    const stat = fs.statSync(full);
-    if (stat.isDirectory()) {
+    if (IGNORES.some((ignore) => rel.split(path.sep).includes(ignore))) continue;
+
+    if (entry.isDirectory()) {
       walk(full, filelist);
-    } else if (/\.(html|md|xml|liquid|js|scss|css)$/.test(file)) {
+    } else if (/\.(html|md|xml|liquid|js|scss|css)$/.test(entry.name)) {
       filelist.push(full);
     }
   }
   return filelist;
 }
 
+// Check anchor tags for visible text or an accessible name and report issues.
 function hasAccessibleNameForAnchor(content) {
-  // Find anchors and check content between tags
   const anchorRegex = /<a\b[^>]*>([\s\S]*?)<\/a>/gi;
   const issues = [];
   let m;
@@ -34,7 +35,6 @@ function hasAccessibleNameForAnchor(content) {
       issues.push({ anchor: anchorHtml, reason: 'empty content, no aria-label/title' });
       continue;
     }
-    // If inner contains only an img or svg, ensure img has alt text and svg not focusable
     const innerNoSpace = inner.replace(/\s+/g, '');
     if (/^<img\b[^>]*>$/i.test(innerNoSpace)) {
       const img = innerNoSpace;
@@ -44,25 +44,24 @@ function hasAccessibleNameForAnchor(content) {
       continue;
     }
     if (/^<svg\b[^>]*>/.test(inner.trim())) {
-      // svg-only anchor - check if anchor has aria-label
       issues.push({ anchor: anchorHtml, reason: 'svg-only anchor without aria-label' });
       continue;
     }
-    // If inner contains only elements with aria-hidden="true" and no visible text
+
     const visibleText = inner.replace(/<[^>]+>/g, '').trim();
     if (!visibleText) {
-      // contains no visible text
       issues.push({ anchor: anchorHtml, reason: 'no visible text and no aria-label' });
     }
   }
   return issues;
 }
 
+// Inspect a single file for accessibility issues in links and images.
 function checkFile(file) {
   const content = fs.readFileSync(file, 'utf8');
   const issues = [];
   issues.push(...hasAccessibleNameForAnchor(content));
-  // images without alt at all
+
   const imgRegex = /<img\b([^>]*)>/gi;
   let im;
   while ((im = imgRegex.exec(content)) !== null) {
@@ -83,7 +82,7 @@ function main() {
       const issues = checkFile(file);
       if (issues.length) report[rel] = issues;
     } catch (e) {
-      // ignore parse errors
+      // Some files may be malformed or use syntax outside the simple checks above.
     }
   }
 

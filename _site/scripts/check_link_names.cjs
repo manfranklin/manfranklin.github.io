@@ -5,15 +5,15 @@ const IGNORES = ['.bundle', '_site', '.jekyll-cache', 'node_modules', 'vendor', 
 const ROOT = process.cwd();
 
 function walk(dir, filelist = []) {
-  const files = fs.readdirSync(dir);
-  for (const file of files) {
-    const full = path.join(dir, file);
+  const entries = fs.readdirSync(dir, { withFileTypes: true });
+  for (const entry of entries) {
+    const full = path.join(dir, entry.name);
     const rel = path.relative(ROOT, full);
-    if (IGNORES.some(i => rel.split(path.sep).includes(i))) continue;
-    const stat = fs.statSync(full);
-    if (stat.isDirectory()) {
+    if (IGNORES.some((ignore) => rel.split(path.sep).includes(ignore))) continue;
+
+    if (entry.isDirectory()) {
       walk(full, filelist);
-    } else if (/\.(html|md|xml|liquid|js|scss|css)$/.test(file)) {
+    } else if (/\.(html|md|xml|liquid|js|scss|css)$/.test(entry.name)) {
       filelist.push(full);
     }
   }

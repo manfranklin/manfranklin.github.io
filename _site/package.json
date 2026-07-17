@@ -4,6 +4,8 @@
   "description": "Personal website and portfolio of Manuel Franklin",
   "type": "module",
   "scripts": {
-    "serve": "bundle exec jekyll serve"
+    "serve": "bundle exec jekyll serve",
+    "build": "bundle exec jekyll build",
+    "check-links": "node scripts/check_link_names.cjs"
   }
 }

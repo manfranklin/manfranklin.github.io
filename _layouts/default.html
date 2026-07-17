@@ -10,10 +10,8 @@
     <link rel="alternate" type="application/rss+xml" title="{{ site.name }} - {{ site.description }}" href="{{ site.baseurl }}/feed.xml">
     <link rel="canonical" href="{{ page.url | remove: 'index.html' | replace: '//', '/' | absolute_url }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ site.baseurl }}/images/favicon-32x32.png">
-    {% assign UMAMI_CLIENT_ID = site.UMAMI_CLIENT_ID | default: site.UMAMI_CLIENT_ID | default: site.UMAMI_CLIENT_ID %}
-    {% assign umami_domain = site.umami_domain | default: site.UMAMI_DOMAIN | default: 'cloud.umami.is' %}
-    {% if UMAMI_CLIENT_ID and umami_domain %}
-      <script defer src="https://{{ umami_domain }}/script.js" data-website-id="{{ UMAMI_CLIENT_ID }}" data-domains="{{ site.url | replace: 'https://', '' | replace: 'http://', '' }}"></script>
+    {% if site.umami_enabled and site.UMAMI_CLIENT_ID and site.umami_domain %}
+      <script defer src="https://{{ site.umami_domain }}/script.js" data-website-id="{{ site.UMAMI_CLIENT_ID }}" data-domains="{{ site.url | replace: 'https://', '' | replace: 'http://', '' }}"></script>
     {% endif %}
   </head>
 

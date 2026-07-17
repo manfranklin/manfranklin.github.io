@@ -2,8 +2,7 @@
 
 STDERR.puts "[ruby_3_compat] plugin loaded"
 
-# Backport the old Ruby taint API for gems that still call it.
-# Ruby 3+ removed Object#taint and Object#tainted?, but Jekyll/Liquid still expects them in some versions.
+# Backport the legacy taint API for older gems that still expect it under Ruby 3+.
 unless ''.respond_to?(:tainted?)
   class Object
     def taint
