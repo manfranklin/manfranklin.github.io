@@ -65,7 +65,7 @@ permalink: /:title/
 
 # Analytics & Comments
 # Values can be supplied via environment variables in GitHub Actions or local .env files.
-umami_id: ""
+UMAMI_CLIENT_ID: ""
 umami_domain: "cloud.umami.is"
 
 #
@@ -94,8 +94,10 @@ build_languages: [en, pt]
 #
 
 excerpt_separator: "<!--more-->"
-paginate: 6
-paginate_path: "/blog/page/:num/"
+pagination:
+  enabled: true
+  per_page: 6
+  permalink: '/blog/page/:num/'
 
 # The release of Jekyll Now that you're using
 version: v1.2.0
@@ -118,10 +120,10 @@ plugins:
   - jekyll-feed              # RSS/Atom feed
   - jekyll-sitemap           # Sitemap generation
   - jekyll-seo-tag           # SEO tags
-  - jekyll-paginate          # Post pagination
+  - jekyll-paginate-v2       # Post pagination with front matter pagination support
   - jekyll-redirect-from     # URL redirects
   - jekyll-relative-links    # Relative links
-  - jekyll-responsive-image  # Responsive image generation
+  # - jekyll-responsive-image  # Responsive image generation (disabled for local builds)
 
 responsive_image:
   default_quality: 90

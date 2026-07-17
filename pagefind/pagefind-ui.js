@@ -1,46 +1,54 @@
 /**
  * Pagefind UI Stub
- * Minimal implementation to prevent 404 errors
+ * Minimal implementation to prevent 404 errors.
  */
 
-(function() {
+(function () {
   'use strict';
 
-  // Simple Pagefind UI stub
-  window.PagefindUI = function(options) {
-    this.options = options || {};
-    this.element = options.element || document.body;
-    this.setupUI();
-  };
+  class PagefindUI {
+    constructor(options = {}) {
+      this.options = options;
+      this.element = options.element || document.body;
+      this.render();
+    }
 
-  window.PagefindUI.prototype.setupUI = function() {
-    if (!this.element) return;
-    
-    // Create a simple search UI
-    const container = document.createElement('div');
-    container.className = 'pagefind-ui';
-    container.innerHTML = `
-      <form class="pagefind-ui__form">
-        <input type="text" 
-               class="pagefind-ui__input" 
-               placeholder="Search..."
-               aria-label="Search">
-      </form>
-      <div class="pagefind-ui__results"></div>
-    `;
-    
-    if (this.element) {
+    render() {
+      if (!this.element) {
+        return;
+      }
+
+      const container = document.createElement('div');
+      container.className = 'pagefind-ui';
+      container.appendChild(this.createForm());
+      container.appendChild(this.createResultsRegion());
       this.element.appendChild(container);
     }
-  };
 
-  // Stub for pagefind API
-  window.pagefind = {
-    init: function() {
-      return Promise.resolve();
-    },
-    search: function(term) {
-      return Promise.resolve({ results: [] });
+    createForm() {
+      const form = document.createElement('form');
+      form.className = 'pagefind-ui__form';
+
+      const input = document.createElement('input');
+      input.className = 'pagefind-ui__input';
+      input.type = 'text';
+      input.placeholder = 'Search...';
+      input.setAttribute('aria-label', 'Search');
+
+      form.appendChild(input);
+      return form;
     }
+
+    createResultsRegion() {
+      const results = document.createElement('div');
+      results.className = 'pagefind-ui__results';
+      return results;
+    }
+  }
+
+  window.PagefindUI = PagefindUI;
+  window.pagefind = {
+    init: async () => undefined,
+    search: async () => ({ results: [] })
   };
 })();

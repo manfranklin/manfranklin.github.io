@@ -18,15 +18,15 @@
 
   <div class="nav-menu" id="site-nav-menu" role="menu" data-nav-menu aria-label="{{ i18n.nav.menu | default: 'Navigation menu' }}" aria-hidden="true">
     {% if language == "en" %}
-      <a href="{{ site.baseurl }}/" class="nav-link{% if current_path == '/' %} is-active{% endif %}" role="menuitem"{% if current_path == '/' %} aria-current="page"{% endif %}>{{ i18n.nav.home }}</a>
-      <a href="{{ site.baseurl }}/blog/" class="nav-link{% if current_path contains '/blog/' %} is-active{% endif %}" role="menuitem"{% if current_path contains '/blog/' %} aria-current="page"{% endif %}>{{ i18n.nav.blog }}</a>
-      <a href="{{ site.baseurl }}/resources/" class="nav-link{% if current_path contains '/resources/' %} is-active{% endif %}" role="menuitem"{% if current_path contains '/resources/' %} aria-current="page"{% endif %}>{{ i18n.nav.resources }}</a>
-      <a href="{{ site.baseurl }}/about/" class="nav-link{% if current_path contains '/about/' %} is-active{% endif %}" role="menuitem"{% if current_path contains '/about/' %} aria-current="page"{% endif %}>{{ i18n.nav.about }}</a>
+      <a href="{{ site.baseurl }}/" class="nav-link{% if current_path == '/' %} is-active{% endif %}" role="menuitem" tabindex="-1"{% if current_path == '/' %} aria-current="page"{% endif %}>{{ i18n.nav.home }}</a>
+      <a href="{{ site.baseurl }}/blog/" class="nav-link{% if current_path contains '/blog/' %} is-active{% endif %}" role="menuitem" tabindex="-1"{% if current_path contains '/blog/' %} aria-current="page"{% endif %}>{{ i18n.nav.blog }}</a>
+      <a href="{{ site.baseurl }}/resources/" class="nav-link{% if current_path contains '/resources/' %} is-active{% endif %}" role="menuitem" tabindex="-1"{% if current_path contains '/resources/' %} aria-current="page"{% endif %}>{{ i18n.nav.resources }}</a>
+      <a href="{{ site.baseurl }}/about/" class="nav-link{% if current_path contains '/about/' %} is-active{% endif %}" role="menuitem" tabindex="-1"{% if current_path contains '/about/' %} aria-current="page"{% endif %}>{{ i18n.nav.about }}</a>
          {% elsif language == "pt" %}
-      <a href="{{ site.baseurl }}/pt/" class="nav-link{% if current_path == '/pt/' %} is-active{% endif %}" role="menuitem"{% if current_path == '/pt/' %} aria-current="page"{% endif %}>{{ i18n.nav.home }}</a>
-      <a href="{{ site.baseurl }}/pt/blog/" class="nav-link{% if current_path contains '/pt/blog/' %} is-active{% endif %}" role="menuitem"{% if current_path contains '/pt/blog/' %} aria-current="page"{% endif %}>{{ i18n.nav.blog }}</a>
-      <a href="{{ site.baseurl }}/pt/recursos/" class="nav-link{% if current_path contains '/pt/recursos/' %} is-active{% endif %}" role="menuitem"{% if current_path contains '/pt/recursos/' %} aria-current="page"{% endif %}>{{ i18n.nav.resources }}</a>
-      <a href="{{ site.baseurl }}/pt/sobre/" class="nav-link{% if current_path contains '/pt/sobre/' %} is-active{% endif %}" role="menuitem"{% if current_path contains '/pt/sobre/' %} aria-current="page"{% endif %}>{{ i18n.nav.about }}</a>
+      <a href="{{ site.baseurl }}/pt/" class="nav-link{% if current_path == '/pt/' %} is-active{% endif %}" role="menuitem" tabindex="-1"{% if current_path == '/pt/' %} aria-current="page"{% endif %}>{{ i18n.nav.home }}</a>
+      <a href="{{ site.baseurl }}/pt/blog/" class="nav-link{% if current_path contains '/pt/blog/' %} is-active{% endif %}" role="menuitem" tabindex="-1"{% if current_path contains '/pt/blog/' %} aria-current="page"{% endif %}>{{ i18n.nav.blog }}</a>
+      <a href="{{ site.baseurl }}/pt/recursos/" class="nav-link{% if current_path contains '/pt/recursos/' %} is-active{% endif %}" role="menuitem" tabindex="-1"{% if current_path contains '/pt/recursos/' %} aria-current="page"{% endif %}>{{ i18n.nav.resources }}</a>
+      <a href="{{ site.baseurl }}/pt/sobre/" class="nav-link{% if current_path contains '/pt/sobre/' %} is-active{% endif %}" role="menuitem" tabindex="-1"{% if current_path contains '/pt/sobre/' %} aria-current="page"{% endif %}>{{ i18n.nav.about }}</a>
     {% endif %}
   </div>
 

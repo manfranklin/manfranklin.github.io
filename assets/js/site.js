@@ -2,434 +2,134 @@
   'use strict';
 
   const DEFAULT_LANGUAGE = 'en';
-  const SUPPORTED_LANGUAGES = ['en', 'pt'];
-  const LANGUAGE_STORAGE_KEY = 'preferred-language';
-  const EXTERNAL_LINK_STORAGE_KEY = 'manf-external-link-warning-dismissed';
+  const SUPPORTED_LANGUAGES = new Set(['en', 'pt']);
+  const STORAGE_KEYS = {
+    LANGUAGE: 'preferred-language',
+    EXTERNAL_LINK_WARNING: 'manf-external-link-warning-dismissed'
+  };
+  const ROUTE_MAP = new Map([
+    ['', { en: '/', pt: '/pt/' }],
+    ['blog', { en: '/blog/', pt: '/pt/blog/' }],
+    ['showcase', { en: '/showcase/', pt: '/pt/galeria/' }],
+    ['galeria', { en: '/showcase/', pt: '/pt/galeria/' }],
+    ['resources', { en: '/resources/', pt: '/pt/recursos/' }],
+    ['recursos', { en: '/resources/', pt: '/pt/recursos/' }],
+    ['search', { en: '/search/', pt: '/pt/pesquisa/' }],
+    ['pesquisa', { en: '/search/', pt: '/pt/pesquisa/' }],
+    ['about', { en: '/about/', pt: '/pt/sobre/' }],
+    ['sobre', { en: '/about/', pt: '/pt/sobre/' }],
+    ['disclaimer', { en: '/disclaimer/', pt: '/pt/aviso/' }],
+    ['aviso', { en: '/disclaimer/', pt: '/pt/aviso/' }],
+    ['getting-started', { en: '/getting-started/', pt: '/getting-started/' }],
+    ['archive', { en: '/archive/', pt: '/archive/' }],
+    ['categories', { en: '/categories/', pt: '/categories/' }]
+  ]);
 
-  function getBodyData() {
-    return document.body ? document.body.dataset : {};
+  class DomUtils {
+    static getBodyData() {
+      return document.body ? document.body.dataset : {};
+    }
   }
 
-  function getBaseUrl() {
-    return (getBodyData().baseurl || '').replace(/\/$/, '');
-  }
-
-  function normalizePath(pathname) {
-    const baseUrl = getBaseUrl();
-    const stripped = baseUrl && pathname.startsWith(baseUrl)
-      ? pathname.slice(baseUrl.length) || '/'
-      : pathname;
-
-    return stripped.replace(/\/+$/, '') || '/';
-  }
-
-  function withBaseUrl(path) {
-    const baseUrl = getBaseUrl();
-    if (!path) {
-      return baseUrl || '/';
+  class UrlUtils {
+    static get baseUrl() {
+      return (DomUtils.getBodyData().baseurl || '').replace(/\/$/, '');
     }
 
-    if (!baseUrl) {
-      return path;
+    static normalizePath(pathname) {
+      const baseUrl = UrlUtils.baseUrl;
+      const stripped = baseUrl && pathname.startsWith(baseUrl)
+        ? pathname.slice(baseUrl.length) || '/'
+        : pathname;
+
+      return stripped.replace(/\/+$/, '') || '/';
     }
 
-    return `${baseUrl}${path.startsWith('/') ? path : `/${path}`}`;
-  }
-
-  function getCurrentLanguage() {
-    const bodyLanguage = getBodyData().currentLanguage;
-    if (SUPPORTED_LANGUAGES.includes(bodyLanguage)) {
-      return bodyLanguage;
-    }
-
-    const path = normalizePath(window.location.pathname);
-    return path === '/pt' || path.startsWith('/pt/') ? 'pt' : DEFAULT_LANGUAGE;
-  }
-
-  function getRouteKey(pathname) {
-    const currentPath = normalizePath(pathname);
-    const normalizedPath = currentPath === '/pt' || currentPath.startsWith('/pt/')
-      ? currentPath.replace(/^\/pt/, '') || '/'
-      : currentPath;
-
-    return normalizedPath === '/' ? '' : normalizedPath.replace(/^\//, '').split('/')[0];
-  }
-
-  function getExplicitTranslationUrl(targetLang) {
-    const translationUrl = targetLang === 'pt'
-      ? getBodyData().translationUrlPt
-      : getBodyData().translationUrlEn;
-
-    if (!translationUrl) {
-      return null;
-    }
-
-    return translationUrl.startsWith('/') ? translationUrl : `/${translationUrl}`;
-  }
-
-  function buildTargetPath(targetLang) {
-    const explicitUrl = getExplicitTranslationUrl(targetLang);
-    if (explicitUrl) {
-      return withBaseUrl(explicitUrl) + window.location.search + window.location.hash;
-    }
-
-    const currentPath = normalizePath(window.location.pathname);
-    const currentLang = getCurrentLanguage();
-    const normalizedPath = currentLang === 'pt' ? currentPath.replace(/^\/pt/, '') || '/' : currentPath;
-    const routeKey = getRouteKey(window.location.pathname);
-    const routeMap = {
-      '': { en: '/', pt: '/pt/' },
-      blog: { en: '/blog/', pt: '/pt/blog/' },
-      showcase: { en: '/showcase/', pt: '/pt/galeria/' },
-      galeria: { en: '/showcase/', pt: '/pt/galeria/' },
-      resources: { en: '/resources/', pt: '/pt/recursos/' },
-      recursos: { en: '/resources/', pt: '/pt/recursos/' },
-      search: { en: '/search/', pt: '/pt/pesquisa/' },
-      pesquisa: { en: '/search/', pt: '/pt/pesquisa/' },
-      about: { en: '/about/', pt: '/pt/sobre/' },
-      sobre: { en: '/about/', pt: '/pt/sobre/' },
-      disclaimer: { en: '/disclaimer/', pt: '/pt/aviso/' },
-      aviso: { en: '/disclaimer/', pt: '/pt/aviso/' },
-      'getting-started': { en: '/getting-started/', pt: '/getting-started/' },
-      archive: { en: '/archive/', pt: '/archive/' },
-      categories: { en: '/categories/', pt: '/categories/' }
-    };
-
-    const mappedPath = routeMap[routeKey] ? routeMap[routeKey][targetLang] : null;
-    if (mappedPath) {
-      return withBaseUrl(mappedPath) + window.location.search + window.location.hash;
-    }
-
-    const pathWithoutTrailingSlash = normalizedPath === '/' ? '' : normalizedPath.replace(/\/$/, '');
-    let fallbackPath = '';
-
-    if (targetLang === 'pt') {
-      fallbackPath = pathWithoutTrailingSlash === ''
-        ? '/pt/'
-        : `${pathWithoutTrailingSlash}-pt/`;
-    } else if (currentLang === 'pt' && pathWithoutTrailingSlash.endsWith('-pt')) {
-      fallbackPath = pathWithoutTrailingSlash.replace(/-pt$/, '') || '/';
-      fallbackPath = fallbackPath === '/' ? '/' : `${fallbackPath}/`;
-    } else {
-      fallbackPath = pathWithoutTrailingSlash === '' ? '/' : `${pathWithoutTrailingSlash}/`;
-    }
-
-    return withBaseUrl(fallbackPath) + window.location.search + window.location.hash;
-  }
-
-  function initLanguageSwitcher() {
-    const switcher = document.querySelector('[data-language-switcher]');
-    if (!switcher) {
-      return;
-    }
-
-    const select = switcher.querySelector('[data-language-select]');
-    if (!select) {
-      return;
-    }
-
-    const currentLang = getCurrentLanguage();
-    select.value = currentLang;
-    select.addEventListener('change', (event) => {
-      const targetLang = event.target.value;
-      if (!SUPPORTED_LANGUAGES.includes(targetLang)) {
-        return;
+    static withBaseUrl(path) {
+      if (!path) {
+        return UrlUtils.baseUrl || '/';
       }
 
-      try {
-        window.localStorage.setItem(LANGUAGE_STORAGE_KEY, targetLang);
-      } catch (error) {
-        // Ignore storage failures and continue with navigation.
+      if (!UrlUtils.baseUrl) {
+        return path;
       }
 
-      window.location.assign(buildTargetPath(targetLang));
-    });
+      return `${UrlUtils.baseUrl}${path.startsWith('/') ? path : `/${path}`}`;
+    }
   }
 
-  function initNavigation() {
-    const toggle = document.querySelector('[data-nav-toggle]');
-    const menu = document.querySelector('[data-nav-menu]');
+  class LanguageService {
+    static getCurrentLanguage() {
+      const bodyLanguage = DomUtils.getBodyData().currentLanguage;
+      if (SUPPORTED_LANGUAGES.has(bodyLanguage)) {
+        return bodyLanguage;
+      }
 
-    if (!toggle || !menu) {
-      return;
+      const path = UrlUtils.normalizePath(window.location.pathname);
+      return path === '/pt' || path.startsWith('/pt/') ? 'pt' : DEFAULT_LANGUAGE;
     }
 
-    const menuLinks = Array.from(menu.querySelectorAll('a'));
+    static getRouteKey(pathname) {
+      const currentPath = UrlUtils.normalizePath(pathname);
+      const normalizedPath = currentPath === '/pt' || currentPath.startsWith('/pt/')
+        ? currentPath.replace(/^\/pt/, '') || '/'
+        : currentPath;
 
-    const setMenuState = (isOpen) => {
-      menu.classList.toggle('is-open', isOpen);
-      toggle.classList.toggle('is-open', isOpen);
-      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      return normalizedPath === '/' ? '' : normalizedPath.replace(/^\//, '').split('/')[0];
+    }
 
-      const isMobileNavigation = window.innerWidth < 1025;
-      menu.setAttribute('aria-hidden', isMobileNavigation ? (isOpen ? 'false' : 'true') : 'false');
+    static getExplicitTranslationUrl(targetLang) {
+      const bodyData = DomUtils.getBodyData();
+      const translationUrl = targetLang === 'pt'
+        ? bodyData.translationUrlPt
+        : bodyData.translationUrlEn;
 
-      menuLinks.forEach((link, index) => {
-        if (isMobileNavigation) {
-          link.setAttribute('tabindex', isOpen ? '0' : '-1');
-        } else {
-          link.removeAttribute('tabindex');
-        }
-
-        if (isOpen && isMobileNavigation && index === 0) {
-          link.setAttribute('data-nav-focus', 'true');
-        } else {
-          link.removeAttribute('data-nav-focus');
-        }
-      });
-    };
-
-    const closeMenu = () => {
-      setMenuState(false);
-    };
-
-    const openMenu = () => {
-      setMenuState(true);
-      if (menuLinks.length) {
-        menuLinks[0].focus();
-      }
-    };
-
-    const handleMenuKeydown = (event) => {
-      const currentIndex = menuLinks.indexOf(document.activeElement);
-
-      if (event.key === 'Escape') {
-        event.preventDefault();
-        closeMenu();
-        toggle.focus();
-        return;
+      if (!translationUrl) {
+        return null;
       }
 
-      if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
-        event.preventDefault();
-        const nextIndex = currentIndex < 0 ? 0 : (currentIndex + 1) % menuLinks.length;
-        menuLinks[nextIndex].focus();
-      } else if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {
-        event.preventDefault();
-        const prevIndex = currentIndex < 0 ? menuLinks.length - 1 : (currentIndex - 1 + menuLinks.length) % menuLinks.length;
-        menuLinks[prevIndex].focus();
-      } else if (event.key === 'Home') {
-        event.preventDefault();
-        menuLinks[0].focus();
-      } else if (event.key === 'End') {
-        event.preventDefault();
-        menuLinks[menuLinks.length - 1].focus();
-      }
-    };
+      return translationUrl.startsWith('/') ? translationUrl : `/${translationUrl}`;
+    }
 
-    toggle.addEventListener('click', () => {
-      const isOpen = toggle.getAttribute('aria-expanded') === 'true';
-      if (isOpen) {
-        closeMenu();
+    static buildTargetPath(targetLang) {
+      const explicitUrl = LanguageService.getExplicitTranslationUrl(targetLang);
+      const suffix = `${window.location.search}${window.location.hash}`;
+      if (explicitUrl) {
+        return `${UrlUtils.withBaseUrl(explicitUrl)}${suffix}`;
+      }
+
+      const currentPath = UrlUtils.normalizePath(window.location.pathname);
+      const currentLang = LanguageService.getCurrentLanguage();
+      const normalizedPath = currentLang === 'pt'
+        ? currentPath.replace(/^\/pt/, '') || '/'
+        : currentPath;
+      const routeKey = LanguageService.getRouteKey(window.location.pathname);
+      const mapping = ROUTE_MAP.get(routeKey);
+
+      if (mapping) {
+        return `${UrlUtils.withBaseUrl(mapping[targetLang])}${suffix}`;
+      }
+
+      const pathWithoutTrailingSlash = normalizedPath === '/'
+        ? ''
+        : normalizedPath.replace(/\/$/, '');
+      let fallbackPath = '';
+
+      if (targetLang === 'pt') {
+        fallbackPath = pathWithoutTrailingSlash === ''
+          ? '/pt/'
+          : `${pathWithoutTrailingSlash}-pt/`;
+      } else if (currentLang === 'pt' && pathWithoutTrailingSlash.endsWith('-pt')) {
+        fallbackPath = pathWithoutTrailingSlash.replace(/-pt$/, '') || '/';
+        fallbackPath = fallbackPath === '/' ? '/' : `${fallbackPath}/`;
       } else {
-        openMenu();
+        fallbackPath = pathWithoutTrailingSlash === ''
+          ? '/'
+          : `${pathWithoutTrailingSlash}/`;
       }
-    });
 
-    menuLinks.forEach((link) => {
-      link.addEventListener('click', closeMenu);
-    });
-
-    menu.addEventListener('keydown', handleMenuKeydown);
-
-    document.addEventListener('click', (event) => {
-      if (window.innerWidth < 1025 && !menu.contains(event.target) && !toggle.contains(event.target)) {
-        closeMenu();
-      }
-    });
-
-    window.addEventListener('resize', () => {
-      if (window.innerWidth >= 1025) {
-        closeMenu();
-      }
-    });
-
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape') {
-        closeMenu();
-      }
-    });
-  }
-
-  function shouldBypassExternalWarning() {
-    try {
-      return window.localStorage.getItem(EXTERNAL_LINK_STORAGE_KEY) === 'true';
-    } catch (error) {
-      return false;
+      return `${UrlUtils.withBaseUrl(fallbackPath)}${suffix}`;
     }
-  }
-
-  function getTranslations(language) {
-    if (language === 'pt') {
-      return {
-        title: 'Saindo do site manfraklin.github.io',
-        message: 'Você está sendo direcionado para conteúdo hospedado em outro site. Este link será aberto em uma nova janela ou aba do navegador.\n\nA manfraklin.github.io não assume qualquer responsabilidade ou obrigação por danos, perdas, problemas de segurança, riscos de privacidade ou quaisquer consequências resultantes da utilização de sites externos ou do download de produtos, arquivos ou materiais disponibilizados nesses sites.',
-        checkboxLabel: 'Não mostrar esta mensagem novamente',
-        continueLabel: 'Continuar',
-        cancelLabel: 'Cancelar'
-      };
-    }
-
-    return {
-      title: 'Leaving manfraklin.github.io',
-      message: 'You are being redirected to content hosted on another website. This link will open in a new browser window or tab.\n\n manfraklin.github.io assumes no responsibility or liability for any damage, loss, security issues, privacy risks, or other consequences resulting from the use of external websites or any products, files, or materials downloaded from those websites.',
-      checkboxLabel: 'Do not show me this again',
-      continueLabel: 'Continue',
-      cancelLabel: 'Cancel'
-    };
-  }
-
-  function isExternalLink(anchor) {
-    if (!anchor || !anchor.getAttribute('href')) {
-      return false;
-    }
-
-    const href = anchor.getAttribute('href');
-    if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('javascript:') || href.startsWith('data:')) {
-      return false;
-    }
-
-    try {
-      const url = new URL(href, window.location.href);
-      return url.hostname !== window.location.hostname;
-    } catch (error) {
-      return false;
-    }
-  }
-
-  function shouldSkipLink(anchor) {
-    return anchor.hasAttribute('data-no-external-warning') || anchor.closest('[data-no-external-warning]');
-  }
-
-  function enhanceExternalLink(anchor) {
-    if (!anchor || !isExternalLink(anchor) || shouldSkipLink(anchor)) {
-      return;
-    }
-
-    if (anchor.getAttribute('target') !== '_blank') {
-      anchor.setAttribute('target', '_blank');
-    }
-
-    const rel = (anchor.getAttribute('rel') || '').split(/\s+/).filter(Boolean);
-    if (!rel.includes('noopener')) {
-      rel.push('noopener');
-    }
-    if (!rel.includes('noreferrer')) {
-      rel.push('noreferrer');
-    }
-    anchor.setAttribute('rel', rel.join(' '));
-  }
-
-  function initExternalLinkWarning() {
-    let modal = document.getElementById('external-link-warning-modal');
-    let pendingUrl = null;
-
-    if (!modal) {
-      modal = document.createElement('div');
-      modal.id = 'external-link-warning-modal';
-      modal.className = 'external-link-warning-modal';
-      modal.setAttribute('role', 'dialog');
-      modal.setAttribute('aria-modal', 'true');
-      modal.setAttribute('aria-hidden', 'true');
-      modal.innerHTML = [
-        '<div class="external-link-warning-dialog" role="document">',
-        '  <h2 id="external-link-warning-title" class="external-link-warning-title"></h2>',
-        '  <p id="external-link-warning-message" class="external-link-warning-message"></p>',
-        '  <label class="external-link-warning-checkbox">',
-        '    <input type="checkbox" data-external-link-dont-show />',
-        '    <span></span>',
-        '  </label>',
-        '  <div class="external-link-warning-actions">',
-        '    <button type="button" class="button button-secondary" data-external-link-cancel></button>',
-        '    <button type="button" class="button button-primary" data-external-link-continue></button>',
-        '  </div>',
-        '</div>'
-      ].join('');
-
-      document.body.appendChild(modal);
-    }
-
-    const closeModal = () => {
-      modal.classList.remove('is-open');
-      modal.setAttribute('aria-hidden', 'true');
-      document.body.classList.remove('external-link-warning-open');
-      pendingUrl = null;
-    };
-
-    const continueNavigation = () => {
-      const checkbox = modal.querySelector('[data-external-link-dont-show]');
-      if (checkbox.checked) {
-        try {
-          window.localStorage.setItem(EXTERNAL_LINK_STORAGE_KEY, 'true');
-        } catch (error) {
-          // Ignore storage failures and continue to open the link.
-        }
-      }
-
-      const url = pendingUrl;
-      closeModal();
-      if (url) {
-        window.open(url, '_blank', 'noopener,noreferrer');
-      }
-    };
-
-    const updateModalContent = (language) => {
-      const translations = getTranslations(language);
-      modal.querySelector('.external-link-warning-title').textContent = translations.title;
-      modal.querySelector('.external-link-warning-message').textContent = translations.message;
-      modal.querySelector('.external-link-warning-checkbox span').textContent = translations.checkboxLabel;
-      modal.querySelector('[data-external-link-cancel]').textContent = translations.cancelLabel;
-      modal.querySelector('[data-external-link-continue]').textContent = translations.continueLabel;
-      modal.setAttribute('data-language', language);
-    };
-
-    const openModal = (url) => {
-      if (shouldBypassExternalWarning()) {
-        window.open(url, '_blank', 'noopener,noreferrer');
-        return;
-      }
-
-      pendingUrl = url;
-      updateModalContent(getCurrentLanguage());
-      modal.classList.add('is-open');
-      modal.setAttribute('aria-hidden', 'false');
-      document.body.classList.add('external-link-warning-open');
-      modal.querySelector('[data-external-link-dont-show]').checked = false;
-      modal.querySelector('[data-external-link-continue]').focus();
-    };
-
-    modal.addEventListener('click', (event) => {
-      if (event.target === modal) {
-        closeModal();
-      }
-    });
-
-    modal.querySelector('[data-external-link-cancel]').addEventListener('click', closeModal);
-    modal.querySelector('[data-external-link-continue]').addEventListener('click', continueNavigation);
-
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape' && modal.classList.contains('is-open')) {
-        closeModal();
-      }
-    });
-
-    document.querySelectorAll('a[href]').forEach((anchor) => {
-      enhanceExternalLink(anchor);
-    });
-
-    document.addEventListener('click', (event) => {
-      const anchor = event.target.closest('a');
-      if (!anchor || !isExternalLink(anchor) || shouldSkipLink(anchor)) {
-        return;
-      }
-
-      if (shouldBypassExternalWarning()) {
-        return;
-      }
-
-      event.preventDefault();
-      openModal(anchor.href);
-    });
   }
 
   function normalizeText(value) {
@@ -455,41 +155,388 @@
     return normalizeText(query).split(/\s+/).filter(Boolean);
   }
 
-  function initSearch() {
-    const searchInput = document.querySelector('[data-search-input]');
-    const searchForm = document.querySelector('[data-search-form]');
-    const resultsContainer = document.querySelector('[data-search-results]');
-    const summaryContainer = document.querySelector('[data-search-summary]');
-    const fallbackContainer = document.querySelector('[data-search-fallback]');
-
-    if (!searchInput || !resultsContainer) {
-      return;
-    }
-
-    const normalizedBaseUrl = getBaseUrl() === '/' ? '' : getBaseUrl();
-    const indexUrl = `${normalizedBaseUrl}/pagefind/index.json`;
-    const resultLimit = 12;
-    let searchTimer = null;
-    let searchIndex = null;
-
-    const getLanguage = () => getCurrentLanguage();
-
-    const loadIndex = async () => {
-      if (Array.isArray(searchIndex) && searchIndex.length > 0) {
-        return searchIndex;
+  class LanguageSwitcher {
+    init() {
+      const switcher = document.querySelector('[data-language-switcher]');
+      if (!switcher) {
+        return;
       }
 
-      const response = await fetch(indexUrl, { cache: 'no-store' });
+      const select = switcher.querySelector('[data-language-select]');
+      if (!select) {
+        return;
+      }
+
+      select.value = LanguageService.getCurrentLanguage();
+      select.addEventListener('change', (event) => {
+        const targetLang = event.target.value;
+        if (!SUPPORTED_LANGUAGES.has(targetLang)) {
+          return;
+        }
+
+        try {
+          window.localStorage.setItem(STORAGE_KEYS.LANGUAGE, targetLang);
+        } catch (_) {
+          // Ignore storage failures and continue with navigation.
+        }
+
+        window.location.assign(LanguageService.buildTargetPath(targetLang));
+      });
+    }
+  }
+
+  class NavigationMenu {
+    init() {
+      this.toggle = document.querySelector('[data-nav-toggle]');
+      this.menu = document.querySelector('[data-nav-menu]');
+
+      if (!this.toggle || !this.menu) {
+        return;
+      }
+
+      this.menuLinks = Array.from(this.menu.querySelectorAll('a'));
+      this.toggle.addEventListener('click', () => this.toggleMenu());
+      this.menu.addEventListener('keydown', (event) => this.handleKeydown(event));
+      this.menuLinks.forEach((link) => link.addEventListener('click', () => this.setMenuState(false)));
+      document.addEventListener('click', (event) => this.handleDocumentClick(event));
+      window.addEventListener('resize', () => this.handleResize());
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          this.setMenuState(false);
+        }
+      });
+    }
+
+    setMenuState(isOpen) {
+      this.menu.classList.toggle('is-open', isOpen);
+      this.toggle.classList.toggle('is-open', isOpen);
+      this.toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+
+      const isMobileNavigation = window.innerWidth < 1025;
+      this.menu.setAttribute('aria-hidden', isMobileNavigation ? (isOpen ? 'false' : 'true') : 'false');
+
+      this.menuLinks.forEach((link, index) => {
+        if (isMobileNavigation) {
+          link.setAttribute('tabindex', isOpen ? '0' : '-1');
+        } else {
+          link.removeAttribute('tabindex');
+        }
+
+        if (isOpen && isMobileNavigation && index === 0) {
+          link.setAttribute('data-nav-focus', 'true');
+        } else {
+          link.removeAttribute('data-nav-focus');
+        }
+      });
+    }
+
+    toggleMenu() {
+      const isOpen = this.toggle.getAttribute('aria-expanded') === 'true';
+      this.setMenuState(!isOpen);
+      if (!isOpen && this.menuLinks.length) {
+        this.menuLinks[0].focus();
+      }
+    }
+
+    handleDocumentClick(event) {
+      if (window.innerWidth >= 1025) {
+        return;
+      }
+
+      if (!this.menu.contains(event.target) && !this.toggle.contains(event.target)) {
+        this.setMenuState(false);
+      }
+    }
+
+    handleResize() {
+      if (window.innerWidth >= 1025) {
+        this.setMenuState(false);
+      }
+    }
+
+    handleKeydown(event) {
+      const currentIndex = this.menuLinks.indexOf(document.activeElement);
+
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        this.setMenuState(false);
+        this.toggle.focus();
+        return;
+      }
+
+      if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
+        event.preventDefault();
+        const nextIndex = currentIndex < 0 ? 0 : (currentIndex + 1) % this.menuLinks.length;
+        this.menuLinks[nextIndex].focus();
+      } else if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {
+        event.preventDefault();
+        const prevIndex = currentIndex < 0
+          ? this.menuLinks.length - 1
+          : (currentIndex - 1 + this.menuLinks.length) % this.menuLinks.length;
+        this.menuLinks[prevIndex].focus();
+      } else if (event.key === 'Home') {
+        event.preventDefault();
+        this.menuLinks[0].focus();
+      } else if (event.key === 'End') {
+        event.preventDefault();
+        this.menuLinks[this.menuLinks.length - 1].focus();
+      }
+    }
+  }
+
+  class ExternalLinkWarning {
+    init() {
+      this.modal = document.getElementById('external-link-warning-modal') || this.createModal();
+      if (!this.modal) {
+        return;
+      }
+
+      this.pendingUrl = null;
+      this.cacheElements();
+      this.bindEvents();
+      this.enhanceLinks();
+    }
+
+    createModal() {
+      const modal = document.createElement('div');
+      modal.id = 'external-link-warning-modal';
+      modal.className = 'external-link-warning-modal';
+      modal.setAttribute('role', 'dialog');
+      modal.setAttribute('aria-modal', 'true');
+      modal.setAttribute('aria-hidden', 'true');
+      modal.innerHTML = [
+        '<div class="external-link-warning-dialog" role="document">',
+        '  <h2 class="external-link-warning-title"></h2>',
+        '  <p class="external-link-warning-message"></p>',
+        '  <label class="external-link-warning-checkbox">',
+        '    <input type="checkbox" data-external-link-dont-show />',
+        '    <span></span>',
+        '  </label>',
+        '  <div class="external-link-warning-actions">',
+        '    <button type="button" class="button button-secondary" data-external-link-cancel></button>',
+        '    <button type="button" class="button button-primary" data-external-link-continue></button>',
+        '  </div>',
+        '</div>'
+      ].join('');
+
+      document.body.appendChild(modal);
+      return modal;
+    }
+
+    cacheElements() {
+      this.titleElement = this.modal.querySelector('.external-link-warning-title');
+      this.messageElement = this.modal.querySelector('.external-link-warning-message');
+      this.checkboxLabel = this.modal.querySelector('.external-link-warning-checkbox span');
+      this.cancelButton = this.modal.querySelector('[data-external-link-cancel]');
+      this.continueButton = this.modal.querySelector('[data-external-link-continue]');
+      this.dontShowCheckbox = this.modal.querySelector('[data-external-link-dont-show]');
+    }
+
+    bindEvents() {
+      this.modal.addEventListener('click', (event) => {
+        if (event.target === this.modal) {
+          this.closeModal();
+        }
+      });
+
+      this.cancelButton.addEventListener('click', () => this.closeModal());
+      this.continueButton.addEventListener('click', () => this.continueNavigation());
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && this.modal.classList.contains('is-open')) {
+          this.closeModal();
+        }
+      });
+
+      document.addEventListener('click', (event) => {
+        const anchor = event.target.closest('a');
+        if (!anchor || !this.isExternalLink(anchor) || this.shouldSkipLink(anchor)) {
+          return;
+        }
+
+        if (this.shouldBypassWarning()) {
+          return;
+        }
+
+        event.preventDefault();
+        this.openModal(anchor.href);
+      });
+    }
+
+    getTranslations(language) {
+      if (language === 'pt') {
+        return {
+          title: 'Saindo do site manfraklin.github.io',
+          message: 'Você está sendo direcionado para conteúdo hospedado em outro site. Este link será aberto em uma nova janela ou aba do navegador.\n\nA manfraklin.github.io não assume qualquer responsabilidade ou obrigação por danos, perdas, problemas de segurança, riscos de privacidade ou quaisquer consequências resultantes da utilização de sites externos ou do download de produtos, arquivos ou materiais disponibilizados nesses sites.',
+          checkboxLabel: 'Não mostrar esta mensagem novamente',
+          continueLabel: 'Continuar',
+          cancelLabel: 'Cancelar'
+        };
+      }
+
+      return {
+        title: 'Leaving manfraklin.github.io',
+        message: 'You are being redirected to content hosted on another website. This link will open in a new browser window or tab.\n\n manfraklin.github.io assumes no responsibility or liability for any damage, loss, security issues, privacy risks, or other consequences resulting from the use of external websites or any products, files, or materials downloaded from those websites.',
+        checkboxLabel: 'Do not show me this again',
+        continueLabel: 'Continue',
+        cancelLabel: 'Cancel'
+      };
+    }
+
+    enhanceLinks() {
+      document.querySelectorAll('a[href]').forEach((anchor) => {
+        if (!this.isExternalLink(anchor) || this.shouldSkipLink(anchor)) {
+          return;
+        }
+
+        if (anchor.getAttribute('target') !== '_blank') {
+          anchor.setAttribute('target', '_blank');
+        }
+
+        const rel = (anchor.getAttribute('rel') || '').split(/\s+/).filter(Boolean);
+        if (!rel.includes('noopener')) {
+          rel.push('noopener');
+        }
+        if (!rel.includes('noreferrer')) {
+          rel.push('noreferrer');
+        }
+
+        anchor.setAttribute('rel', rel.join(' '));
+      });
+    }
+
+    isExternalLink(anchor) {
+      if (!anchor || !anchor.getAttribute('href')) {
+        return false;
+      }
+
+      const href = anchor.getAttribute('href');
+      if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('javascript:') || href.startsWith('data:')) {
+        return false;
+      }
+
+      try {
+        const url = new URL(href, window.location.href);
+        return url.hostname !== window.location.hostname;
+      } catch (_) {
+        return false;
+      }
+    }
+
+    shouldSkipLink(anchor) {
+      return anchor.hasAttribute('data-no-external-warning') || anchor.closest('[data-no-external-warning]');
+    }
+
+    shouldBypassWarning() {
+      try {
+        return window.localStorage.getItem(STORAGE_KEYS.EXTERNAL_LINK_WARNING) === 'true';
+      } catch (_) {
+        return false;
+      }
+    }
+
+    openModal(url) {
+      if (this.shouldBypassWarning()) {
+        window.open(url, '_blank', 'noopener,noreferrer');
+        return;
+      }
+
+      this.pendingUrl = url;
+      this.updateModalContent(LanguageService.getCurrentLanguage());
+      this.modal.classList.add('is-open');
+      this.modal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('external-link-warning-open');
+      this.dontShowCheckbox.checked = false;
+      this.continueButton.focus();
+    }
+
+    updateModalContent(language) {
+      const translations = this.getTranslations(language);
+      this.titleElement.textContent = translations.title;
+      this.messageElement.textContent = translations.message;
+      this.checkboxLabel.textContent = translations.checkboxLabel;
+      this.cancelButton.textContent = translations.cancelLabel;
+      this.continueButton.textContent = translations.continueLabel;
+      this.modal.setAttribute('data-language', language);
+    }
+
+    closeModal() {
+      this.modal.classList.remove('is-open');
+      this.modal.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('external-link-warning-open');
+      this.pendingUrl = null;
+    }
+
+    continueNavigation() {
+      if (this.dontShowCheckbox.checked) {
+        try {
+          window.localStorage.setItem(STORAGE_KEYS.EXTERNAL_LINK_WARNING, 'true');
+        } catch (_) {
+          // Ignore storage failures.
+        }
+      }
+
+      const url = this.pendingUrl;
+      this.closeModal();
+      if (url) {
+        window.open(url, '_blank', 'noopener,noreferrer');
+      }
+    }
+  }
+
+  class SearchController {
+    constructor() {
+      this.resultLimit = 12;
+      this.searchTimer = null;
+      this.searchIndex = null;
+    }
+
+    init() {
+      this.searchInput = document.querySelector('[data-search-input]');
+      this.searchForm = document.querySelector('[data-search-form]');
+      this.resultsContainer = document.querySelector('[data-search-results]');
+      this.summaryContainer = document.querySelector('[data-search-summary]');
+      this.fallbackContainer = document.querySelector('[data-search-fallback]');
+
+      if (!this.searchInput || !this.resultsContainer) {
+        return;
+      }
+
+      this.indexUrl = `${UrlUtils.baseUrl === '/' ? '' : UrlUtils.baseUrl}/pagefind/index.json`;
+      this.searchInput.addEventListener('input', (event) => this.handleInput(event));
+      if (this.searchForm) {
+        this.searchForm.addEventListener('submit', (event) => {
+          event.preventDefault();
+          this.performSearch(this.searchInput.value);
+        });
+      }
+
+      const initialQuery = new URLSearchParams(window.location.search).get('q') || '';
+      if (initialQuery) {
+        this.searchInput.value = initialQuery;
+        this.performSearch(initialQuery);
+      }
+
+      if (this.fallbackContainer) {
+        this.fallbackContainer.style.display = this.searchInput.value.trim() ? 'none' : 'block';
+      }
+    }
+
+    async loadIndex() {
+      if (Array.isArray(this.searchIndex) && this.searchIndex.length > 0) {
+        return this.searchIndex;
+      }
+
+      const response = await fetch(this.indexUrl, { cache: 'no-store' });
       if (!response.ok) {
         throw new Error('Search index unavailable');
       }
 
       const data = await response.json();
-      searchIndex = Array.isArray(data) ? data : [];
-      return searchIndex;
-    };
+      this.searchIndex = Array.isArray(data) ? data : [];
+      return this.searchIndex;
+    }
 
-    const scoreEntry = (entry, query, tokens) => {
+    scoreEntry(entry, query, tokens) {
       const normalizedTitle = normalizeText(entry.title);
       const normalizedCategory = normalizeText(entry.category);
       const normalizedExcerpt = normalizeText(entry.excerpt);
@@ -528,17 +575,19 @@
       });
 
       return score;
-    };
+    }
 
-    const isMatch = (entry, queryTokens) => {
+    isMatch(entry, queryTokens) {
       const haystack = normalizeText(`${entry.title} ${entry.category} ${entry.excerpt} ${entry.content}`);
       return queryTokens.every((token) => haystack.includes(token));
-    };
+    }
 
-    const createExcerpt = (entry, tokens) => {
+    createExcerpt(entry, tokens) {
       const source = entry.excerpt || entry.content || '';
       const normalizedSource = source.replace(/\s+/g, ' ').trim();
-      const snippet = normalizedSource.length > 280 ? `${normalizedSource.slice(0, 280).trim()}…` : normalizedSource;
+      const snippet = normalizedSource.length > 280
+        ? `${normalizedSource.slice(0, 280).trim()}…`
+        : normalizedSource;
       let highlighted = escapeHtml(snippet);
 
       tokens.forEach((token) => {
@@ -547,27 +596,28 @@
       });
 
       return highlighted;
-    };
+    }
 
-    const renderResults = (results, query) => {
+    renderResults(results, query) {
       if (!results.length) {
-        if (summaryContainer) {
-          summaryContainer.textContent = `No results found for "${query}".`;
+        if (this.summaryContainer) {
+          this.summaryContainer.textContent = `No results found for "${query}".`;
         }
-        resultsContainer.innerHTML = '<p class="search-empty">No results found.</p>';
+
+        this.resultsContainer.innerHTML = '<p class="search-empty">No results found.</p>';
         return;
       }
 
-      if (summaryContainer) {
-        summaryContainer.textContent = `${results.length} result${results.length === 1 ? '' : 's'} found for "${query}".`;
+      if (this.summaryContainer) {
+        this.summaryContainer.textContent = `${results.length} result${results.length === 1 ? '' : 's'} found for "${query}".`;
       }
 
-      const items = results.slice(0, resultLimit).map((result) => {
+      const items = results.slice(0, this.resultLimit).map((result) => {
         const item = result.item;
         const title = escapeHtml(item.title || 'Untitled');
         const category = item.category ? `<span class="search-result-meta">${escapeHtml(item.category)}</span>` : '';
         const date = item.date ? `<span class="search-result-meta">${escapeHtml(item.date)}</span>` : '';
-        const excerpt = createExcerpt(item, tokenize(query));
+        const excerpt = this.createExcerpt(item, tokenize(query));
 
         return `
           <li class="search-result">
@@ -579,83 +629,76 @@
           </li>`;
       }).join('');
 
-      resultsContainer.innerHTML = `<ul class="search-results">${items}</ul>`;
-    };
+      this.resultsContainer.innerHTML = `<ul class="search-results">${items}</ul>`;
+    }
 
-    const performSearch = async (query) => {
+    async performSearch(query) {
       const trimmedQuery = String(query || '').trim();
       if (!trimmedQuery) {
-        resultsContainer.innerHTML = '';
-        if (summaryContainer) {
-          summaryContainer.textContent = '';
+        this.resultsContainer.innerHTML = '';
+        if (this.summaryContainer) {
+          this.summaryContainer.textContent = '';
         }
-        if (fallbackContainer) {
-          fallbackContainer.style.display = 'block';
+        if (this.fallbackContainer) {
+          this.fallbackContainer.style.display = 'block';
         }
         return;
       }
 
-      if (fallbackContainer) {
-        fallbackContainer.style.display = 'none';
+      if (this.fallbackContainer) {
+        this.fallbackContainer.style.display = 'none';
       }
 
       try {
-        const index = await loadIndex();
+        const index = await this.loadIndex();
         const tokens = tokenize(trimmedQuery);
         const normalizedQuery = normalizeText(trimmedQuery);
-        const currentLanguage = getLanguage();
-        const results = index
+        const currentLanguage = LanguageService.getCurrentLanguage();
+        const filteredResults = index
           .filter((item) => item && item.type === 'posts')
-          .filter((item) => String(item.language || '').toLowerCase().startsWith('pt') ? currentLanguage === 'pt' : currentLanguage === DEFAULT_LANGUAGE)
-          .map((item) => ({ item, score: scoreEntry(item, normalizedQuery, tokens) }))
-          .filter((entry) => entry.score > 0 && isMatch(entry.item, tokens))
+          .filter((item) => String(item.language || '').toLowerCase().startsWith('pt')
+            ? currentLanguage === 'pt'
+            : currentLanguage === DEFAULT_LANGUAGE)
+          .map((item) => ({ item, score: this.scoreEntry(item, normalizedQuery, tokens) }))
+          .filter((entry) => entry.score > 0 && this.isMatch(entry.item, tokens))
           .sort((a, b) => b.score - a.score);
 
-        renderResults(results, trimmedQuery);
+        this.renderResults(filteredResults, trimmedQuery);
       } catch (error) {
         console.error('Search error:', error);
-        if (summaryContainer) {
-          summaryContainer.textContent = 'Search is temporarily unavailable.';
+        if (this.summaryContainer) {
+          this.summaryContainer.textContent = 'Search is temporarily unavailable.';
         }
-        resultsContainer.innerHTML = '<p class="search-empty">Search is temporarily unavailable.</p>';
+        this.resultsContainer.innerHTML = '<p class="search-empty">Search is temporarily unavailable.</p>';
       }
-    };
-
-    const initialQuery = new URLSearchParams(window.location.search).get('q') || '';
-    if (initialQuery) {
-      searchInput.value = initialQuery;
-      performSearch(initialQuery);
     }
 
-    searchInput.addEventListener('input', (event) => {
-      if (searchTimer) {
-        window.clearTimeout(searchTimer);
+    handleInput(event) {
+      if (this.searchTimer) {
+        window.clearTimeout(this.searchTimer);
       }
 
-      searchTimer = window.setTimeout(() => {
-        performSearch(event.target.value);
+      this.searchTimer = window.setTimeout(() => {
+        this.performSearch(event.target.value);
       }, 120);
-    });
-
-    if (searchForm) {
-      searchForm.addEventListener('submit', (event) => {
-        event.preventDefault();
-        performSearch(searchInput.value);
-      });
-    }
-
-    if (fallbackContainer) {
-      fallbackContainer.style.display = searchInput.value.trim() ? 'none' : 'block';
     }
   }
 
-  function initGallery() {
-    const galleries = document.querySelectorAll('[data-gallery]');
-    if (!galleries.length) {
-      return;
+  class Gallery {
+    init() {
+      this.galleries = document.querySelectorAll('[data-gallery]');
+      if (!this.galleries.length) {
+        return;
+      }
+
+      this.lightbox = this.createLightbox();
+      this.currentImageSet = [];
+      this.currentImageIndex = 0;
+      this.bindLightboxEvents();
+      this.initGalleryItems();
     }
 
-    const createLightbox = () => {
+    createLightbox() {
       const existingLightbox = document.getElementById('lightbox');
       if (existingLightbox) {
         return existingLightbox;
@@ -677,100 +720,97 @@
 
       document.body.appendChild(lightbox);
       return lightbox;
-    };
+    }
 
-    const lightbox = createLightbox();
-    let currentImageSet = [];
-    let currentImageIndex = 0;
+    bindLightboxEvents() {
+      this.lightbox.querySelector('.lightbox-close').addEventListener('click', () => this.closeLightbox());
+      this.lightbox.querySelector('.lightbox-prev').addEventListener('click', () => this.showPrevImage());
+      this.lightbox.querySelector('.lightbox-next').addEventListener('click', () => this.showNextImage());
+      this.lightbox.addEventListener('click', (event) => {
+        if (event.target === this.lightbox) {
+          this.closeLightbox();
+        }
+      });
 
-    const updateLightbox = (imageData) => {
-      const imageElement = lightbox.querySelector('.lightbox-image');
-      const captionElement = lightbox.querySelector('.lightbox-caption');
-      imageElement.src = imageData.src;
-      imageElement.alt = imageData.alt;
-      captionElement.textContent = imageData.caption || imageData.alt;
-      lightbox.classList.add('active');
-      lightbox.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-      lightbox.querySelector('.lightbox-close').focus();
-    };
+      document.addEventListener('keydown', (event) => {
+        if (!this.lightbox.classList.contains('active')) {
+          return;
+        }
 
-    const closeLightbox = () => {
-      lightbox.classList.remove('active');
-      lightbox.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-    };
+        if (event.key === 'ArrowLeft') {
+          this.showPrevImage();
+        } else if (event.key === 'ArrowRight') {
+          this.showNextImage();
+        } else if (event.key === 'Escape') {
+          this.closeLightbox();
+        }
+      });
+    }
 
-    const showNextImage = () => {
-      if (!currentImageSet.length) {
-        return;
-      }
-
-      currentImageIndex = (currentImageIndex + 1) % currentImageSet.length;
-      updateLightbox(currentImageSet[currentImageIndex]);
-    };
-
-    const showPrevImage = () => {
-      if (!currentImageSet.length) {
-        return;
-      }
-
-      currentImageIndex = (currentImageIndex - 1 + currentImageSet.length) % currentImageSet.length;
-      updateLightbox(currentImageSet[currentImageIndex]);
-    };
-
-    lightbox.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
-    lightbox.querySelector('.lightbox-prev').addEventListener('click', showPrevImage);
-    lightbox.querySelector('.lightbox-next').addEventListener('click', showNextImage);
-
-    lightbox.addEventListener('click', (event) => {
-      if (event.target === lightbox) {
-        closeLightbox();
-      }
-    });
-
-    document.addEventListener('keydown', (event) => {
-      if (!lightbox.classList.contains('active')) {
-        return;
-      }
-
-      if (event.key === 'ArrowLeft') {
-        showPrevImage();
-      } else if (event.key === 'ArrowRight') {
-        showNextImage();
-      } else if (event.key === 'Escape') {
-        closeLightbox();
-      }
-    });
-
-    galleries.forEach((gallery) => {
-      const items = gallery.querySelectorAll('img');
-      const imageSet = [];
-
-      items.forEach((image, index) => {
-        imageSet.push({
+    initGalleryItems() {
+      this.galleries.forEach((gallery) => {
+        const items = gallery.querySelectorAll('img');
+        const imageSet = Array.from(items).map((image) => ({
           src: image.currentSrc || image.src,
           alt: image.alt,
           caption: image.getAttribute('data-caption') || image.alt
-        });
+        }));
 
-        image.addEventListener('click', () => {
-          currentImageSet = imageSet;
-          currentImageIndex = index;
-          updateLightbox(imageSet[index]);
+        items.forEach((image, index) => {
+          image.style.cursor = 'pointer';
+          image.addEventListener('click', () => {
+            this.currentImageSet = imageSet;
+            this.currentImageIndex = index;
+            this.updateLightbox(imageSet[index]);
+          });
         });
-
-        image.style.cursor = 'pointer';
       });
-    });
+    }
+
+    updateLightbox(imageData) {
+      const imageElement = this.lightbox.querySelector('.lightbox-image');
+      const captionElement = this.lightbox.querySelector('.lightbox-caption');
+
+      imageElement.src = imageData.src;
+      imageElement.alt = imageData.alt;
+      captionElement.textContent = imageData.caption || imageData.alt;
+      this.lightbox.classList.add('active');
+      this.lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      this.lightbox.querySelector('.lightbox-close').focus();
+    }
+
+    closeLightbox() {
+      this.lightbox.classList.remove('active');
+      this.lightbox.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    showNextImage() {
+      if (!this.currentImageSet.length) {
+        return;
+      }
+
+      this.currentImageIndex = (this.currentImageIndex + 1) % this.currentImageSet.length;
+      this.updateLightbox(this.currentImageSet[this.currentImageIndex]);
+    }
+
+    showPrevImage() {
+      if (!this.currentImageSet.length) {
+        return;
+      }
+
+      this.currentImageIndex = (this.currentImageIndex - 1 + this.currentImageSet.length) % this.currentImageSet.length;
+      this.updateLightbox(this.currentImageSet[this.currentImageIndex]);
+    }
   }
 
   function init() {
-    initLanguageSwitcher();
-    initNavigation();
-    initExternalLinkWarning();
-    initSearch();
-    initGallery();
+    new LanguageSwitcher().init();
+    new NavigationMenu().init();
+    new ExternalLinkWarning().init();
+    new SearchController().init();
+    new Gallery().init();
   }
 
   if (document.readyState === 'loading') {

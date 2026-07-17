@@ -1,0 +1,22 @@
+{% comment %} Optimized responsive image include.
+Usage: {% include responsive-image-optimized.html url=page.image alt="..." sizes="(max-width: 740px) 100vw, 740px" %}
+This include will render a picture element with WebP and fallback sources and `loading` attribute.
+{% endcomment %}
+<picture>
+  {% assign base = url | default: original.path | relative_url %}
+  {% assign name = base | split: '/' | last | split: '.' | first %}
+  {% assign ext = base | split: '.' | last %}
+  {% assign widths = "400,800,1200,1600" | split: ',' %}
+  {% assign srcset_webp = '' %}
+  {% assign srcset_fallback = '' %}
+  {% for w in widths %}
+    {% assign webp_path = "images/" | append: name | append: '-' | append: w | append: '.webp' %}
+    {% assign fallback_path = "images/" | append: name | append: '-' | append: w | append: '.' | append: ext %}
+    {% assign srcset_webp = srcset_webp | append: webp_path | append: ' ' | append: w | append: 'w, ' %}
+    {% assign srcset_fallback = srcset_fallback | append: fallback_path | append: ' ' | append: w | append: 'w, ' %}
+  {% endfor %}
+
+  <source type="image/webp" srcset="{{ srcset_webp | strip_suffix: ', ' }}" sizes="{{ sizes | default: '(max-width: 740px) 100vw, 740px' }}">
+  <source srcset="{{ srcset_fallback | strip_suffix: ', ' }}" sizes="{{ sizes | default: '(max-width: 740px) 100vw, 740px' }}">
+  <img src="{{ url | default: original.path | relative_url }}" alt="{{ alt }}" loading="{{ loading | default: 'lazy' }}" class="{{ class | default: '' }}" width="{{ width | default: '' }}" height="{{ height | default: '' }}">
+</picture>

@@ -3,35 +3,93 @@ module Jekyll
     safe true
     priority :lowest
 
-    def generate(site)
-      env_file = File.expand_path('../.env.prod', __dir__)
-      env_values = parse_env_file(env_file)
+    DEFAULTS = {
+      'name' => 'Manuel Franklin',
+      'description' => 'Personal website and portfolio of Manuel Franklin.',
+      'url' => 'https://manfranklin.github.io',
+      'baseurl' => '',
+      'google_analytics' => '',
+      'google_analytics_ga4' => ''
+    }.freeze
 
-      env_values.each do |key, value|
+    CONFIG_ALIASES = {
+      'name' => %w[SITE_NAME],
+      'author' => %w[SITE_AUTHOR],
+      'description' => %w[SITE_DESCRIPTION],
+      'url' => %w[SITE_URL],
+      'baseurl' => %w[SITE_BASEURL],
+      'google_analytics' => %w[GOOGLE_ANALYTICS],
+      'google_analytics_ga4' => %w[GOOGLE_ANALYTICS_GA4],
+      'enforce_ssl' => %w[SITE_ENFORCE_SSL]
+    }.freeze
+
+    def generate(site)
+      merge_environment_values
+      apply_site_defaults(site)
+      site.config['author'] ||= site.config['name']
+      site.config['enforce_ssl'] = env_or_config('enforce_ssl', site.config['enforce_ssl'], site.config['url'])
+      configure_umami(site)
+      configure_tina(site)
+      configure_footer_links(site)
+    end
+
+    private
+
+    def merge_environment_values
+      env_path = File.expand_path('../.env.prod', __dir__)
+      parse_env_file(env_path).each do |key, value|
         ENV[key] = value unless ENV.key?(key)
       end
+    end
 
-      site.config['name'] = ENV['SITE_NAME'] || site.config['name'] || 'Manuel Franklin'
-      site.config['author'] = ENV['SITE_AUTHOR'] || site.config['author'] || site.config['name']
-      site.config['description'] = ENV['SITE_DESCRIPTION'] || site.config['description'] || 'Personal website and portfolio of Manuel Franklin.'
-      site.config['url'] = ENV['SITE_URL'] || site.config['url'] || 'https://manfranklin.github.io'
-      site.config['baseurl'] = ENV['SITE_BASEURL'] || site.config['baseurl'] || ''
-      site.config['enforce_ssl'] = ENV['SITE_ENFORCE_SSL'] || site.config['enforce_ssl'] || site.config['url']
-      site.config['google_analytics'] = ENV['GOOGLE_ANALYTICS'] || site.config['google_analytics'] || ''
-      site.config['google_analytics_ga4'] = ENV['GOOGLE_ANALYTICS_GA4'] || site.config['google_analytics_ga4'] || ''
-      site.config['umami_id'] = ENV['UMAMI_ID'] || ENV['UMAMI_CLIENT_ID'] || site.config['umami_id'] || ''
-      site.config['umami_domain'] = ENV['UMAMI_DOMAIN'] || site.config['umami_domain'] || 'cloud.umami.is'
+    def apply_site_defaults(site)
+      DEFAULTS.each do |config_key, fallback|
+        site.config[config_key] = env_or_config(config_key, site.config[config_key], fallback)
+      end
+    end
+
+    def configure_umami(site)
+      umami_value = first_present(%w[UMAMI_CLIENT_ID UMAMI_CLIENT_ID]) || site.config['UMAMI_CLIENT_ID'] || ''
+      site.config['UMAMI_CLIENT_ID'] = umami_value
+      site.config['UMAMI_CLIENT_ID'] = umami_value
+      site.config['UMAMI_CLIENT_ID'] = umami_value
+
+      umami_domain_value = ENV['UMAMI_DOMAIN'] || site.config['umami_domain'] || 'cloud.umami.is'
+      site.config['umami_domain'] = umami_domain_value
+      site.config['UMAMI_DOMAIN'] = umami_domain_value
+    end
+
+    def configure_tina(site)
       site.config['tina_branch'] = ENV['TINA_BRANCH'] || site.config['tina_branch'] || 'main'
-      site.config['tina_client_id'] = ENV['TINA_CLIENT_ID'] || site.config['tina_client_id'] || ''
-      site.config['tina_token'] = ENV['TINA_TOKEN'] || ENV['TINA_TOKEN_CONTENT'] || ENV['TINA_TOKEN_SEARCH'] || site.config['tina_token'] || ''
+      tina_client = first_present(%w[TINA_CLIENT_ID PUBLIC_TINA_CLIENT_ID]) || site.config['tina_client_id'] || ''
+      site.config['tina_client_id'] = tina_client
+      site.config['TINA_CLIENT_ID'] = tina_client
 
+      tina_token = first_present(%w[TINA_TOKEN TINA_TOKEN_CONTENT TINA_TOKEN_SEARCH]) || site.config['tina_token'] || ''
+      site.config['tina_token'] = tina_token
+      site.config['TINA_TOKEN'] = tina_token
+      site.config['TINA_TOKEN_CONTENT'] = ENV['TINA_TOKEN_CONTENT'] || ''
+      site.config['TINA_TOKEN_SEARCH'] = ENV['TINA_TOKEN_SEARCH'] || ''
+    end
+
+    def configure_footer_links(site)
       footer_links = site.config['footer-links'] || {}
-      footer_links['email'] = ENV['SITE_EMAIL'] || footer_links['email'] || 'manfranklin817@gmail.com'
+      footer_links['email'] = ENV['SITE_EMAIL'] || footer_links['email'] || 'manfraklin817@gmail.com'
       footer_links['linkedin'] = ENV['SITE_LINKEDIN'] || footer_links['linkedin'] || 'https://www.linkedin.com/in/manfranklin/'
       site.config['footer-links'] = footer_links
     end
 
-    private
+    def env_or_config(config_key, current_value, fallback)
+      first_present(CONFIG_ALIASES.fetch(config_key, [])) || current_value || fallback
+    end
+
+    def first_present(keys)
+      keys.each do |key|
+        value = ENV[key]
+        return value if value && !value.strip.empty?
+      end
+      nil
+    end
 
     def parse_env_file(path)
       return {} unless File.exist?(path)
@@ -40,13 +98,28 @@ module Jekyll
         stripped = line.strip
         next if stripped.empty? || stripped.start_with?('#')
 
-        if stripped =~ /\A([A-Za-z_][A-Za-z0-9_]*)\s*[:=]\s*(.*)\z/
-          key = Regexp.last_match(1)
-          value = Regexp.last_match(2).strip
-          value = value[1...-1] if value.length >= 2 && ((value.start_with?('"') && value.end_with?('"')) || (value.start_with?("'") && value.end_with?("'")))
-          values[key] = value
-        end
+        key, value = parse_env_line(stripped)
+        values[key] = value if key
       end
+    end
+
+    def parse_env_line(line)
+      return unless line =~ /\A([A-Za-z_][A-Za-z0-9_]*)\s*[:=]\s*(.*)\z/
+
+      key = Regexp.last_match(1)
+      value = Regexp.last_match(2).strip
+      [key, unquote(value)]
+    end
+
+    def unquote(value)
+      return value unless value.length >= 2
+      return value[1...-1] if quoted_string?(value)
+      value
+    end
+
+    def quoted_string?(value)
+      (value.start_with?("\"") && value.end_with?("\"")) ||
+        (value.start_with?("'") && value.end_with?("'"))
     end
   end
 end

@@ -5,12 +5,15 @@
     {% seo title=false %}
     {% include meta.html %}
 
-    <link rel="stylesheet" href="{{ site.baseurl }}/assets/style.css">
+    <link rel="preload" href="{{ site.baseurl }}/assets/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="{{ site.baseurl }}/assets/style.css"></noscript>
     <link rel="alternate" type="application/rss+xml" title="{{ site.name }} - {{ site.description }}" href="{{ site.baseurl }}/feed.xml">
-    <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+    <link rel="canonical" href="{{ page.url | remove: 'index.html' | replace: '//', '/' | absolute_url }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ site.baseurl }}/images/favicon-32x32.png">
-    {% if site.UMAMI_CLIENT_ID and site.umami_domain %}
-      <script defer src="https://{{ site.umami_domain }}/script.js" data-website-id="{{ site.UMAMI_CLIENT_ID }}" data-domains="{{ site.url | replace: 'https://', '' | replace: 'http://', '' }}"></script>
+    {% assign UMAMI_CLIENT_ID = site.UMAMI_CLIENT_ID | default: site.UMAMI_CLIENT_ID | default: site.UMAMI_CLIENT_ID %}
+    {% assign umami_domain = site.umami_domain | default: site.UMAMI_DOMAIN | default: 'cloud.umami.is' %}
+    {% if UMAMI_CLIENT_ID and umami_domain %}
+      <script defer src="https://{{ umami_domain }}/script.js" data-website-id="{{ UMAMI_CLIENT_ID }}" data-domains="{{ site.url | replace: 'https://', '' | replace: 'http://', '' }}"></script>
     {% endif %}
   </head>
 
@@ -26,7 +29,12 @@
         <div class="container">
           <header class="masthead" role="banner">
             <a href="{{ site.baseurl }}/" class="site-brand" aria-label="{{ site.name }} home">
-              <span class="site-avatar"><img src="{{ site.baseurl }}{{ site.avatar }}" alt="{{ site.name }} avatar"></span>
+              <span class="site-avatar">
+                <svg width="52" height="52" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ site.name }} avatar">
+                  <rect width="52" height="52" rx="8" fill="#0B74DE"></rect>
+                  <text x="50%" y="54%" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial" font-size="20" fill="#ffffff" text-anchor="middle" alignment-baseline="middle" dominant-baseline="middle">{{ site.name | slice: 0,1 }}{{ site.name | split: ' ' | last | slice: 0,1 }}</text>
+                </svg>
+              </span>
               <span class="site-info">
                 <span class="site-name">{{ site.name }}</span>
                 <span class="site-description">{{ site.description }}</span>

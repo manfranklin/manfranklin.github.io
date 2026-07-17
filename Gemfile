@@ -5,11 +5,11 @@ gem "jekyll", "~> 4.4"
 gem "jekyll-feed"
 gem "jekyll-sitemap"
 gem "jekyll-seo-tag"
-gem "jekyll-paginate"
+gem "jekyll-paginate-v2"
 gem "jekyll-redirect-from"
 gem "jekyll-relative-links"
 gem "jekyll-github-metadata"
-gem "jekyll-responsive-image"
+# gem "jekyll-responsive-image "  # removed: depends on rmagick which requires ImageMagick
 
 gem "webrick"
 gem "csv"
