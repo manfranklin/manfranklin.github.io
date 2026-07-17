@@ -1,7 +1,7 @@
 ---
-layout: default
 title: Início
-permalink: /pt/
+permalink: "/pt/"
+layout: default
 language: pt
 ---
 

@@ -1,7 +1,7 @@
 ---
-layout: default
 title: Categorias
-permalink: /pt/categorias/
+permalink: "/pt/categorias/"
+layout: default
 language: pt
 ---
 

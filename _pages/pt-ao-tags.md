@@ -1,7 +1,7 @@
 ---
-layout: default
 title: Etiquetas
-permalink: /pt/tags/
+permalink: "/pt/tags/"
+layout: default
 language: pt
 ---
 

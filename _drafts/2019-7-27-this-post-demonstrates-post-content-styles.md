@@ -1,20 +1,20 @@
 ---
-layout: post
 title: This post demonstrates post content styles
-date: 2019-07-27 00:00:00 +0000
-author: Manuel Franklin
-description: A starter post that demonstrates the blog's typography, layout, and content styling.
+date: 2019-07-27 00:00:00 Z
 categories:
-  - Miscellaneous
+- Miscellaneous
 tags:
-  - example
-  - blog
-  - jekyll
-published: true
+- example
+- blog
+- jekyll
+layout: post
+author: Manuel Franklin
+description: A starter post that demonstrates the blog's typography, layout, and content
+  styling.
 comments: true
 language: en
 translation_key: this-post-demonstrates-post-content-styles
-translation_url_pt: /this-post-demonstrates-post-content-styles-pt/
+translation_url_pt: "/this-post-demonstrates-post-content-styles-pt/"
 ---
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce bibendum neque eget nunc mattis eu sollicitudin enim tincidunt. Vestibulum lacus tortor, ultricies id dignissim ac, bibendum in velit. Praesent varius interdum vehicula. Aenean risus libero, placerat at vestibulum eget, ultricies eu enim. Praesent nulla tortor, malesuada adipiscing adipiscing sollicitudin, adipiscing eget est.

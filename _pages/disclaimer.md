@@ -1,7 +1,7 @@
 ---
-layout: page
 title: Disclaimer
-permalink: /disclaimer/
+permalink: "/disclaimer/"
+layout: page
 language: en
 description: Website disclaimer covering liability, privacy, cookies, and GDPR compliance.
 seo:

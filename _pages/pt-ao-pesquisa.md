@@ -1,7 +1,7 @@
 ---
-layout: default
 title: Pesquisar
-permalink: /pt/pesquisa/
+permalink: "/pt/pesquisa/"
+layout: default
 language: pt
 ---
 

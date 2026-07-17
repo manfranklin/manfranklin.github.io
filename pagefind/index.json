@@ -1,7 +1,8 @@
 ---
-layout: null
-permalink: /pagefind/index.json
+permalink: "/pagefind/index.json"
+layout: 
 ---
+
 [
 {% assign search_items = site.posts %}
 {% assign output_index = 0 %}

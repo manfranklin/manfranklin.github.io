@@ -1,12 +1,14 @@
 ---
-layout: page
 title: Aviso Legal
-permalink: /pt/aviso/
+permalink: "/pt/aviso/"
+layout: page
 language: pt
-description: Aviso legal do website sobre responsabilidade, privacidade, cookies e conformidade com o GDPR.
+description: Aviso legal do website sobre responsabilidade, privacidade, cookies e
+  conformidade com o GDPR.
 seo:
   title: Aviso Legal
-  description: Aviso legal do website sobre responsabilidade, privacidade, cookies e conformidade com o GDPR.
+  description: Aviso legal do website sobre responsabilidade, privacidade, cookies
+    e conformidade com o GDPR.
 ---
 
 {% assign i18n = site.data.i18n[page.language] %}

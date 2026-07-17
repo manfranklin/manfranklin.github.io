@@ -1,20 +1,21 @@
 ---
-layout: post
-title:  What is Free and Open source Software
-date: 2026-07-11 00:00:00 +0000
-author: Manuel Franklin
-description: This article explains the importance of Free and Open Source Software (FOSS) and how it contributes to a more open, collaborative, and independent digital society.
+title: What is Free and Open source Software
+date: 2026-07-11 00:00:00 Z
 categories:
-  - Tecnology
-  - Open Software 
+- Tecnology
+- Open Software
 tags:
-  - blog
-  - FOSS
-published: true
+- blog
+- FOSS
+layout: post
+author: Manuel Franklin
+description: This article explains the importance of Free and Open Source Software
+  (FOSS) and how it contributes to a more open, collaborative, and independent digital
+  society.
 comments: true
 language: en
 translation_key: what-is-free-and-open-source-software
-translation_url_pt: /blog/2026/07/11/what-is-free-and-open-source-software-pt/
+translation_url_pt: "/blog/2026/07/11/what-is-free-and-open-source-software-pt/"
 ---
 
 # TL;DR

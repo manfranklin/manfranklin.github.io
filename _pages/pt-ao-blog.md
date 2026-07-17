@@ -1,7 +1,7 @@
 ---
-layout: default
 title: Blog
-permalink: /pt/blog/
+permalink: "/pt/blog/"
+layout: default
 language: pt
 pagination:
   enabled: true

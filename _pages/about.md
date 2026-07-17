@@ -1,12 +1,14 @@
 ---
-layout: page
 title: About Me
-permalink: /about/
+permalink: "/about/"
+layout: page
 language: en
-description: Learn more about Manuel Franklin, his background, areas of interest, and way of working.
+description: Learn more about Manuel Franklin, his background, areas of interest,
+  and way of working.
 seo:
   title: About Me
-  description: Learn more about Manuel Franklin, his background, areas of interest, and way of working.
+  description: Learn more about Manuel Franklin, his background, areas of interest,
+    and way of working.
 ---
 
 {% assign i18n = site.data.i18n[page.language] %}

@@ -1,78 +1,80 @@
-#
-# This file contains configuration flags to customize your site
-#
-
-# Site Configuration
+---
+title: Manfranklin.Github.Io
+timezone: UTC
+collections:
+  posts:
+    title: Posts
+    output: true
+  resources:
+    title: Resources
+    output: false
+  showcase:
+    title: Showcase
+    output: true
+    permalink: "/showcase/:path/"
+  uploads:
+    title: Uploads
+    output: true
+defaults:
+- scope:
+    path: ''
+    type: pages
+  values:
+    layout: page
+    language: en
+- scope:
+    path: _posts
+    type: posts
+  values:
+    layout: post
+    language: en
+    comments: false
+    author: Manuel Franklin
+    published: true
+    permalink: "/blog/:year/:month/:day/:title/"
+- scope:
+    path: _showcase
+    type: showcase
+  values:
+    layout: showcase
+- scope:
+    path: pt
+  values:
+    language: pt
+- scope:
+    path: en
+  values:
+    language: en
 name: Manuel Franklin
 author: Manuel Franklin
 description: Personal website and portfolio of Manuel Franklin.
-
-# URL of your avatar or profile pic (you could use your GitHub profile pic)
-avatar: /images/reverie.png
-
-#
-# Flags below are optional
-#
-
-# Includes an icon in the footer for each username you enter
+avatar: "/images/reverie.png"
 footer-links:
-  dribbble:
-  email: ""
-  facebook:
-  flickr:
+  dribbble: 
+  email: ''
+  facebook: 
+  flickr: 
   github: manfranklin
-  instagram:
-  linkedin: ""
-  pinterest:
+  instagram: 
+  linkedin: ''
+  pinterest: 
   rss: feed
   twitter: 
-  stackoverflow:
-  youtube: # channel/<your_long_string> or user/<user-name>
-  googleplus: # anything in your profile username that comes after plus.google.com/
-  playconsole:
-  mastodon: # <your-mastodon-instance>/@<your-user-name> eg. fosstodon.org/@username
-
-# Disqus is disabled
-disqus: ""
-
-# Enter your Google Analytics web tracking code (e.g. UA-2110908-2) to activate tracking
+  stackoverflow: 
+  youtube: 
+  googleplus: 
+  playconsole: 
+  mastodon: 
+disqus: ''
 google_analytics: 
-
-# Your website URL (e.g. http://amitmerchant1990.github.io or http://www.amitmerchant.com)
-# Used for Sitemap.xml and your RSS feed
-
 url: https://manfranklin.github.io
-baseurl: ""
-# baseurl: "" # Leave empty for user repository (yourusername.github.io)
-# baseurl: "/repository-name" # Use this for project repository
-
+baseurl: ''
 enforce_ssl: https://manfranklin.github.io
-
-# If you're hosting your site at a Project repository on GitHub pages
-# (http://yourusername.github.io/repository-name)
-# and NOT your User repository (http://yourusername.github.io)
-# then add in the baseurl here, like this: "/repository-name"
-
-#
-# !! You don't need to change any of the configuration flags below !!
-#
-
-permalink: /:title/
-
-# Analytics & Comments
-# Values can be supplied via environment variables in GitHub Actions or local .env files.
-UMAMI_CLIENT_ID: ""
-umami_domain: "cloud.umami.is"
+permalink: "/:title/"
+UMAMI_CLIENT_ID: ''
+umami_domain: cloud.umami.is
 umami_enabled: false
-
-#
-# Bilingual Configuration
-#
-
-# Default language
 default_language: en
-
-# Supported languages
 languages:
   en:
     name: EN
@@ -80,154 +82,69 @@ languages:
   pt:
     name: PT-AO
     direction: ltr
-
-# Languages to build
-# On GitHub Pages, we'll build all versions
-# Set to specific language for faster local builds
-build_languages: [en, pt]
-
-#
-# Jekyll Configuration
-#
-
+build_languages:
+- en
+- pt
 excerpt_separator: "<!--more-->"
 pagination:
   enabled: true
   per_page: 6
-  permalink: '/blog/page/:num/'
-
-# Markdown Processing
+  permalink: "/blog/page/:num/"
 kramdown:
   input: GFM
   syntax_highlighter: rouge
   syntax_highlighter_opts:
-    css_class: 'highlight'
-
-# Sass
+    css_class: highlight
 sass:
-  style: :compressed # Minified for production
+  style: :compressed
   load_paths:
-    - _sass
-
-# Plugins (GitHub Pages compatible)
+  - _sass
 plugins:
-  - jekyll-feed              # RSS/Atom feed
-  - jekyll-sitemap           # Sitemap generation
-  - jekyll-seo-tag           # SEO tags
-  - jekyll-paginate-v2       # Post pagination with front matter pagination support
-  - jekyll-redirect-from     # URL redirects
-  - jekyll-relative-links    # Relative links
-  # - jekyll-responsive-image  # Responsive image generation (disabled for local builds)
-
+- jekyll-feed
+- jekyll-sitemap
+- jekyll-seo-tag
+- jekyll-paginate-v2
+- jekyll-redirect-from
+- jekyll-relative-links
 responsive_image:
   default_quality: 90
   sizes:
-    - "(min-width: 1200px) 33vw"
-    - "(min-width: 768px) 50vw"
-    - "100vw"
+  - "(min-width: 1200px) 33vw"
+  - "(min-width: 768px) 50vw"
+  - 100vw
   output_path_format: assets/resized/%{dirname}/%{basename}-%{width}x%{height}.%{extension}
   template: _includes/responsive-image.html
-
-# Pages to include in builds
 include:
-  - '_pages'
-  - '.htaccess'
-
-# Files/directories to exclude
+- _pages
+- ".htaccess"
 exclude:
-  - Gemfile
-  - Gemfile.lock
-  - LICENSE
-  - README.md
-  - CNAME
-  - .DS_Store
-  - node_modules
-  - .git
-  - .gitignore
-  - Makefile
-  - 'vendor/'
-  - '*.code-workspace'
-
-# Collections (for custom content types)
-collections:
-  posts:
-    output: true
-    permalink: /blog/:year/:month/:day/:title/
-  showcase:
-    output: true
-    permalink: /showcase/:path/
-  resources:
-    output: false
-
-# Feed Configuration
+- Gemfile
+- Gemfile.lock
+- LICENSE
+- README.md
+- CNAME
+- ".DS_Store"
+- node_modules
+- ".git"
+- ".gitignore"
+- Makefile
+- vendor/
+- "*.code-workspace"
 feed:
   path: feed.xml
   collections:
     posts:
-      path: /feed.xml
-
-# SEO & Front Matter defaults
-defaults:
-  # All pages
-  - scope:
-      path: ""
-      type: "pages"
-    values:
-      layout: "page"
-      language: en
-  # Blog posts
-  - scope:
-      path: "_posts"
-      type: "posts"
-    values:
-      layout: "post"
-      language: en
-      comments: false
-      author: Manuel Franklin
-      published: true
-      permalink: /blog/:year/:month/:day/:title/
-  # Showcase items
-  - scope:
-      path: "_showcase"
-      type: "showcase"
-    values:
-      layout: "showcase"
-  # Portuguese pages
-  - scope:
-      path: "pt"
-    values:
-      language: pt
-  # English alternate
-  - scope:
-      path: "en"
-    values:
-      language: en
-
-# Timezone for post dates
-timezone: UTC
-
-# Keep generated files
+      path: "/feed.xml"
 keep_files:
-  - '.git'
-  - '.github'
-  - 'CNAME'
-
-# Future posts
+- ".git"
+- ".github"
+- CNAME
 future: false
-
-# Highlight configuration
 highlighter: rouge
-
-# Liquid settings
 liquid:
   error_mode: strict
-
-# Pagefind Search Configuration (client-side)
 search:
   enabled: true
   pagefind:
     enabled: true
-    index_path: /pagefind
-
-
-
+    index_path: "/pagefind"

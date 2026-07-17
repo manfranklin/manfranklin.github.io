@@ -1,22 +1,22 @@
 ---
-layout: post
-title:  O que é um Software Livre e de Código Aberto?
-date: 2026-07-11 00:00:00 +0000
-author: Manuel Franklin
-description: Este artigo explica a importância do Software Livre e de Código Aberto (FOSS) e a forma como este contribui para uma sociedade digital mais aberta, colaborativa e independente.
+title: O que é um Software Livre e de Código Aberto?
+date: 2026-07-11 00:00:00 Z
 categories:
-  - Tecnologia
-  - Software Livre
+- Tecnologia
+- Software Livre
 tags:
-  - blog
-  - FOSS
-published: true
+- blog
+- FOSS
+layout: post
+author: Manuel Franklin
+description: Este artigo explica a importância do Software Livre e de Código Aberto
+  (FOSS) e a forma como este contribui para uma sociedade digital mais aberta, colaborativa
+  e independente.
 comments: true
 language: pt
 translation_key: what-is-free-and-open-source-software
-translation_url_en: /blog/2026/07/11/what-is-free-and-open-source-software/
+translation_url_en: "/blog/2026/07/11/what-is-free-and-open-source-software/"
 ---
-
 
 # TL;DR
 
