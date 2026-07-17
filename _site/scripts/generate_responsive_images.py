@@ -16,6 +16,7 @@ if not SRC_DIR.exists():
     print('images/ directory not found, exiting')
     exit(1)
 
+# Process larger images first so the most important assets are generated immediately.
 for path in sorted(SRC_DIR.iterdir(), key=lambda p: p.stat().st_size, reverse=True):
     if not path.is_file():
         continue
@@ -34,9 +35,9 @@ for path in sorted(SRC_DIR.iterdir(), key=lambda p: p.stat().st_size, reverse=Tr
     name = path.stem
     ext = path.suffix.lower().lstrip('.')
 
+    # Generate the requested responsive sizes and a WebP copy for each target width.
     for w in WIDTHS:
         if w >= orig_w:
-            # still create webp copy at original size
             out_w = orig_w
         else:
             out_w = w
@@ -60,7 +61,6 @@ for path in sorted(SRC_DIR.iterdir(), key=lambda p: p.stat().st_size, reverse=Tr
 
         if not webp_path.exists():
             try:
-                # Pillow supports WebP if compiled with it
                 img.save(webp_path, 'WEBP', quality=80, method=6)
                 print('Wrote', webp_path)
             except Exception as e:
