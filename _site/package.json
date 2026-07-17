@@ -1,0 +1,19 @@
+{
+  "name": "manfranklin.github.io",
+  "version": "1.0.0",
+  "description": "Personal website and portfolio of Manuel Franklin",
+  "type": "module",
+  "scripts": {
+    "serve": "bundle exec jekyll serve",
+    "dev": "tina start",
+    "build": "tina build",
+    "tina": "tina"
+  },
+  "dependencies": {
+    "tinacms": "^1.5.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  }
+}
