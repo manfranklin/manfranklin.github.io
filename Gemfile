@@ -1,22 +1,20 @@
 source "https://rubygems.org"
 
-gem "jekyll", "~> 4.4"
+gem "github-pages", group: :jekyll_plugins
 
+# Plugins supported by GitHub Pages
 gem "jekyll-feed"
 gem "jekyll-sitemap"
 gem "jekyll-seo-tag"
-gem "jekyll-paginate-v2"
 gem "jekyll-redirect-from"
 gem "jekyll-relative-links"
-gem "jekyll-github-metadata"
-# gem "jekyll-responsive-image "  # removed: depends on rmagick which requires ImageMagick
 
+# Pagination
+gem "jekyll-paginate"
+
+# Required for local Windows development
 gem "webrick"
-gem "csv"
-gem "bigdecimal"
-
-gem "tzinfo"
-gem "tzinfo-data", platforms: [:windows]
+gem "base64"
 
 group :development do
   gem "wdm", ">= 0.1.0", platforms: [:windows]

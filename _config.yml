@@ -147,9 +147,6 @@ exclude:
   - LICENSE
   - README.md
   - CNAME
-  - IMPLEMENTATION_PLAN.md
-  - DEPLOYMENT_GUIDE.md
-  - CONTRIBUTING.md
   - .DS_Store
   - node_modules
   - .git

@@ -5,10 +5,10 @@
 // IMPORTS
 //
 
-@use 'reset';
-@use 'variables' as *;
-@use 'darcula';
-@use 'svg-icons';
+@import 'reset';
+@import 'variables';
+@import 'darcula';
+@import 'svg-icons';
 // Syntax highlighting @use is at the bottom of this file
 
 /**************/
