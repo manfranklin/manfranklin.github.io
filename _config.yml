@@ -137,7 +137,6 @@ responsive_image:
 # Pages to include in builds
 include:
   - '_pages'
-  - 'admin'
   - '.htaccess'
 
 # Files/directories to exclude

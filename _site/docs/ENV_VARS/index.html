@@ -152,16 +152,12 @@
 <p>Set the following repository variables/secrets in GitHub (Repository Settings → Secrets &amp; variables):</p>
 
 <ul>
-  <li>TINA_CLIENT_ID: TinaCMS public client id</li>
-  <li>TINA_TOKEN_CONTENT: (secret) Tina content write token (will be used if <code class="language-plaintext highlighter-rouge">TINA_TOKEN</code> is not set)</li>
-  <li>TINA_TOKEN_SEARCH: (secret) Tina search token (fallback)</li>
   <li>UMAMI_CLIENT_ID: Umami website id (used by analytics include)</li>
   <li>UMAMI_DOMAIN: Umami host (default: cloud.umami.is)</li>
 </ul>
 
 <p>Notes:</p>
 <ul>
-  <li>The GitHub Actions workflow will pick the first available Tina token from <code class="language-plaintext highlighter-rouge">TINA_TOKEN</code>, <code class="language-plaintext highlighter-rouge">TINA_TOKEN_CONTENT</code>, or <code class="language-plaintext highlighter-rouge">TINA_TOKEN_SEARCH</code>.</li>
   <li>Locally you can define the same variables in a <code class="language-plaintext highlighter-rouge">.env</code> file at the project root. See <code class="language-plaintext highlighter-rouge">.env.example</code> for names.</li>
 </ul>
 

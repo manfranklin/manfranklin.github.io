@@ -41,12 +41,8 @@ jobs:
           SITE_ENFORCE_SSL: ${{ vars.SITE_ENFORCE_SSL  }}
           GOOGLE_ANALYTICS: ${{ vars.GOOGLE_ANALYTICS || '' }}
           GOOGLE_ANALYTICS_GA4: ${{ vars.GOOGLE_ANALYTICS_GA4 || '' }}
-          TINA_BRANCH: ${{ vars.TINA_BRANCH || github.ref_name }}
-          TINA_CLIENT_ID: ${{ vars.TINA_CLIENT_ID }}
-          # Accept multiple secret names for Tina tokens (content/search)
-          TINA_TOKEN: ${{ secrets.TINA_TOKEN || secrets.TINA_TOKEN_CONTENT || secrets.TINA_TOKEN_SEARCH }}
-          UMAMI_CLIENT_ID: ${{ vars.UMAMI_CLIENT_ID || vars.UMAMI_CLIENT_ID || '' }}
-          UMAMI_DOMAIN: ${{ vars.UMAMI_DOMAIN || 'cloud.umami.is' }}
+          UMAMI_CLIENT_ID: ${{ vars.UMAMI_CLIENT_ID || secrets.UMAMI_CLIENT_ID || '' }}
+          UMAMI_DOMAIN: ${{ vars.UMAMI_DOMAIN || secrets.UMAMI_DOMAIN || 'cloud.umami.is' }}
         run: bundle exec jekyll build
 
       - name: Upload Pages artifact

@@ -29,14 +29,19 @@ module Jekyll
       site.config['author'] ||= site.config['name']
       site.config['enforce_ssl'] = env_or_config('enforce_ssl', site.config['enforce_ssl'], site.config['url'])
       configure_umami(site)
-      configure_tina(site)
       configure_footer_links(site)
     end
 
     private
 
     def merge_environment_values
+      # Only merge production env file when running a production build
+      # (either JEKYLL_ENV=production or inside GitHub Actions).
+      return unless ENV['JEKYLL_ENV'] == 'production' || ENV['GITHUB_ACTIONS'] == 'true'
+
       env_path = File.expand_path('../.env.prod', __dir__)
+      return unless File.exist?(env_path)
+
       parse_env_file(env_path).each do |key, value|
         ENV[key] = value unless ENV.key?(key)
       end
@@ -57,19 +62,6 @@ module Jekyll
       umami_domain_value = ENV['UMAMI_DOMAIN'] || site.config['umami_domain'] || 'cloud.umami.is'
       site.config['umami_domain'] = umami_domain_value
       site.config['UMAMI_DOMAIN'] = umami_domain_value
-    end
-
-    def configure_tina(site)
-      site.config['tina_branch'] = ENV['TINA_BRANCH'] || site.config['tina_branch'] || 'main'
-      tina_client = first_present(%w[TINA_CLIENT_ID PUBLIC_TINA_CLIENT_ID]) || site.config['tina_client_id'] || ''
-      site.config['tina_client_id'] = tina_client
-      site.config['TINA_CLIENT_ID'] = tina_client
-
-      tina_token = first_present(%w[TINA_TOKEN TINA_TOKEN_CONTENT TINA_TOKEN_SEARCH]) || site.config['tina_token'] || ''
-      site.config['tina_token'] = tina_token
-      site.config['TINA_TOKEN'] = tina_token
-      site.config['TINA_TOKEN_CONTENT'] = ENV['TINA_TOKEN_CONTENT'] || ''
-      site.config['TINA_TOKEN_SEARCH'] = ENV['TINA_TOKEN_SEARCH'] || ''
     end
 
     def configure_footer_links(site)
