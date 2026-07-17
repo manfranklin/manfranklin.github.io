@@ -17,3 +17,5 @@ vendor
 .env.*.local
 !.env.example
 !.env.sample
+
+tina/__generated__
