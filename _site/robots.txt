@@ -1,1 +1,1 @@
-Sitemap: https://manfranklin.github.io/pages/manfranklin/sitemap.xml
+Sitemap: https://manfranklin.github.io/sitemap.xml
