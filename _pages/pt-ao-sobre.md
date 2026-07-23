@@ -1,14 +1,12 @@
 ---
 title: Sobre Mim
 permalink: "/pt/sobre/"
-layout: page
 language: pt
-description: Saiba mais sobre Manuel Franklin, a sua formação, áreas de interesse
-  e forma de trabalhar.
+description: Saiba mais sobre Manuel Franklin, áreas de interesse e forma de trabalhar.
 seo:
   title: Sobre Mim
-  description: Saiba mais sobre Manuel Franklin, a sua formação, áreas de interesse
-    e forma de trabalhar.
+  description: Saiba mais sobre Manuel Franklin, áreas de interesse e forma de trabalhar.
+layout: page
 ---
 
 {% assign i18n = site.data.i18n[page.language] %}
