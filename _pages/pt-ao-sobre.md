@@ -1,5 +1,6 @@
 ---
 title: Sobre Mim
+date: 2026-07-23 10:24:00 Z
 permalink: "/pt/sobre/"
 language: pt
 description: Saiba mais sobre Manuel Franklin, áreas de interesse e forma de trabalhar.
