@@ -1,7 +1,7 @@
 ---
 title: About Me
+date: 2026-07-23 10:25:00 Z
 permalink: "/about/"
-layout: page
 language: en
 description: Learn more about Manuel Franklin, his background, areas of interest,
   and way of working.
@@ -9,6 +9,7 @@ seo:
   title: About Me
   description: Learn more about Manuel Franklin, his background, areas of interest,
     and way of working.
+layout: page
 ---
 
 {% assign i18n = site.data.i18n[page.language] %}
