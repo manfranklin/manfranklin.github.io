@@ -155,6 +155,31 @@ For tighter scoping, add the same values under **Environments → github-pages**
 
 The default GitHub Pages workflow will automatically build and deploy on push.
 
+### Local deploy
+
+If you prefer to build and publish locally (no GitHub Actions), use the included script to build the site and publish the generated `_site` to the `gh-pages` branch.
+
+1. Ensure dependencies are installed and the site builds successfully:
+
+```bash
+bundle install
+npm install
+npm run build
+```
+
+2. Run the publish script (force-pushes the generated site to the `gh-pages` branch):
+
+```bash
+./scripts/publish-ghpages.sh
+# or specify a branch name
+./scripts/publish-ghpages.sh gh-pages
+```
+
+The script creates a temporary git repository, copies the generated `_site` contents into it, and force-pushes to the specified branch. Use with care — the push is forced to the specified branch.
+
+After pushing, verify the GitHub Pages settings in the repository to use the `gh-pages` branch as the Pages source.
+
+
 ## Analytics
 
 The site uses Umami for privacy-conscious analytics. The tracking configuration is managed in the site config and analytics includes.
