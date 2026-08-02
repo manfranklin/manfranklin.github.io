@@ -1,6 +1,4 @@
-abort "PLUGIN LOADED"
 module Jekyll
-  warn "[EnvConfigGenerator] plugin loaded"
   class EnvConfigGenerator < Generator
     safe true
     priority :lowest
@@ -84,7 +82,7 @@ module Jekyll
     end
 
     def production_environment?
-      ENV['JEKYLL_ENV'].to_s.downcase == 'production'
+      ENV['JEKYLL_ENV'].to_s.downcase == 'production' || ENV['GITHUB_ACTIONS'] == 'true'
     end
 
     def truthy?(value)

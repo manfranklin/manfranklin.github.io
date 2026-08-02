@@ -73,7 +73,7 @@ enforce_ssl: https://manfranklin.github.io
 permalink: "/:title/"
 umami_domain: cloud.umami.is
 umami_enabled: true
-UMAMI_CLIENT_ID: 1b2c3ac0-dff7-4079-a1fb-7becfdc2634a
+UMAMI_CLIENT_ID: ""
 default_language: en
 languages:
   en:
