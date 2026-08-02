@@ -173,6 +173,12 @@ npm run build
 ./scripts/publish-ghpages.sh
 # or specify a branch name
 ./scripts/publish-ghpages.sh gh-pages
+
+The script will prompt for confirmation before force-pushing. To skip the prompt in automation or CI, pass `-y` or `--yes`:
+
+```bash
+./scripts/publish-ghpages.sh -y
+```
 ```
 
 The script creates a temporary git repository, copies the generated `_site` contents into it, and force-pushes to the specified branch. Use with care — the push is forced to the specified branch.
