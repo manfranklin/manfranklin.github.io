@@ -15,6 +15,7 @@
       <script async defer src="https://{{ site.umami_domain }}/script.js" data-website-id="{{ site.UMAMI_CLIENT_ID }}"{% unless _umami_host contains 'localhost' or _umami_host contains '127.0.0.1' or _umami_host == '' %} data-domains="{{ _umami_host }}"{% endunless %}></script>
       <noscript><!-- Umami disabled for users without JavaScript. --></noscript>
     {% endif %}
+    {% endif %}
   </head>
 
   <body
