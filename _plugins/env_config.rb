@@ -56,9 +56,9 @@ module Jekyll
 
     # Configure analytics settings from environment variables and the site config.
     def configure_umami(site)
-      umami_value = first_present(%w[UMAMI_CLIENT_ID]) || site.config['UMAMI_CLIENT_ID'] || ''
-      umami_domain_value = first_present(%w[UMAMI_DOMAIN]) || site.config['umami_domain'] || 'cloud.umami.is'
-      umami_enabled = production_environment? && truthy?(first_present(%w[UMAMI_ENABLED]) || site.config['umami_enabled']) && !umami_value.empty?
+      umami_value = site.config['UMAMI_CLIENT_ID'] || first_present(%w[UMAMI_CLIENT_ID]) || ''
+      umami_domain_value = site.config['umami_domain'] || first_present(%w[UMAMI_DOMAIN]) || 'cloud.umami.is'
+      umami_enabled = production_environment? && truthy?(site.config['umami_enabled'] || first_present(%w[UMAMI_ENABLED])) && !umami_value.empty?
 
       warn "[EnvConfigGenerator] umami_enabled=#{umami_enabled.inspect} umami_value=#{umami_value.inspect} umami_domain_value=#{umami_domain_value.inspect} JEKYLL_ENV=#{ENV['JEKYLL_ENV'].inspect} UMAMI_ENABLED=#{ENV['UMAMI_ENABLED'].inspect}"
 
@@ -78,7 +78,11 @@ module Jekyll
     end
 
     def env_or_config(config_key, current_value, fallback)
-      first_present(CONFIG_ALIASES.fetch(config_key, [])) || current_value || fallback
+      if current_value.nil? || current_value.to_s.strip.empty?
+        first_present(CONFIG_ALIASES.fetch(config_key, [])) || fallback
+      else
+        current_value
+      end
     end
 
     def production_environment?

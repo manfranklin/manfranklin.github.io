@@ -44,6 +44,23 @@ class EnvConfigGeneratorTest < Minitest::Test
     assert site.config['umami_enabled']
   end
 
+  def test_site_config_overrides_environment_variables_for_umami
+    ENV['JEKYLL_ENV'] = 'production'
+    ENV['UMAMI_ENABLED'] = 'true'
+    ENV['UMAMI_CLIENT_ID'] = '00000000-0000-0000-0000-000000000000'
+    ENV['UMAMI_DOMAIN'] = 'bad-domain.example.com'
+    site = stub_site
+    site.config['UMAMI_CLIENT_ID'] = '11111111-1111-1111-1111-111111111111'
+    site.config['umami_domain'] = 'cloud.umami.is'
+    site.config['umami_enabled'] = true
+
+    Jekyll::EnvConfigGenerator.new.generate(site)
+
+    assert_equal '11111111-1111-1111-1111-111111111111', site.config['UMAMI_CLIENT_ID']
+    assert_equal 'cloud.umami.is', site.config['umami_domain']
+    assert site.config['umami_enabled']
+  end
+
   private
 
   # Build a minimal site config object that mimics the shape expected by the
