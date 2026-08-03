@@ -103,7 +103,7 @@ plugins:
 - jekyll-feed
 - jekyll-sitemap
 - jekyll-seo-tag
-- jekyll-paginate-v2
+- jekyll-paginate
 - jekyll-redirect-from
 - jekyll-relative-links
 responsive_image:

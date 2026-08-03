@@ -1,0 +1,44 @@
+name: Jekyll Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      JEKYLL_ENV: production
+      BUNDLE_PATH: vendor/bundle
+      PAGES_REPO_NWO: manfranklin/manfranklin.github.io
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.3
+          bundler-cache: true
+
+      - name: Install dependencies
+        run: bundle install --jobs 4 --retry 3
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Build site
+        run: bundle exec jekyll build
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-build
+          path: _site
